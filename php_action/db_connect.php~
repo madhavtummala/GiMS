@@ -1,8 +1,8 @@
 <?php 	
 
-$localhost = "localhost";
-$username = "arnejasaksham";
-$password = "Sak@192114";
+$localhost = "192.168.1.100";
+$username = "root";
+$password = "root";
 $dbname = "Gymkhana";
 
 // db connection
