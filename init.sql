@@ -29,17 +29,6 @@ create table student
   unique (emailid)
 );
 
-create table equipment
-(
-  eid int not null,
-  name varchar(50) not null,
-  availabilitystatus int not null,
-  purchasedate date not null,
-  cost int not null,
-  invoiceno int not null,
-  primary key (eid)
-);
-
 create table issuehistory
 (
   eid int not null,
@@ -49,7 +38,6 @@ create table issuehistory
   fineamount int not null,
   reasonforfine int not null,
   primary key (eid, rollno, dateofissue),
-  foreign key (eid) references equipment(eid),
   foreign key (rollno) references student(rollno)
 );
 
@@ -60,7 +48,6 @@ create table fines
   amount int not null,
   reason int not null,
   primary key (eid),
-  foreign key (eid) references equipment(eid),
   foreign key (rollno) references student(rollno)
 );
 
@@ -83,6 +70,5 @@ create table issued
   rollno varchar(12) not null,
   dateofissue date not null,
   primary key (eid, rollno, dateofissue),
-  foreign key (rollno) references student(rollno),
-  foreign key (eid) references equipment(eid)
+  foreign key (rollno) references student(rollno)
 );
