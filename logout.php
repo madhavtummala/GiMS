@@ -8,6 +8,6 @@ session_unset();
 // destroy the session 
 session_destroy(); 
 
-header('location: http://localhost:8888/Gymkhana/php-inventory-management-system/index.php');
+header('location: index.php');
 
 ?>
