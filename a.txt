@@ -1,0 +1,87 @@
+CREATE TABLE Hostel
+(
+  HostelName VARCHAR(50) NOT NULL,
+  DBAddress VARCHAR(100) NOT NULL,
+  PRIMARY KEY (HostelName),
+  UNIQUE (DBAddress)
+);
+
+CREATE TABLE OfficeBearer
+(
+  Post VARCHAR(50) NOT NULL,
+  Name VARCHAR(50) NOT NULL,
+  ContactNumber NUMERIC(10 0) NOT NULL,
+  emailID VARCHAR(50) NOT NULL,
+  PRIMARY KEY (Post),
+  UNIQUE (ContactNumber)
+);
+
+CREATE TABLE Student
+(
+  RollNo VARCHAR(12) NOT NULL,
+  Name VARCHAR(50) NOT NULL,
+  emailId VARCHAR(50) NOT NULL,
+  Password VARCHAR(50) NOT NULL,
+  HostelName VARCHAR(50) NOT NULL,
+  PRIMARY KEY (RollNo),
+  FOREIGN KEY (HostelName) REFERENCES Hostel(HostelName),
+  UNIQUE (emailId)
+);
+
+CREATE TABLE IssueHistory
+(
+  eid INT NOT NULL,
+  RollNo VARCHAR(12) NOT NULL,
+  DateOfIssue DATE NOT NULL,
+  DateOfReturn DATE NOT NULL,
+  FineAmount INT NOT NULL,
+  ReasonForFine INT NOT NULL,
+  PRIMARY KEY (eid, RollNo, DateOfIssue),
+  FOREIGN KEY (eid) REFERENCES Equipment(eid),
+  FOREIGN KEY (RollNo) REFERENCES Student(RollNo)
+);
+
+CREATE TABLE Fines
+(
+  eid INT NOT NULL,
+  RollNo VARCHAR(12) NOT NULL,
+  Amount INT NOT NULL,
+  Reason INT NOT NULL,
+  PRIMARY KEY (eid),
+  FOREIGN KEY (eid) REFERENCES Equipment(eid),
+  FOREIGN KEY (RollNo) REFERENCES Student(RollNo)
+);
+
+CREATE TABLE Requests
+(
+  EquipmentName VARCHAR(50) NOT NULL,
+  RollNo VARCHAR(12) NOT NULL,
+  HostelName VARCHAR(50) NOT NULL,
+  EstimatedCost INT NOT NULL,
+  PurchaseLinks VARCHAR(1000),
+  Reason VARCHAR(1000) NOT NULL,
+  PRIMARY KEY (EquipmentName, HostelName, RollNo),
+  FOREIGN KEY (HostelName) REFERENCES Hostel(HostelName),
+  FOREIGN KEY (RollNo) REFERENCES Student(RollNo)
+);
+
+CREATE TABLE Issued
+(
+  eid INT NOT NULL,
+  RollNo VARCHAR(12) NOT NULL,
+  DateOfIssue DATE NOT NULL,
+  PRIMARY KEY (eid, RollNo, DateOfIssue),
+  FOREIGN KEY (RollNo) REFERENCES Student(RollNo),
+  FOREIGN KEY (eid) REFERENCES Equipment(eid)
+);
+
+CREATE TABLE Equipment
+(
+  eid INT NOT NULL,
+  Name VARCHAR(50) NOT NULL,
+  AvailabilityStatus INT NOT NULL,
+  PurchaseDate DATE NOT NULL,
+  Cost INT NOT NULL,
+  InvoiceNo INT NOT NULL,
+  PRIMARY KEY (eid)
+);
