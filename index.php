@@ -12,9 +12,6 @@ $errors = array();
 if($_POST) {
 
 	$rollno = $_POST['rollno'];
-
-	// echo $rollno;
-
 	$password = $_POST['password'];
 
 	if(empty($rollno) || empty($password)) {
@@ -39,8 +36,10 @@ if($_POST) {
 			if($mainResult->num_rows == 1) {
 				$value = $mainResult->fetch_assoc();
 				$user_id = $value['rollno'];
+				$hostel_name = $value['hostelname'];
 
 				// set session
+				$_SESSION['hostelname'] = $hostel_name;
 				$_SESSION['userId'] = $user_id;
 
 				header('location: dashboard.php');	
