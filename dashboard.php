@@ -1,6 +1,17 @@
-<?php require_once 'includes/header.php'; ?>
+<?php require_once 'includes/header.php';
 
-<?php
+$servername = "localhost";
+$username = "root";
+$password = "root";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+echo "Connected successfully";
 
 $sql = "SELECT * FROM product WHERE status = 1";
 $query = $connect->query($sql);
