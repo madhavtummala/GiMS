@@ -38,7 +38,7 @@ use THN2;
 
 create table equipment
 (
-  eid int not null,
+  eid int not null auto_increment,
   name varchar(50) not null,
   status int not null,
   dateofpurchase date not null,
@@ -75,5 +75,5 @@ create table requests
   estimatedcost int not null,
   purchaselinks varchar(1000),
   reason varchar(1000) not null,
-  constraint pk_requests primary key (equipmentname, hostelname, rollno)
+  constraint pk_requests primary key (equipmentname, rollno)
 );
