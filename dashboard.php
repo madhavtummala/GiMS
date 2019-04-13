@@ -1,16 +1,13 @@
 <?php require_once 'includes/header.php';
 
-$servername = "localhost";
-$username = "root";
-$password = "root";
 $roll_no = $_SESSION['userId'];
 
-$hostel = new mysqli($localhost, $username, $password, $_SESSION['hostelname']);
+$hostel = new mysqli($localhost, $username, $password, $_SESSION['hostel']);
 // check connection
 if($hostel->connect_error) {
   die("Connection Failed : " . $hostel->connect_error);
 } else {
-   echo "Successfully connected";
+//   echo "Successfully connected";
 }
 
 $sql = "SELECT * FROM equipment";
@@ -25,19 +22,14 @@ $sql = "SELECT * FROM equipment WHERE status = 1";
 $query = $hostel->query($sql);
 $countAvailable = $query->num_rows;
 
-//$sql = "SELECT * FROM issued WHERE rollno = $roll_no";
-//$query = $connect->query($sql);
-//$countAvailable = $query->num_rows;
+$sql = "SELECT * FROM issued natural join equipment WHERE rollno = '$roll_no'";
+$query = $hostel->query($sql);
 
-//while($issued = $query->fetch_assoc())
-//{
-//    echo $issued['eqname'];
-//    echo $issued['dateofissue'];
-//}
-$hostel->close();
+$sql = "SELECT sum(fine) as totalfine FROM issued WHERE rollno = '$roll_no'";
+$fine = $hostel->query($sql);
 
-$fine = 10;
-$orderResult = 20;
+$fine = $fine->fetch_assoc();
+$fine = $fine['totalfine']
 ?>
 
 <!-- fullCalendar 2.2.5-->
@@ -120,19 +112,21 @@ $orderResult = 20;
 				<table class="table" id="productTable">
 			  	<thead>
 			  		<tr>			  			
-			  			<th style="width:40%;">Name</th>
-			  			<th style="width:20%;">Orders in Rupees</th>
+			  			<th style="width:20%;">Name</th>
+                        <th style="width:20%;">Date of Issue</th>
+			  			<th style="width:20%;">Fine</th>
 			  		</tr>
 			  	</thead>
 			  	<tbody>
-<!--					--><?php //while ($issued = $userIssued->fetch_assoc()) { ?>
-<!--						<tr>-->
-<!--							<td>--><?php //echo $issued['username']?><!--</td>-->
-<!--							<td>--><?php //echo $issued['totalorder']?><!--</td>-->
-<!---->
-<!--						</tr>-->
-<!---->
-<!--					--><?php //} ?>
+					<?php while ($issued = $query->fetch_assoc()) { ?>
+						<tr>
+							<td><?php echo $issued['name']?></td>
+                            <td><?php echo $issued['dateofissue']?></td>
+							<td><?php echo $issued['fine']?> Rs</td>
+
+						</tr>
+
+					<?php } ?>
 				</tbody>
 				</table>
 				<!--<div id="calendar"></div>-->
