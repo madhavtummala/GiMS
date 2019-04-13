@@ -65,7 +65,7 @@ create table issued
   rollno varchar(12) not null,
   dateofissue date not null,
   fine int not null default 0,
-  constraint pk_issued primary key (eid, rollno, dateofissue),
+  constraint pk_issued primary key (eid, rollno, dateofissue)
 );
 
 create table requests
@@ -75,5 +75,5 @@ create table requests
   estimatedcost int not null,
   purchaselinks varchar(1000),
   reason varchar(1000) not null,
-  constraint pk_requests primary key (equipmentname, hostelname, rollno),
+  constraint pk_requests primary key (equipmentname, hostelname, rollno)
 );
