@@ -43,7 +43,7 @@ $fine = $fine['totalfine']
 		<div class="panel panel-success">
 			<div class="panel-heading">
 				
-				<a href="product.php" style="text-decoration:none;color:black;">
+				<a href="brand.php" style="text-decoration:none;color:black;">
 					Item Available
 					<span class="badge pull pull-right"><?php echo $countAvailable; ?></span>
 				</a>
@@ -55,7 +55,7 @@ $fine = $fine['totalfine']
 	<div class="col-md-4">
 		<div class="panel panel-danger">
 			<div class="panel-heading">
-				<a href="product.php" style="text-decoration:none;color:black;">
+				<a href="brand.php" style="text-decoration:none;color:black;">
 					Items under Repair
 					<span class="badge pull pull-right"><?php echo $countRepair; ?></span>
 				</a>
@@ -69,7 +69,7 @@ $fine = $fine['totalfine']
 		<div class="col-md-4">
 			<div class="panel panel-info">
 			<div class="panel-heading">
-				<a href="orders.php?o=manord" style="text-decoration:none;color:black;">
+				<a href="brand.php?o=manord" style="text-decoration:none;color:black;">
 					Total Items
 					<span class="badge pull pull-right"><?php echo $countTotal; ?></span>
 				</a>

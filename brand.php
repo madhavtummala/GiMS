@@ -6,27 +6,27 @@
 
 		<ol class="breadcrumb">
 		  <li><a href="dashboard.php">Home</a></li>		  
-		  <li class="active">Brand</li>
+		  <li class="active">Items</li>
 		</ol>
 
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<div class="page-heading"> <i class="glyphicon glyphicon-edit"></i> Manage Brand</div>
+				<div class="page-heading"> <i class="glyphicon glyphicon-edit"></i> Manage Items</div>
 			</div> <!-- /panel-heading -->
 			<div class="panel-body">
 
 				<div class="remove-messages"></div>
 
 				<div class="div-action pull pull-right" style="padding-bottom:20px;">
-					<button class="btn btn-default button1" data-toggle="modal" data-target="#addBrandModel"> <i class="glyphicon glyphicon-plus-sign"></i> Add Brand </button>
+					<button class="btn btn-default button1" data-toggle="modal" data-target="#addBrandModel"> <i class="glyphicon glyphicon-plus-sign"></i>  Issue Item</button>
 				</div> <!-- /div-action -->				
 				
 				<table class="table" id="manageBrandTable">
 					<thead>
 						<tr>							
-							<th>Brand Name</th>
-							<th>Status</th>
-							<th style="width:15%;">Options</th>
+							<th>ID</th>
+							<th>Name</th>
+							<th style="width:15%;">Status</th>
 						</tr>
 					</thead>
 				</table>
@@ -44,30 +44,36 @@
     	<form class="form-horizontal" id="submitBrandForm" action="php_action/createBrand.php" method="POST">
 	      <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h4 class="modal-title"><i class="fa fa-plus"></i> Add Brand</h4>
+	        <h4 class="modal-title"><i class="fa fa-plus"></i> Issue Item</h4>
 	      </div>
 	      <div class="modal-body">
 
 	      	<div id="add-brand-messages"></div>
 
 	        <div class="form-group">
-	        	<label for="brandName" class="col-sm-3 control-label">Brand Name: </label>
-	        	<label class="col-sm-1 control-label">: </label>
+	        	<label for="brandName" class="col-sm-3 control-label">ID </label>
+<!--	        	<label class="col-sm-1 control-label">: </label>-->
 				    <div class="col-sm-8">
-				      <input type="text" class="form-control" id="brandName" placeholder="Brand Name" name="brandName" autocomplete="off">
+				      <input type="text" class="form-control" id="eid" placeholder="Id of the Item" name="eid" autocomplete="off">
 				    </div>
+
+                <label for="brandName" class="col-sm-3 control-label">Roll No </label>
+<!--                <label class="col-sm-1 control-label">: </label>-->
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="rollno" placeholder="Roll no of Student" name="rollno" autocomplete="off">
+                </div>
 	        </div> <!-- /form-group-->	         	        
-	        <div class="form-group">
-	        	<label for="brandStatus" class="col-sm-3 control-label">Status: </label>
-	        	<label class="col-sm-1 control-label">: </label>
-				    <div class="col-sm-8">
-				      <select class="form-control" id="brandStatus" name="brandStatus">
-				      	<option value="">~~SELECT~~</option>
-				      	<option value="1">Available</option>
-				      	<option value="2">Not Available</option>
-				      </select>
-				    </div>
-	        </div> <!-- /form-group-->	         	        
+<!--	        <div class="form-group">-->
+<!--	        	<label for="brandStatus" class="col-sm-3 control-label">Status: </label>-->
+<!--	        	<label class="col-sm-1 control-label">: </label>-->
+<!--				    <div class="col-sm-8">-->
+<!--				      <select class="form-control" id="brandStatus" name="brandStatus">-->
+<!--				      	<option value="">~~SELECT~~</option>-->
+<!--				      	<option value="1">Available</option>-->
+<!--				      	<option value="2">Not Available</option>-->
+<!--				      </select>-->
+<!--				    </div>-->
+<!--	        </div>        	        -->
 
 	      </div> <!-- /modal-body -->
 	      
