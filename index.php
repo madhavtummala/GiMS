@@ -39,7 +39,7 @@ if($_POST) {
 				$hostel_name = $value['hostelname'];
 
 				// set session
-				$_SESSION['hostelname'] = $hostel_name;
+				$_SESSION['hostel'] = $hostel_name;
 				$_SESSION['userId'] = $user_id;
 
 				header('location: dashboard.php');	
@@ -48,7 +48,7 @@ if($_POST) {
 				$errors[] = "Incorrect rollno/password combination";
 			} // /else
 		} else {		
-			$errors[] = "Rollno doesnot exists";		
+			$errors[] = "Rollno does not exists";
 		} // /else
 	} 
 	

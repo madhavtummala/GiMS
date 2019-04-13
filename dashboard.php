@@ -3,47 +3,42 @@
 $servername = "localhost";
 $username = "root";
 $password = "root";
+$roll_no = $_SESSION['userId'];
 
-// Create connection
-$conn = new mysqli($servername, $username, $password);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-echo "Connected successfully";
-
-$sql = "SELECT * FROM product WHERE status = 1";
-$query = $connect->query($sql);
-$countProduct = $query->num_rows;
-
-$orderSql = "SELECT * FROM orders WHERE order_status = 1";
-$orderQuery = $connect->query($orderSql);
-$countOrder = $orderQuery->num_rows;
-
-$totalRevenue = "";
-while ($orderResult = $orderQuery->fetch_assoc()) {
-	$totalRevenue += $orderResult['paid'];
+$hostel = new mysqli($localhost, $username, $password, $_SESSION['hostelname']);
+// check connection
+if($hostel->connect_error) {
+  die("Connection Failed : " . $hostel->connect_error);
+} else {
+   echo "Successfully connected";
 }
 
-$lowStockSql = "SELECT * FROM product WHERE quantity <= 3 AND status = 1";
-$lowStockQuery = $connect->query($lowStockSql);
-$countLowStock = $lowStockQuery->num_rows;
+$sql = "SELECT * FROM equipment";
+$query = $hostel->query($sql);
+$countTotal = $query->num_rows;
 
-$userwisesql = "SELECT users.username , SUM(orders.grand_total) as totalorder FROM orders INNER JOIN users ON orders.user_id = users.user_id WHERE orders.order_status = 1 GROUP BY orders.user_id";
-$userwiseQuery = $connect->query($userwisesql);
-$userwieseOrder = $userwiseQuery->num_rows;
+$sql = "SELECT * FROM equipment WHERE status = 2";
+$query = $hostel->query($sql);
+$countRepair = $query->num_rows;
 
-$connect->close();
+$sql = "SELECT * FROM equipment WHERE status = 1";
+$query = $hostel->query($sql);
+$countAvailable = $query->num_rows;
 
+//$sql = "SELECT * FROM issued WHERE rollno = $roll_no";
+//$query = $connect->query($sql);
+//$countAvailable = $query->num_rows;
+
+//while($issued = $query->fetch_assoc())
+//{
+//    echo $issued['eqname'];
+//    echo $issued['dateofissue'];
+//}
+$hostel->close();
+
+$fine = 10;
+$orderResult = 20;
 ?>
-
-
-<style type="text/css">
-	.ui-datepicker-calendar {
-		display: none;
-	}
-</style>
 
 <!-- fullCalendar 2.2.5-->
     <link rel="stylesheet" href="assests/plugins/fullcalendar/fullcalendar.min.css">
@@ -51,31 +46,31 @@ $connect->close();
 
 
 <div class="row">
-	<?php  if(isset($_SESSION['userId']) && $_SESSION['userId']==1) { ?>
+	<?php  if(isset($_SESSION['userId'])) { ?>
 	<div class="col-md-4">
 		<div class="panel panel-success">
 			<div class="panel-heading">
 				
 				<a href="product.php" style="text-decoration:none;color:black;">
-					Total Product
-					<span class="badge pull pull-right"><?php echo $countProduct; ?></span>	
+					Item Available
+					<span class="badge pull pull-right"><?php echo $countAvailable; ?></span>
 				</a>
 				
-			</div> <!--/panel-hdeaing-->
-		</div> <!--/panel-->
-	</div> <!--/col-md-4-->
+			</div>
+		</div>
+	</div>
 	
 	<div class="col-md-4">
 		<div class="panel panel-danger">
 			<div class="panel-heading">
 				<a href="product.php" style="text-decoration:none;color:black;">
-					Low Stock
-					<span class="badge pull pull-right"><?php echo $countLowStock; ?></span>	
+					Items under Repair
+					<span class="badge pull pull-right"><?php echo $countRepair; ?></span>
 				</a>
 				
-			</div> <!--/panel-hdeaing-->
-		</div> <!--/panel-->
-	</div> <!--/col-md-4-->
+			</div>
+		</div>
+	</div>
 	
 	
 	<?php } ?>  
@@ -83,13 +78,13 @@ $connect->close();
 			<div class="panel panel-info">
 			<div class="panel-heading">
 				<a href="orders.php?o=manord" style="text-decoration:none;color:black;">
-					Total Orders
-					<span class="badge pull pull-right"><?php echo $countOrder; ?></span>
+					Total Items
+					<span class="badge pull pull-right"><?php echo $countTotal; ?></span>
 				</a>
 					
-			</div> <!--/panel-hdeaing-->
-		</div> <!--/panel-->
-		</div> <!--/col-md-4-->
+			</div>
+		</div>
+		</div>
 
 	
 
@@ -107,24 +102,20 @@ $connect->close();
 
 		<div class="card">
 		  <div class="cardHeader" style="background-color:#245580;">
-		    <h1><?php if($totalRevenue) {
-		    	echo $totalRevenue;
-		    	} else {
-		    		echo '0';
-		    		} ?></h1>
+              <?php echo $fine; ?>
 		  </div>
 
 		  <div class="cardContainer">
-		    <p> INR Total Revenue</p>
+		    <p> Total Fine</p>
 		  </div>
 		</div> 
 
 	</div>
 	
-	<?php  if(isset($_SESSION['userId']) && $_SESSION['userId']==1) { ?>
+	<?php  if(isset($_SESSION['userId'])) { ?>
 	<div class="col-md-8">
 		<div class="panel panel-default">
-			<div class="panel-heading"> <i class="glyphicon glyphicon-calendar"></i> User Wise Order</div>
+			<div class="panel-heading"> <i class="glyphicon glyphicon-calendar"></i> You Issued Items</div>
 			<div class="panel-body">
 				<table class="table" id="productTable">
 			  	<thead>
@@ -134,14 +125,14 @@ $connect->close();
 			  		</tr>
 			  	</thead>
 			  	<tbody>
-					<?php while ($orderResult = $userwiseQuery->fetch_assoc()) { ?>
-						<tr>
-							<td><?php echo $orderResult['username']?></td>
-							<td><?php echo $orderResult['totalorder']?></td>
-							
-						</tr>
-						
-					<?php } ?>
+<!--					--><?php //while ($issued = $userIssued->fetch_assoc()) { ?>
+<!--						<tr>-->
+<!--							<td>--><?php //echo $issued['username']?><!--</td>-->
+<!--							<td>--><?php //echo $issued['totalorder']?><!--</td>-->
+<!---->
+<!--						</tr>-->
+<!---->
+<!--					--><?php //} ?>
 				</tbody>
 				</table>
 				<!--<div id="calendar"></div>-->
@@ -176,8 +167,8 @@ $connect->close();
         },
         buttonText: {
           today: 'today',
-          month: 'month'          
-        }        
+          month: 'month'
+        }
       });
 
 
