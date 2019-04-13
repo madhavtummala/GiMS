@@ -111,6 +111,7 @@ create table issued
   fine int not null default 0,
   reason varchar(1000) default NULL,
   constraint pk_issued primary key (issueno)
+  constraint fk_issued_eid foreign key (eid) references equipment(eid)
 );
 
 create table requests
@@ -257,4 +258,4 @@ end //
 
 delimiter ;
 
-insert into issued values(NULL, 5, "16cs01041", curdate(), 0, NULL);
+-- insert into issued values(NULL, 5, "16cs01041", curdate(), 0, NULL);
