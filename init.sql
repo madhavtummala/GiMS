@@ -1,9 +1,13 @@
+create database Gymkhana;
+
+use Gymkhana;
+
 create table hostel
 (
   hostelname varchar(50) not null,
   dbaddress varchar(100) not null,
-  primary key (hostelname),
-  unique (dbaddress)
+  constraint pk_hostel primary key (hostelname),
+  constraint uk_hostel_dbaddress unique (dbaddress)
 );
 
 create table officebearer
@@ -12,9 +16,9 @@ create table officebearer
   name varchar(50) not null,
   contactnumber numeric(10,0) not null,
   emailid varchar(50) not null,
-  primary key (post),
-  unique (contactnumber),
-  unique (emailid)
+  constraint pk_officebearer primary key (post),
+  constraint uk_officebearer_contactnumber unique (contactnumber),
+  constraint uk_officebearer_emailid unique (emailid)
 );
 
 create table student
@@ -24,9 +28,23 @@ create table student
   emailid varchar(50) not null,
   password varchar(50) not null,
   hostelname varchar(50) not null,
-  primary key (rollno),
-  foreign key (hostelname) references hostel(hostelname),
-  unique (emailid)
+  constraint pk_student primary key (rollno),
+  constraint fk_student_hostelname foreign key (hostelname) references hostel(hostelname),
+  constraint uk_student_emailid unique (emailid)
+);
+
+create database THN2;
+use THN2;
+
+create table equipment
+(
+  eid int not null,
+  name varchar(50) not null,
+  status int not null,
+  dateofpurchase date not null,
+  cost int not null,
+  invoiceno int not null,
+  constraint pk_equipment primary key (eid)
 );
 
 create table issuehistory
@@ -37,31 +55,8 @@ create table issuehistory
   dateofreturn date not null,
   fineamount int not null,
   reasonforfine int not null,
-  primary key (eid, rollno, dateofissue),
-  foreign key (rollno) references student(rollno)
-);
-
-create table fines
-(
-  eid int not null,
-  rollno varchar(12) not null,
-  amount int not null,
-  reason int not null,
-  primary key (eid),
-  foreign key (rollno) references student(rollno)
-);
-
-create table requests
-(
-  equipmentname varchar(50) not null,
-  rollno varchar(12) not null,
-  hostelname varchar(50) not null,
-  estimatedcost int not null,
-  purchaselinks varchar(1000),
-  reason varchar(1000) not null,
-  primary key (equipmentname, hostelname, rollno),
-  foreign key (hostelname) references hostel(hostelname),
-  foreign key (rollno) references student(rollno)
+  constraint pk_issuehistory primary key (eid, rollno, dateofissue),
+  constraint fk_issuehistory_eid foreign key (eid) references equipment(eid)
 );
 
 create table issued
@@ -69,6 +64,16 @@ create table issued
   eid int not null,
   rollno varchar(12) not null,
   dateofissue date not null,
-  primary key (eid, rollno, dateofissue),
-  foreign key (rollno) references student(rollno)
+  fine int not null default 0,
+  constraint pk_issued primary key (eid, rollno, dateofissue),
+);
+
+create table requests
+(
+  equipmentname varchar(50) not null,
+  rollno varchar(12) not null,
+  estimatedcost int not null,
+  purchaselinks varchar(1000),
+  reason varchar(1000) not null,
+  constraint pk_requests primary key (equipmentname, hostelname, rollno),
 );
