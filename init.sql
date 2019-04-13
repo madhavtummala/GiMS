@@ -1,5 +1,9 @@
-create database Gymkhana;
+drop database if exists Gymkhana;
+drop database if exists THN2;
 
+set global event_scheduler = ON;
+
+create database Gymkhana;
 use Gymkhana;
 
 create table hostel
@@ -33,6 +37,44 @@ create table student
   constraint uk_student_emailid unique (emailid)
 );
 
+insert into hostel values
+("MHR", "MHR"),
+("SHR", "SHR"),
+("THN1", "THN1"),
+("THN2", "THN2");
+
+
+insert into student values("16cs01041", "Tummala Madhav", "tm15@iitbbs.ac.in", "madhav1999", "THN2");
+insert into student values("16cs01042", "Saksham Arneja", "sa26@iitbbs.ac.in", "sak@1234", "THN2");
+
+insert into student values
+("AA02REJDN","Leonard Ray","0192480689","lobortis.mauris@iitbbs.ac.in","SHR"),
+("GF44OXGJP","Ahmed Gill","5696687270","a.feugiat.tellus@iitbbs.ac.in","THN1"),
+("NP61TYMEC","Allistair Evans","8073860419","Aliquam@iitbbs.ac.in","THN1"),
+("BB64JLQWR","Cade Moon","1856290779","sociis.natoque.penatibus@iitbbs.ac.in","THN2"),
+("GP21VSCYR","Ronan Ewing","6208777051","eget.tincidunt.dui@iitbbs.ac.in","SHR"),
+("UL42KOQVH","Cairo Cannon","8600306673","ultricies@iitbbs.ac.in","THN1"),
+("CL22HQJLJ","Maxwell Marshall","7652990202","Fusce.dolor.quam@iitbbs.ac.in","THN1"),
+("XC15SRIOZ","Preston Brown","2172598659","lorem.vehicula.et@iitbbs.ac.in","SHR"),
+("WQ08UYKLG","Wang Velasquez","5880563729","varius@iitbbs.ac.in","MHR"),
+("YZ89CXGLA","Emerson Mann","9449383483","congue@iitbbs.ac.in","THN1"),
+("DY15FSQJA","Roth Cochran","1026289295","arcu.iaculis@iitbbs.ac.in","THN2"),
+("UL07GXDLZ","Harper Alvarez","7134057654","tristique@iitbbs.ac.in","THN2"),
+("LF16GPSPW","Henry Williamson","9385734724","erat.Sed@iitbbs.ac.in","SHR"),
+("WW12QYMBK","Lucian Haley","7692936859","nisl.Maecenas@iitbbs.ac.in","SHR"),
+("SC61JEPKT","Salvador Ortiz","6850998568","sem.eget@iitbbs.ac.in","THN1"),
+("KQ58TWASU","Gil Espinoza","1434012890","Proin.mi.Aliquam@iitbbs.ac.in","SHR"),
+("FS42KICUM","Kane Ramos","1221954040","morbi.tristique@iitbbs.ac.in","SHR"),
+("MQ22DYQTV","Henry Kelly","6976561045","Aenean@iitbbs.ac.in","THN1"),
+("XI58MMJNN","Vladimir Mann","7723170273","nec@iitbbs.ac.in","MHR"),
+("ZV24WMWSC","Burton Doyle","6360183522","est.mollis@iitbbs.ac.in","MHR"),
+("UY68OWUVS","Carter Estrada","1004754982","vulputate@iitbbs.ac.in","THN1"),
+("VS97UOXZR","Ulric Noel","0170968602","a.mi.fringilla@iitbbs.ac.in","THN2"),
+("HA28XMYQF","Kennan Lancaster","3265559373","turpis.vitae.purus@iitbbs.ac.in","THN1");
+
+insert into officebearer values("Gsec Science and Technology", "Geeth Nischal", "8500936193", "ggn10@iitbbs.ac.in");
+insert into officebearer values("Vice President", "Punith", "9999999999", "vp.sg@iitbbs.ac.in");
+
 create database THN2;
 use THN2;
 
@@ -43,29 +85,32 @@ create table equipment
   status int not null,
   dateofpurchase date not null,
   cost int not null,
-  invoiceno int not null,
+  invoiceno varchar(12) not null,
   constraint pk_equipment primary key (eid)
 );
 
 create table issuehistory
 (
+  issueno int not null,
   eid int not null,
   rollno varchar(12) not null,
   dateofissue date not null,
   dateofreturn date not null,
   fineamount int not null,
-  reasonforfine int not null,
-  constraint pk_issuehistory primary key (eid, rollno, dateofissue),
+  reasonforfine varchar(1000),
+  constraint pk_issuehistory primary key (issueno),
   constraint fk_issuehistory_eid foreign key (eid) references equipment(eid)
 );
 
 create table issued
 (
+  issueno int not null auto_increment,
   eid int not null,
   rollno varchar(12) not null,
   dateofissue date not null,
   fine int not null default 0,
-  constraint pk_issued primary key (eid, rollno, dateofissue)
+  reason varchar(1000) default NULL,
+  constraint pk_issued primary key (issueno)
 );
 
 create table requests
@@ -77,3 +122,139 @@ create table requests
   reason varchar(1000) not null,
   constraint pk_requests primary key (equipmentname, rollno)
 );
+
+insert into equipment values
+(NULL,"Ludo",1,"20-02-21",653,"CVU87WNA0XZ"),
+(NULL,"Swimming gogles",1,"19-05-25",6281,"AUB55NMI8ZQ"),
+(NULL,"Tennis Ball",1,"19-02-28",3455,"CWW60HQC2ZK"),
+(NULL,"Arduino",1,"18-11-13",7864,"VUL22KUE0PS"),
+(NULL,"Arduino",1,"19-02-19",7857,"QMD75FYD0EU"),
+(NULL,"Arduino",1,"19-05-05",9945,"GWK58ISM7CP"),
+(NULL,"Water Ballon",1,"19-06-19",9780,"RFT53VEJ8CH"),
+(NULL,"Baseball",1,"19-08-27",9643,"GYX37TDP2GR"),
+(NULL,"Swimming sutis",1,"19-06-11",1546,"CEX06SBJ4MA"),
+(NULL,"Baseball",1,"20-01-24",7094,"MRY70RGA6EP"),
+(NULL,"Screw Driver",1,"20-03-20",7732,"JQO90MNP5JS"),
+(NULL,"Swimming sutis",1,"20-01-19",8204,"FYH95YGP7RU"),
+(NULL,"VolleyBall",1,"19-12-17",336,"LMA96OBC2PI"),
+(NULL,"Baseball",1,"19-09-16",2590,"KFN37QJD8ST"),
+(NULL,"Lock",1,"18-07-17",8598,"LAB63IHM3HD"),
+(NULL,"Lock",1,"18-06-20",6185,"SXA33KEF3ZB"),
+(NULL,"Swimming gogles",1,"19-02-18",3659,"GYI33PHG9WK"),
+(NULL,"First Aid bands",1,"19-09-01",4733,"JRH74DGS5YZ"),
+(NULL,"Chess",1,"19-03-24",8989,"OXK74UJB3IW"),
+(NULL,"Lock",1,"19-05-16",1629,"VUR55RRG1EW"),
+(NULL,"Air Pump",1,"19-11-06",693,"GSZ86IVS7BC"),
+(NULL,"VolleyBall",1,"20-01-12",2082,"PWI69LLI7VT"),
+(NULL,"Table Tennis Ball",1,"18-09-04",6093,"WMG68UCZ4LU"),
+(NULL,"Cricket Ball",1,"19-03-27",1476,"LNL79JAQ6PK"),
+(NULL,"Motors",1,"19-12-19",2164,"HNS68MMX8DN"),
+(NULL,"BasketBall",1,"19-05-23",7719,"EKP09RNM1KH"),
+(NULL,"Swimming gogles",1,"19-06-21",8918,"BPG75PGY2IZ"),
+(NULL,"Swimming sutis",1,"19-12-06",9706,"GGI78XCY6IS"),
+(NULL,"Hockey",1,"20-02-14",3155,"CIH73CDJ1XV"),
+(NULL,"Chess",1,"18-05-03",2475,"FED52YXK2WQ"),
+(NULL,"Table Tennis Ball",1,"19-06-17",7360,"ICA84OHK8KL"),
+(NULL,"Raspi",1,"18-12-05",9803,"YCV79EXR5TC"),
+(NULL,"Hockey",1,"18-04-26",7185,"XAI64FXI2OV"),
+(NULL,"FootBall",1,"19-12-20",5203,"QLB15WSG3CR"),
+(NULL,"Printer",1,"19-12-04",1612,"RSW96ABI5UB"),
+(NULL,"Lock",1,"19-06-07",886,"KEE86YWM3GI"),
+(NULL,"Swimming gogles",1,"18-05-23",922,"HLG16DNV2WQ"),
+(NULL,"BasketBall",1,"18-07-29",5926,"ZEK12AZW0WN"),
+(NULL,"Raspi",1,"18-04-20",1122,"HKC61IBX7TD"),
+(NULL,"Lock",1,"20-01-31",1363,"NEK00OWY8LK"),
+(NULL,"Guard Dress",1,"19-10-14",7123,"NKV76PQP0KJ"),
+(NULL,"Guard Dress",1,"18-05-23",2532,"BWM36OWI7UG"),
+(NULL,"Table Tennis Bat",1,"18-07-24",2873,"DEA27OKW2AD"),
+(NULL,"Tennis Ball",1,"20-03-02",7394,"ZDM59MKL5QI"),
+(NULL,"Table Tennis Ball",1,"19-05-12",2957,"JJT21XLA7BT"),
+(NULL,"Air Pump",1,"18-11-02",6744,"ZQF15HXW2EH"),
+(NULL,"Ludo",1,"18-08-31",4763,"FJP03DVD0WP"),
+(NULL,"Printer",1,"20-04-07",5708,"LIV26KEH1MU"),
+(NULL,"VolleyBall",1,"18-11-18",2155,"ZXH43SLU0EY"),
+(NULL,"BasketBall",1,"19-11-03",6978,"GPX26TKZ9QK"),
+(NULL,"Printer",1,"18-08-01",4689,"FJI64KUM5OA"),
+(NULL,"First Aid bands",1,"20-03-23",9393,"UHP50BBP2WN"),
+(NULL,"Cricket Ball",1,"19-03-28",4178,"MYZ65UNL9LU"),
+(NULL,"FootBall",1,"19-06-14",7245,"TNM46JJV3JD"),
+(NULL,"Cricket Ball",1,"18-08-10",4798,"SFQ82HRP2NY"),
+(NULL,"Mess card",1,"19-09-26",6190,"LOU90SOK8YJ"),
+(NULL,"Carroms",1,"20-01-02",4746,"LEY51FUV3KK"),
+(NULL,"Cards",1,"20-03-07",5527,"DCV90ETZ0ZP"),
+(NULL,"Tennis Ball",1,"18-05-19",2183,"BWE44TKE6UJ"),
+(NULL,"Hockey",1,"18-09-01",979,"PQY81UUZ0AV"),
+(NULL,"VolleyBall",1,"18-07-02",6381,"SCU86NPU6YD"),
+(NULL,"Ludo",1,"19-11-12",571,"CZC85OHV8TT"),
+(NULL,"BasketBall",1,"20-03-14",8222,"WZA54TTB8AH"),
+(NULL,"First Aid bands",1,"19-11-09",505,"KXH38WVQ4WM"),
+(NULL,"First Aid bands",1,"19-09-10",2341,"DFY10FRS8AX"),
+(NULL,"Table Tennis Ball",1,"18-05-06",8390,"GSN56WGS9GG"),
+(NULL,"Carroms",1,"19-10-27",5572,"XNT38FLV9NZ"),
+(NULL,"First Aid bands",1,"19-10-17",927,"RSM08KYR1LQ"),
+(NULL,"Cards",1,"19-07-05",4949,"ECX71VAP7TT"),
+(NULL,"Screw Driver",1,"19-12-28",9316,"ARV79OMQ6IT"),
+(NULL,"Cricket Bat",1,"19-07-03",311,"TYU51EMA0NR"),
+(NULL,"Printer",1,"18-06-15",1052,"DHE70WHE6DI"),
+(NULL,"Motors",1,"19-07-27",6213,"VGA39JDK0QE"),
+(NULL,"Swimming sutis",1,"19-03-07",8816,"PCI30QPU9WO"),
+(NULL,"Cricket Ball",1,"18-05-11",2732,"IDL79XQC0UJ"),
+(NULL,"Lock",1,"19-12-03",9980,"KQW95NQT6LD"),
+(NULL,"Water Ballon",1,"19-10-01",4863,"BGP03CKL4XG"),
+(NULL,"Tennis Ball",1,"18-09-27",5155,"IEU04MPR8CV"),
+(NULL,"Carroms",1,"19-07-13",7679,"FDP66FJC7YV"),
+(NULL,"Baseball",1,"19-03-20",5644,"HSW26KQE6ZS"),
+(NULL,"Raspi",1,"19-07-29",8241,"VZI01WSM9LT"),
+(NULL,"Mess card",1,"19-07-13",9775,"QAW99TAQ7XQ"),
+(NULL,"First Aid bands",1,"19-02-14",1192,"QOS11XRF0QH"),
+(NULL,"Raspi Zero",1,"19-01-10",6376,"CBN57NJH2DY"),
+(NULL,"Water Ballon",1,"19-10-17",9081,"VBV18WEF9QH"),
+(NULL,"Motors",1,"20-03-22",3893,"LDD44UWW8KA"),
+(NULL,"VolleyBall",1,"19-09-07",9832,"LWN80FRU5WD"),
+(NULL,"Tennis Ball",1,"18-08-17",1525,"UML41LHF2MA"),
+(NULL,"BasketBall",1,"18-11-24",1158,"PBQ31NMH6PV"),
+(NULL,"Motors",1,"18-11-10",2038,"OGD42XLV9DC"),
+(NULL,"Guard Dress",1,"18-08-07",6419,"QWB26CBI1YB"),
+(NULL,"Cricket Ball",1,"19-07-05",3633,"KET77CMT0FR"),
+(NULL,"Swimming gogles",1,"20-02-27",2037,"NHS88VIT9MA"),
+(NULL,"Chess",1,"20-03-16",1572,"WKX94AXY6GJ"),
+(NULL,"Water Ballon",1,"19-05-23",1565,"LYA58XHT2OC"),
+(NULL,"Lock",1,"18-12-19",292,"OEH62CQO8HG"),
+(NULL,"VolleyBall",1,"19-11-20",4816,"SYT75EYR9KP"),
+(NULL,"Ludo",1,"18-09-27",7791,"GQE27FCI4AB"),
+(NULL,"First Aid bands",1,"20-01-26",5540,"HKM58XHD5UG"),
+(NULL,"Cards",1,"18-07-14",3148,"BTO34YJP2DT");
+
+delimiter //
+
+create trigger issue 
+before insert on issued
+for each row
+begin
+update equipment set status=0 where eid=new.eid;
+end //
+
+-- create procedure test(IN issueno int)
+-- begin
+-- select * from issued where issueno = issueno;
+-- end //
+
+create trigger returned 
+before delete on issued
+for each row
+begin
+insert into issuehistory values(old.issueno,old.eid,old.rollno,old.dateofissue,curdate(),old.fine,old.reason);
+end //
+
+create event cal_fine
+on schedule every 1 day
+starts current_timestamp
+ends current_timestamp + interval 1 year
+do
+begin
+update issued set fine = case when datediff(curdate(),dateofissue)<=7 then fine+10 else fine end;
+end //
+
+delimiter ;
+
+insert into issued values(NULL, 5, "16cs01041", curdate(), 0, NULL);
