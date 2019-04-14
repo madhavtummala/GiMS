@@ -48,29 +48,17 @@ insert into student values("16cs01041", "Tummala Madhav", "tm15@iitbbs.ac.in", "
 insert into student values("16cs01042", "Saksham Arneja", "sa26@iitbbs.ac.in", "sak@1234", "THN2");
 
 insert into student values
-("AA02REJDN","Leonard Ray","0192480689","lobortis.mauris@iitbbs.ac.in","SHR"),
-("GF44OXGJP","Ahmed Gill","5696687270","a.feugiat.tellus@iitbbs.ac.in","THN1"),
-("NP61TYMEC","Allistair Evans","8073860419","Aliquam@iitbbs.ac.in","THN1"),
-("BB64JLQWR","Cade Moon","1856290779","sociis.natoque.penatibus@iitbbs.ac.in","THN2"),
-("GP21VSCYR","Ronan Ewing","6208777051","eget.tincidunt.dui@iitbbs.ac.in","SHR"),
-("UL42KOQVH","Cairo Cannon","8600306673","ultricies@iitbbs.ac.in","THN1"),
-("CL22HQJLJ","Maxwell Marshall","7652990202","Fusce.dolor.quam@iitbbs.ac.in","THN1"),
-("XC15SRIOZ","Preston Brown","2172598659","lorem.vehicula.et@iitbbs.ac.in","SHR"),
-("WQ08UYKLG","Wang Velasquez","5880563729","varius@iitbbs.ac.in","MHR"),
-("YZ89CXGLA","Emerson Mann","9449383483","congue@iitbbs.ac.in","THN1"),
-("DY15FSQJA","Roth Cochran","1026289295","arcu.iaculis@iitbbs.ac.in","THN2"),
-("UL07GXDLZ","Harper Alvarez","7134057654","tristique@iitbbs.ac.in","THN2"),
-("LF16GPSPW","Henry Williamson","9385734724","erat.Sed@iitbbs.ac.in","SHR"),
-("WW12QYMBK","Lucian Haley","7692936859","nisl.Maecenas@iitbbs.ac.in","SHR"),
-("SC61JEPKT","Salvador Ortiz","6850998568","sem.eget@iitbbs.ac.in","THN1"),
-("KQ58TWASU","Gil Espinoza","1434012890","Proin.mi.Aliquam@iitbbs.ac.in","SHR"),
-("FS42KICUM","Kane Ramos","1221954040","morbi.tristique@iitbbs.ac.in","SHR"),
-("MQ22DYQTV","Henry Kelly","6976561045","Aenean@iitbbs.ac.in","THN1"),
-("XI58MMJNN","Vladimir Mann","7723170273","nec@iitbbs.ac.in","MHR"),
-("ZV24WMWSC","Burton Doyle","6360183522","est.mollis@iitbbs.ac.in","MHR"),
-("UY68OWUVS","Carter Estrada","1004754982","vulputate@iitbbs.ac.in","THN1"),
-("VS97UOXZR","Ulric Noel","0170968602","a.mi.fringilla@iitbbs.ac.in","THN2"),
-("HA28XMYQF","Kennan Lancaster","3265559373","turpis.vitae.purus@iitbbs.ac.in","THN1");
+("43NP98555","Oren Ballard","bibendum.ullamcorper@iitbbs.ac.in","EYJ21VDJ6KU","SHR"),
+("10RV89956","Ira Medina","primis@iitbbs.ac.in","YZP63IDW4YH","THN1"),
+("55BO25293","Chandler Riley","ornare.lectus@iitbbs.ac.in","YSI75QAY6VD","THN1"),
+("85LS84759","Zeus Rasmussen","ultricies@iitbbs.ac.in","KGV86LSL4KF","THN2"),
+("79JY65401","Bruno Baird","dapibus@iitbbs.ac.in","ZDA81UZH2EC","SHR"),
+("60TE93343","Vaughan Ortiz","fermentum.metus@iitbbs.ac.in","VQW60XSV8RZ","THN1"),
+("74XJ62359","Cullen Cleveland","mi@iitbbs.ac.in","TWH92TUP8EU","THN2"),
+("07FJ98351","Dillon Carey","ipsum.Phasellus@iitbbs.ac.in","YJR75GJD4OG","SHR"),
+("16HI96639","Victor Haynes","metus@iitbbs.ac.in","QUM73VOS4SV","THN1"),
+("00BP39323","Fritz Morgan","laoreet.libero.et@iitbbs.ac.in","VTK43RKZ0HV","THN2");
+
 
 insert into officebearer values("Gsec Science and Technology", "Geeth Nischal", "8500936193", "ggn10@iitbbs.ac.in");
 insert into officebearer values("Vice President", "Punith", "9999999999", "vp.sg@iitbbs.ac.in");
