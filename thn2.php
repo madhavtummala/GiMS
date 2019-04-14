@@ -17,7 +17,7 @@
                     <div class="remove-messages"></div>
 
                     <div class="div-action pull pull-right" style="padding-bottom:20px;">
-                        <button class="btn btn-default button1" data-toggle="modal" data-target="#addBrandModel"> <i class="glyphicon glyphicon-plus-sign"></i>  Issue Item</button>
+                        <button class="btn btn-default button1" data-toggle="modal" data-target="#addBrandModel"> <i class="glyphicon glyphicon-plus-sign"></i>  Add Item</button>
                     </div>
 
                     <table class="table" id="manageBrandTable">
