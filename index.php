@@ -36,11 +36,10 @@ if($_POST) {
 			if($mainResult->num_rows == 1) {
 				$value = $mainResult->fetch_assoc();
 				$user_id = $value['rollno'];
-				$hostel_name = $value['hostelname'];
 
 				// set session
-				$_SESSION['hostel'] = $hostel_name;
-				$_SESSION['userId'] = $user_id ;
+				$_SESSION['hostel'] = $value['hostelname'];
+				$_SESSION['userId'] = 2;
 
 				header('location: dashboard.php');	
 			} else{
