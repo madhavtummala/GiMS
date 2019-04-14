@@ -2,3 +2,4 @@
 *~
 php_action/db_connect.py
 .DStore
+php_action/core.php

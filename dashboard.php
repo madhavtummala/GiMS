@@ -2,9 +2,9 @@
 
 
 if($_SESSION['userId']>1) {
-    $sql = "SELECT * FROM equipment";
+    $sql = "SELECT * FROM equipment WHERE status = 0";
     $query = $hostel->query($sql);
-    $countTotal = $query->num_rows;
+    $countIssued = $query->num_rows;
 
     $sql = "SELECT * FROM equipment WHERE status = 2";
     $query = $hostel->query($sql);
@@ -16,12 +16,16 @@ if($_SESSION['userId']>1) {
 }
 
 if($_SESSION['userId']>2) {
+
+    $roll_no = $_SESSION['userId'];
+
     $sql = "SELECT * FROM issued natural join equipment WHERE rollno = '$roll_no'";
     $query = $hostel->query($sql);
 
-    $roll_no = $_SESSION['userId'];
+
     $sql = "SELECT sum(fine) as totalfine FROM issued WHERE rollno = '$roll_no'";
     $fine = $hostel->query($sql);
+
 
     $fine = $fine->fetch_assoc();
     $fine = $fine['totalfine'];
@@ -84,7 +88,7 @@ $hostel->close();
 			<div class="panel-heading">
 				
 				<a href="brand.php" style="text-decoration:none;color:black;">
-					Item Available
+					Items Available
 					<span class="badge pull pull-right"><?php echo $countAvailable; ?></span>
 				</a>
 				
@@ -93,11 +97,11 @@ $hostel->close();
 	</div>
 	
 	<div class="col-md-4">
-		<div class="panel panel-danger">
+		<div class="panel panel-info">
 			<div class="panel-heading">
 				<a href="brand.php" style="text-decoration:none;color:black;">
-					Items under Repair
-					<span class="badge pull pull-right"><?php echo $countRepair; ?></span>
+					Issued Items
+					<span class="badge pull pull-right"><?php echo $countIssued; ?></span>
 				</a>
 				
 			</div>
@@ -105,11 +109,11 @@ $hostel->close();
 	</div>
 
         <div class="col-md-4">
-			<div class="panel panel-info">
+			<div class="panel panel-danger">
 			<div class="panel-heading">
 				<a href="brand.php?o=manord" style="text-decoration:none;color:black;">
-					Total Items
-					<span class="badge pull pull-right"><?php echo $countTotal; ?></span>
+					Items Under Repair
+					<span class="badge pull pull-right"><?php echo $countRepair; ?></span>
 				</a>
 					
 			</div>
@@ -123,11 +127,11 @@ $hostel->close();
     <div class="col-md-4">
 		<div class="card">
 		  <div class="cardHeader">
-		    <h1><?php echo date('d'); ?></h1>
+		    <h1><?php echo date('l') .' '.date('d').', '.date('Y'); ?></h1>
 		  </div>
 
 		  <div class="cardContainer">
-		    <p><?php echo date('l') .' '.date('d').', '.date('Y'); ?></p>
+		    <p>Date</p>
 		  </div>
 		</div> 
 		<br/>
@@ -230,7 +234,7 @@ $hostel->close();
                             <tr>
                                 <td><?php echo $issued['name']?></td>
                                 <td><?php echo $issued['dateofissue']?></td>
-                                <td><?php echo $issued['fine']?> Rs</td>
+                                <td>Rs. <?php echo $issued['fine']?></td>
 
                             </tr>
 

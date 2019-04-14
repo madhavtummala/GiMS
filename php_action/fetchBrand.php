@@ -2,19 +2,6 @@
 
 require_once 'core.php';
 
-$localhost = "localhost";
-$username = "root";
-$password = "root";
-
-$hostel = new mysqli($localhost, $username, $password, $_SESSION['hostel']);
-
-if($hostel->connect_error) {
-    die("Connection Failed : " . $hostel->connect_error);
-} else {
-//   echo "Successfully connected";
-}
-
-
 $sql = "SELECT eid, name, status FROM equipment ORDER BY eid";
 $result = $hostel->query($sql);
 
