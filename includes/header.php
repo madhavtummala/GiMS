@@ -4,7 +4,7 @@
 <html>
 <head>
 
-	<title>Gymkhana Inventory Management System</title>
+    <title>Gymkhana Inventory Management System</title>
 
 	<!-- bootstrap -->
 	<link rel="stylesheet" href="assests/bootstrap/css/bootstrap.min.css">
@@ -13,22 +13,22 @@
 	<!-- font awesome -->
 	<link rel="stylesheet" href="assests/font-awesome/css/font-awesome.min.css">
 
-  <!-- custom css -->
-  <link rel="stylesheet" href="custom/css/custom.css">
+    <!-- custom css -->
+    <link rel="stylesheet" href="custom/css/custom.css">
 
 	<!-- DataTables -->
-  <link rel="stylesheet" href="assests/plugins/datatables/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="assests/plugins/datatables/jquery.dataTables.min.css">
 
-  <!-- file input -->
-  <link rel="stylesheet" href="assests/plugins/fileinput/css/fileinput.min.css">
+    <!-- file input -->
+    <link rel="stylesheet" href="assests/plugins/fileinput/css/fileinput.min.css">
 
-  <!-- jquery -->
+    <!-- jquery -->
 	<script src="assests/jquery/jquery.min.js"></script>
-  <!-- jquery ui -->  
-  <link rel="stylesheet" href="assests/jquery-ui/jquery-ui.min.css">
-  <script src="assests/jquery-ui/jquery-ui.min.js"></script>
+     <!-- jquery ui -->
+    <link rel="stylesheet" href="assests/jquery-ui/jquery-ui.min.css">
+    <script src="assests/jquery-ui/jquery-ui.min.js"></script>
 
-  <!-- bootstrap js -->
+    <!-- bootstrap js -->
 	<script src="assests/bootstrap/js/bootstrap.min.js"></script>
 
 </head>
@@ -57,42 +57,55 @@
 
       <ul class="nav navbar-nav navbar-right">        
 
-      	<li id="navDashboard"><a href="index.php"><i class="glyphicon glyphicon-list-alt"></i>  Dashboard</a></li>        
-        <?php if(isset($_SESSION['userId'])) { ?>
-        <li id="navBrand"><a href="brand.php"><i class="glyphicon glyphicon-btc"></i>  Brand</a></li>        
-		<?php } ?>
-		<?php if(isset($_SESSION['userId'])) { ?>
-        <li id="navCategories"><a href="categories.php"> <i class="glyphicon glyphicon-th-list"></i> Category</a></li>        
-		<?php } ?>
-		<?php if(isset($_SESSION['userId'])) { ?>
-        <li id="navProduct"><a href="product.php"> <i class="glyphicon glyphicon-ruble"></i> Product </a></li> 
-		<?php } ?>
+      	<li id="navDashboard"><a href="index.php"><i class="glyphicon glyphicon-list-alt"></i>  Dashboard</a></li>
+
+          <?php if(isset($_SESSION['userId']) && ($_SESSION['userId']==1 || $_SESSION['hostel']=="THN1")) { ?>
+              <li id="navTHN1"><a href="thn1.php"><i class="glyphicon glyphicon-th-list"></i>  THN1</a></li>
+          <?php } ?>
+
+          <?php if(isset($_SESSION['userId']) && ($_SESSION['userId']==1 || $_SESSION['hostel']=="THN2")) { ?>
+              <li id="navTHN2"><a href="thn2.php"><i class="glyphicon glyphicon-th-list"></i>  THN2</a></li>
+          <?php } ?>
+
+          <?php if(isset($_SESSION['userId']) && ($_SESSION['userId']==1 || $_SESSION['hostel']=="MHR")) { ?>
+              <li id="navMHR"><a href="mhr.php"><i class="glyphicon glyphicon-th-list"></i>  MHR</a></li>
+          <?php } ?>
+
+          <?php if(isset($_SESSION['userId']) && ($_SESSION['userId']==1 || $_SESSION['hostel']=="SHR")) { ?>
+              <li id="navSHR"><a href="shr.php"><i class="glyphicon glyphicon-th-list"></i>  SHR</a></li>
+          <?php } ?>
 		
-        <li class="dropdown" id="navOrder">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="glyphicon glyphicon-shopping-cart"></i> Orders <span class="caret"></span></a>
-          <ul class="dropdown-menu">            
-            <li id="topNavAddOrder"><a href="orders.php?o=add"> <i class="glyphicon glyphicon-plus"></i> Add Orders</a></li>            
-            <li id="topNavManageOrder"><a href="orders.php?o=manord"> <i class="glyphicon glyphicon-edit"></i> Manage Orders</a></li>            
-          </ul>
-        </li> 
+<!--        <li class="dropdown" id="navOrder">-->
+<!--          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="glyphicon glyphicon-shopping-cart"></i> Orders <span class="caret"></span></a>-->
+<!--          <ul class="dropdown-menu">            -->
+<!--            <li id="topNavAddOrder"><a href="orders.php?o=add"> <i class="glyphicon glyphicon-plus"></i> Add Orders</a></li>            -->
+<!--            <li id="topNavManageOrder"><a href="orders.php?o=manord"> <i class="glyphicon glyphicon-edit"></i> Manage Orders</a></li>            -->
+<!--          </ul>-->
+<!--        </li> -->
 		
-		<?php  if(isset($_SESSION['userId'])) { ?>
+		<?php  if(isset($_SESSION['userId']) && $_SESSION['userId']==2) { ?>
         <li id="navRequest"><a href="request.php"> <i class="glyphicon glyphicon-check"></i> Request New Item </a></li>
-		<?php } ?>   
+		<?php } ?>
+
         <li class="dropdown" id="navSetting">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="glyphicon glyphicon-user"></i> <span class="caret"></span></a>
           <ul class="dropdown-menu">
-			<?php if(isset($_SESSION['userId'])) { ?>
-            <li id="topNavSetting"><a href="setting.php"> <i class="glyphicon glyphicon-wrench"></i> Setting</a></li>
-            <li id="topNavUser"><a href="user.php"> <i class="glyphicon glyphicon-wrench"></i> Add User</a></li>
-<?php } ?>              
+
+              <?php if(isset($_SESSION['userId'])) { ?>
+                <li id="topNavSetting"><a href="setting.php"> <i class="glyphicon glyphicon-wrench"></i> Setting</a></li>
+              <?php } ?>
+
+              <?php if(isset($_SESSION['userId']) && $_SESSION['userId']==1) { ?>
+                  <li id="topNavUser"><a href="user.php"> <i class="glyphicon glyphicon-wrench"></i> Add User</a></li>
+              <?php } ?>
+
             <li id="topNavLogout"><a href="logout.php"> <i class="glyphicon glyphicon-log-out"></i> Logout</a></li>            
           </ul>
         </li>        
            
       </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-	</nav>
+    </div>
+  </div>
+    </nav>
 
-	<div class="container">
+    <div class="container">
