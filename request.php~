@@ -49,6 +49,6 @@
 </div>
 <!-- /row -->
 
-<script src="custom/js/request.js"></script>
+<script src="custom/js/report.js"></script>
 
 <?php require_once 'includes/footer.php'; ?>
