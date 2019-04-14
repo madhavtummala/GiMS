@@ -1,5 +1,7 @@
 <?php require_once 'includes/header.php';
 
+echo $_SESSION['userId'];
+
 $roll_no = $_SESSION['userId'];
 
 $sql = "SELECT * FROM equipment";
@@ -27,12 +29,14 @@ $hostel->close();
 ?>
 
 <!-- fullCalendar 2.2.5-->
-    <link rel="stylesheet" href="assests/plugins/fullcalendar/fullcalendar.min.css">
-    <link rel="stylesheet" href="assests/plugins/fullcalendar/fullcalendar.print.css" media="print">
+<!--     <link rel="stylesheet" href="assests/plugins/fullcalendar/fullcalendar.min.css">
+    <link rel="stylesheet" href="assests/plugins/fullcalendar/fullcalendar.print.css" media="print"> -->
 
 
 <div class="row">
-	<?php  if(isset($_SESSION['userId'])) { ?>
+
+<!--	--><?php // if(isset($_SESSION['userId'])) { ?>
+
 	<div class="col-md-4">
 		<div class="panel panel-success">
 			<div class="panel-heading">
@@ -57,46 +61,73 @@ $hostel->close();
 			</div>
 		</div>
 	</div>
-	
-	
-	<?php } ?>  
-		<div class="col-md-4">
-			<div class="panel panel-info">
-			<div class="panel-heading">
-				<a href="brand.php?o=manord" style="text-decoration:none;color:black;">
-					Total Items
-					<span class="badge pull pull-right"><?php echo $countTotal; ?></span>
-				</a>
-					
-			</div>
-		</div>
-		</div>
-
-	
-
+	  
 	<div class="col-md-4">
+		<div class="panel panel-info">
+		<div class="panel-heading">
+			<a href="brand.php?o=manord" style="text-decoration:none;color:black;">
+				Total Items
+				<span class="badge pull pull-right"><?php echo $countTotal; ?></span>
+			</a>
+				
+		</div>
+	</div>
+	</div>
+
+<!--	--><?php //} ?>
+
+<!-- 	<div class="col-md-4">
 		<div class="card">
 		  <div class="cardHeader">
-		    <h1><?php echo date('d'); ?></h1>
+		    <h1><?php //echo date('d'); ?></h1>
 		  </div>
 
 		  <div class="cardContainer">
-		    <p><?php echo date('l') .' '.date('d').', '.date('Y'); ?></p>
+		    <p><?php //echo date('l') .' '.date('d').', '.date('Y'); ?></p>
 		  </div>
 		</div> 
 		<br/>
 
+		<?php  //if($_SESSION['userId']==1) { ?>
 		<div class="card">
 		  <div class="cardHeader" style="background-color:#245580;">
-              <?php echo $fine; ?>
+              <?php //echo $hostels; ?>
+		  </div>
+
+		  <div class="cardContainer">
+		    <p> Total Hostels</p>
+		  </div>
+		</div>
+
+		<?php } ?>
+
+		<?php  //else if($_SESSION['userId']==2) { ?>
+		<div class="card">
+		  <div class="cardHeader" style="background-color:#245580;">
+              <?php //echo $students; ?>
+		  </div>
+
+		  <div class="cardContainer">
+		    <p> Total Students</p>
+		  </div>
+		</div>
+
+		<?php } ?>
+
+		<?php  //else { ?>
+		<div class="card">
+			<div class="cardHeader" style="background-color:#245580;">
+              <?php //echo $fine; ?>
 		  </div>
 
 		  <div class="cardContainer">
 		    <p> Total Fine</p>
 		  </div>
-		</div> 
+		</div>
 
-	</div>
+		<?php } ?>
+
+	</div> -->
 	
 	<?php  if(isset($_SESSION['userId'])) { ?>
 	<div class="col-md-8">

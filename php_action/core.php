@@ -10,5 +10,4 @@ if(!$_SESSION['userId']) {
 	header('location: http://localhost:8888/Gymkhana/index.php');	
 } 
 
-
 ?>

@@ -35,9 +35,8 @@
 <body>
 
 
-	<nav class="navbar navbar-default navbar-static-top">
-		<div class="container">
-    <!-- Brand and toggle get grouped for better mobile display -->
+<nav class="navbar navbar-default navbar-static-top">
+	<div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
         <span class="sr-only">Toggle navigation</span>
@@ -45,54 +44,155 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
+
       <!-- <a class="navbar-brand" href="#">Brand</a> -->
-	<a class="navbar-brand" href="/Gymkhana" style="padding:0px;"><font size="5">
-                    <img src="logo.jpg" alt="IIT Bhubaneswar">
-                Students' Gymkhana
-      </font></a>
-    </div>
+    	<a class="navbar-brand" href="/Gymkhana" style="padding:0px;"><font size="5">
+                        <img src="logo.jpg" alt="IIT Bhubaneswar">
+                    Students' Gymkhana
+          </font></a>
+        </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">      
 
-      <ul class="nav navbar-nav navbar-right">        
+      <ul class="nav navbar-nav navbar-right">
 
-      	<li id="navDashboard"><a href="index.php"><i class="glyphicon glyphicon-list-alt"></i>  Dashboard</a></li>        
-        <?php if(isset($_SESSION['userId'])) { ?>
-        <li id="navBrand"><a href="brand.php"><i class="glyphicon glyphicon-btc"></i>  Brand</a></li>        
-		<?php } ?>
-		<?php if(isset($_SESSION['userId'])) { ?>
-        <li id="navCategories"><a href="categories.php"> <i class="glyphicon glyphicon-th-list"></i> Category</a></li>        
-		<?php } ?>
-		<?php if(isset($_SESSION['userId'])) { ?>
-        <li id="navProduct"><a href="product.php"> <i class="glyphicon glyphicon-ruble"></i> Product </a></li> 
-		<?php } ?>
+        <?php if($_SESSION['userId']==1) { ?>
+        <li id="navDashboard">
+          <a href="adminIndex.php">
+            <i class="glyphicon glyphicon-list-alt">
+              
+            </i>  Dashboard
+          </a>
+        </li>
+        <?php } ?> 
+
+        <?php if($_SESSION['userId']==2) { ?>
+        <li id="navDashboard">
+          <a href="hostelIndex.php.php">
+            <i class="glyphicon glyphicon-list-alt">
+              
+            </i>  Dashboard
+          </a>
+        </li>
+        <?php } ?> 
+
+        <?php if($_SESSION['userId']!=1 && $_SESSION['userId']!=2) { ?>
+        <li id="navDashboard">
+          <a href="userIndex.php">
+            <i class="glyphicon glyphicon-list-alt">
+              
+            </i>  Dashboard
+          </a>
+        </li>
+        <?php } ?> 
+
+        <?php if($_SESSION['userId']==1 || $_SESSION['hostel']=="THN1") { ?>
+        <li id="navBrand">
+          <a href="thn1.php">
+            <i class="glyphicon glyphicon-btc">
+              
+            </i>  THN1
+          </a>
+        </li>
+		    <?php } ?>
+
+        <?php if($_SESSION['userId']==1 || $_SESSION['hostel']=="THN2") { ?>
+        <li id="navBrand">
+          <a href="thn2.php">
+            <i class="glyphicon glyphicon-btc">
+              
+            </i>  THN2
+          </a>
+        </li>
+        <?php } ?>
+
+        <?php if($_SESSION['userId']==1 || $_SESSION['hostel']=="MHR") { ?>
+        <li id="navBrand">
+          <a href="mhr.php">
+            <i class="glyphicon glyphicon-btc">
+              
+            </i>  MHR
+          </a>
+        </li>
+        <?php } ?>
+
+        <?php if($_SESSION['userId']==1 || $_SESSION['hostel']=="SHR") { ?>
+        <li id="navBrand">
+          <a href="shr.php">
+            <i class="glyphicon glyphicon-btc">
+              
+            </i>  SHR
+          </a>
+        </li>
+        <?php } ?>
 		
-        <li class="dropdown" id="navOrder">
+<!--         <li class="dropdown" id="navOrder">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="glyphicon glyphicon-shopping-cart"></i> Orders <span class="caret"></span></a>
           <ul class="dropdown-menu">            
             <li id="topNavAddOrder"><a href="orders.php?o=add"> <i class="glyphicon glyphicon-plus"></i> Add Orders</a></li>            
             <li id="topNavManageOrder"><a href="orders.php?o=manord"> <i class="glyphicon glyphicon-edit"></i> Manage Orders</a></li>            
           </ul>
-        </li> 
+        </li>  -->
 		
-		<?php  if(isset($_SESSION['userId'])) { ?>
-        <li id="navRequest"><a href="request.php"> <i class="glyphicon glyphicon-check"></i> Request New Item </a></li>
-		<?php } ?>   
+    		<?php  if(isset($_SESSION['userId']) && $_SESSION['userId']==2) { ?>
+            <li id="navRequest">
+              <a href="request.php"> 
+                <i class="glyphicon glyphicon-check">
+                  
+                </i> Request New Item 
+              </a>
+            </li>
+    		<?php } ?> 
+
         <li class="dropdown" id="navSetting">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="glyphicon glyphicon-user"></i> <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> 
+            <i class="glyphicon glyphicon-user">
+              
+            </i> 
+            <span class="caret"></span>
+          </a>
+
           <ul class="dropdown-menu">
-			<?php if(isset($_SESSION['userId'])) { ?>
-            <li id="topNavSetting"><a href="setting.php"> <i class="glyphicon glyphicon-wrench"></i> Setting</a></li>
-            <li id="topNavUser"><a href="user.php"> <i class="glyphicon glyphicon-wrench"></i> Add User</a></li>
-<?php } ?>              
-            <li id="topNavLogout"><a href="logout.php"> <i class="glyphicon glyphicon-log-out"></i> Logout</a></li>            
+
+			      <?php if(isset($_SESSION['userId'])) { ?>
+
+              <li id="topNavSetting">
+                <a href="setting.php"> 
+                  <i class="glyphicon glyphicon-wrench">
+                    
+                  </i> Setting
+                </a>
+              </li>
+
+            <?php } ?> 
+            
+            <?php if($_SESSION['userId']==1) { ?>  
+
+              <li id="topNavUser">
+                <a href="user.php"> 
+                  <i class="glyphicon glyphicon-wrench">
+                    
+                  </i> Add User
+                </a>
+              </li>
+
+            <?php } ?>  
+
+            <li id="topNavLogout">
+              <a href="logout.php"> 
+                <i class="glyphicon glyphicon-log-out">
+                
+                </i> Logout
+              </a>
+            </li>   
+
           </ul>
         </li>        
            
       </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-	</nav>
+    </div>
+  </div>
+</nav>
 
-	<div class="container">
+<div class="container">

@@ -1,10 +1,11 @@
 <?php require_once 'includes/header.php'; ?>
 
 <?php 
-$user_id = $_SESSION['userId'];
-$sql = "SELECT * FROM users WHERE user_id = {$user_id}";
-$query = $connect->query($sql);
-$result = $query->fetch_assoc();
+
+	$user_id = $_SESSION['userId'];
+	$sql = "SELECT * FROM students WHERE user_id = {$user_id}";
+	$query = $connect->query($sql);
+	$result = $query->fetch_assoc();
 
 $connect->close();
 ?>
