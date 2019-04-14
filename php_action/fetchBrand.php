@@ -2,19 +2,32 @@
 
 require_once 'core.php';
 
-$sql = "SELECT brand_id, brand_name, brand_active, brand_status FROM brands WHERE brand_status = 1";
-$result = $connect->query($sql);
+$localhost = "localhost";
+$username = "root";
+$password = "root";
+
+$hostel = new mysqli($localhost, $username, $password, $_SESSION['hostel']);
+
+if($hostel->connect_error) {
+    die("Connection Failed : " . $hostel->connect_error);
+} else {
+//   echo "Successfully connected";
+}
+
+
+$sql = "SELECT eid, name, status FROM equipment ORDER BY eid";
+$result = $hostel->query($sql);
 
 $output = array('data' => array());
 
-if($result->num_rows > 0) { 
+if($result->num_rows > 0) {
 
  // $row = $result->fetch_array();
- $activeBrands = ""; 
+ $activeBrands = "";
 
  while($row = $result->fetch_array()) {
  	$brandId = $row[0];
- 	// active 
+ 	// active
  	if($row[2] == 1) {
  		// activate member
  		$activeBrands = "<label class='label label-success'>Available</label>";
@@ -23,7 +36,7 @@ if($result->num_rows > 0) {
  		$activeBrands = "<label class='label label-danger'>Not Available</label>";
  	}
 
- 	$button = '<!-- Single button -->
+ 	$button = '
 	<div class="btn-group">
 	  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 	    Action <span class="caret"></span>
@@ -34,15 +47,16 @@ if($result->num_rows > 0) {
 	  </ul>
 	</div>';
 
- 	$output['data'][] = array( 		
- 		$row[1], 		
+ 	$output['data'][] = array(
+ 	    $row[0],
+ 		$row[1],
  		$activeBrands,
  		$button
- 		); 	
- } // /while 
+ 		);
+ }
 
-} // if num_rows
+}
 
-$connect->close();
+$hostel->close();
 
 echo json_encode($output);

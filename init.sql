@@ -109,7 +109,7 @@ create table issued
   rollno varchar(12) not null,
   dateofissue date not null,
   fine int not null default 0,
-  reason varchar(1000) default NULL,
+  reason int not null default 0,
   constraint pk_issued primary key (issueno),
   constraint fk_issued_eid foreign key (eid) references equipment(eid)
 );
@@ -120,7 +120,7 @@ create table requests
   rollno varchar(12) not null,
   estimatedcost int not null,
   purchaselinks varchar(1000),
-  reason varchar(1000) not null,
+  reason int not null default 0,
   constraint pk_requests primary key (equipmentname, rollno)
 );
 
@@ -240,11 +240,17 @@ end //
 -- select * from issued where issueno = issueno;
 -- end //
 
-create trigger returned 
+create trigger return 
 before delete on issued
 for each row
 begin
 insert into issuehistory values(old.issueno,old.eid,old.rollno,old.dateofissue,curdate(),old.fine,old.reason);
+update equipment set status = 
+  case when old.reason==0 then 1 --delay
+  case when old.reason==1 then 2 --broken
+  else 3                         --lost
+  end
+where eid=new.eid;
 end //
 
 create event cal_fine

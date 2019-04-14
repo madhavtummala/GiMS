@@ -2,6 +2,10 @@
 
 $roll_no = $_SESSION['userId'];
 
+$localhost = "localhost";
+$username = "root";
+$password = "root";
+
 $hostel = new mysqli($localhost, $username, $password, $_SESSION['hostel']);
 // check connection
 if($hostel->connect_error) {
@@ -29,7 +33,9 @@ $sql = "SELECT sum(fine) as totalfine FROM issued WHERE rollno = '$roll_no'";
 $fine = $hostel->query($sql);
 
 $fine = $fine->fetch_assoc();
-$fine = $fine['totalfine']
+$fine = $fine['totalfine'];
+
+$hostel->close();
 ?>
 
 <!-- fullCalendar 2.2.5-->
@@ -129,7 +135,6 @@ $fine = $fine['totalfine']
 					<?php } ?>
 				</tbody>
 				</table>
-				<!--<div id="calendar"></div>-->
 			</div>	
 		</div>
 		
