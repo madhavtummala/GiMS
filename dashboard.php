@@ -2,18 +2,6 @@
 
 $roll_no = $_SESSION['userId'];
 
-$localhost = "localhost";
-$username = "root";
-$password = "root";
-
-$hostel = new mysqli($localhost, $username, $password, $_SESSION['hostel']);
-// check connection
-if($hostel->connect_error) {
-  die("Connection Failed : " . $hostel->connect_error);
-} else {
-//   echo "Successfully connected";
-}
-
 $sql = "SELECT * FROM equipment";
 $query = $hostel->query($sql);
 $countTotal = $query->num_rows;
