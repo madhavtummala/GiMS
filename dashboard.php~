@@ -3,8 +3,8 @@
 $roll_no = $_SESSION['userId'];
 
 $localhost = "localhost";
-$username = "arnejasaksham";
-$password = "Sak@192114";
+$username = "root";
+$password = "root";
 
 $hostel = new mysqli($localhost, $username, $password, $_SESSION['hostel']);
 // check connection

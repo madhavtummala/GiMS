@@ -39,7 +39,7 @@ if($_POST) {
 
 				// set session
 				$_SESSION['loginId'] = $login_id;
-
+				echo "im here";
 				header('location: adminDashboard.php');	
 			} else{
 				
