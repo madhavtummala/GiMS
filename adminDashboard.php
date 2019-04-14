@@ -1,38 +1,10 @@
 <?php require_once 'includes/header.php';
 
-$loginid = $_SESSION['loginid'];
-
-/*$hostel = new mysqli($localhost, $username, $password, $_SESSION['hostel']);
-// check connection
-if($hostel->connect_error) {
-  die("Connection Failed : " . $hostel->connect_error);
-} else {
-//   echo "Successfully connected";
-}
-*/
+$loginid = $_SESSION['userId'];
 
 $sql = "SELECT * FROM student order by rollno";
 $query = $connect->query($sql);
 $countTotal = $query->num_rows;
-
-echo $countTotal;
-
-/*$sql = "SELECT * FROM equipment WHERE status = 2";
-$query = $hostel->query($sql);
-$countRepair = $query->num_rows;
-
-$sql = "SELECT * FROM equipment WHERE status = 1";
-$query = $hostel->query($sql);
-$countAvailable = $query->num_rows;
-
-$sql = "SELECT * FROM issued natural join equipment WHERE rollno = '$loginid'";
-$query = $hostel->query($sql);
-
-$sql = "SELECT sum(fine) as totalfine FROM issued WHERE rollno = '$loginid'";
-$fine = $hostel->query($sql);
-
-$fine = $fine->fetch_assoc();
-$fine = $fine['totalfine']*/
 ?>
 
 <!-- fullCalendar 2.2.5-->
@@ -41,17 +13,17 @@ $fine = $fine['totalfine']*/
 
 
 <div class="row">
-	<?php  if(isset($_SESSION['loginid'])) { ?>
+	<?php  if(isset($_SESSION['userId'])) { ?>
 	
 <?php } ?>
 	<div class="col-md-4">
 		<div class="card">
 		  <div class="cardHeader">
-		    <h1><?php echo date('d'); ?></h1>
+		    <h1><?php echo date('l') .' '.date('d').', '.date('Y'); ?></h1>
 		  </div>
 
 		  <div class="cardContainer">
-		    <p><?php echo date('l') .' '.date('d').', '.date('Y'); ?></p>
+		    <p>Date</p>
 		  </div>
 		</div> 
 		<br/>
@@ -62,13 +34,13 @@ $fine = $fine['totalfine']*/
 		  </div>
 
 		  <div class="cardContainer">
-		    <p> Total Students</p>
+		    <p>Total Students</p>
 		  </div>
 		</div> 
 
 	</div>
 	
-	<?php  if(isset($_SESSION['loginid'])) { ?>
+	<?php  if(isset($_SESSION['userId'])) { ?>
 	<div class="col-md-8">
 		<div class="panel panel-default">
 			<div class="panel-heading"> <i class="glyphicon glyphicon-calendar"></i>Students</div>

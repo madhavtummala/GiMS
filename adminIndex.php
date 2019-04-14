@@ -3,7 +3,7 @@ require_once 'php_action/db_connect.php';
 
 session_start();
 
-if(isset($_SESSION['loginid'])) {
+if(isset($_SESSION['userId'])) {
 	header('location: adminDashboard.php');
 }
 
@@ -38,8 +38,7 @@ if($_POST) {
 				$login_id = $value['loginid'];
 
 				// set session
-				$_SESSION['loginId'] = $login_id;
-				echo "im here";
+				$_SESSION['userId'] = 1;
 				header('location: adminDashboard.php');	
 			} else{
 				
