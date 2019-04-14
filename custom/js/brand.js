@@ -6,7 +6,7 @@ $(document).ready(function() {
 	
 	// manage brand table
 	manageBrandTable = $("#manageBrandTable").DataTable({
-		'ajax': 'php_action/fetchBrand.php',
+		'ajax': 'php_action/fetchItem.php',
 		'order': []
 	});
 
