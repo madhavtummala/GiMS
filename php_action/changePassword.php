@@ -6,12 +6,12 @@ if($_POST) {
 
 	$valid['success'] = array('success' => false, 'messages' => array());
 
-	$currentPassword = md5($_POST['password']);
-	$newPassword = md5($_POST['npassword']);
-	$conformPassword = md5($_POST['cpassword']);
+	$currentPassword = $_POST['password'];
+	$newPassword = $_POST['npassword'];
+	$conformPassword = $_POST['cpassword'];
 	$userId = $_POST['user_id'];
 
-	$sql ="SELECT * FROM users WHERE user_id = {$userId}";
+	$sql ="SELECT * FROM student WHERE rollno = '$userId'";
 	$query = $connect->query($sql);
 	$result = $query->fetch_assoc();
 
@@ -19,10 +19,10 @@ if($_POST) {
 
 		if($newPassword == $conformPassword) {
 
-			$updateSql = "UPDATE users SET password = '$newPassword' WHERE user_id = {$userId}";
+			$updateSql = "UPDATE student SET password = '$newPassword' WHERE rollno = '$userId'";
 			if($connect->query($updateSql) === TRUE) {
 				$valid['success'] = true;
-				$valid['messages'] = "Successfully Updated";		
+				$valid['messages'] = "Successfully Updated";
 			} else {
 				$valid['success'] = false;
 				$valid['messages'] = "Error while updating the password";	
@@ -37,8 +37,6 @@ if($_POST) {
 		$valid['success'] = false;
 		$valid['messages'] = "Current password is incorrect";
 	}
-
-	$connect->close();
 
 	echo json_encode($valid);
 
