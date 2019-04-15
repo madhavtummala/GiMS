@@ -1,5 +1,8 @@
 drop database if exists Gymkhana;
 drop database if exists THN2;
+drop database if exists THN1;
+drop database if exists MHR;
+drop database if exists SHR;
 
 set global event_scheduler = ON;
 
@@ -85,7 +88,7 @@ create table issuehistory
   dateofissue date not null,
   dateofreturn date not null,
   fineamount int not null,
-  reasonforfine varchar(1000),
+  reasonforfine int,
   constraint pk_issuehistory primary key (issueno),
   constraint fk_issuehistory_eid foreign key (eid) references equipment(eid)
 );
@@ -97,7 +100,7 @@ create table issued
   rollno varchar(12) not null,
   dateofissue date not null,
   fine int not null default 0,
-  reason int not null default 0,
+  reason int default 0,
   constraint pk_issued primary key (issueno),
   constraint fk_issued_eid foreign key (eid) references equipment(eid)
 );
@@ -137,57 +140,86 @@ insert into equipment values
 (NULL,"VolleyBall",1,"20-01-12",2082,"PWI69LLI7VT"),
 (NULL,"Table Tennis Ball",1,"18-09-04",6093,"WMG68UCZ4LU"),
 (NULL,"Cricket Ball",1,"19-03-27",1476,"LNL79JAQ6PK"),
-(NULL,"Motors",1,"19-12-19",2164,"HNS68MMX8DN"),
-(NULL,"BasketBall",1,"19-05-23",7719,"EKP09RNM1KH"),
-(NULL,"Swimming gogles",1,"19-06-21",8918,"BPG75PGY2IZ"),
-(NULL,"Swimming sutis",1,"19-12-06",9706,"GGI78XCY6IS"),
-(NULL,"Hockey",1,"20-02-14",3155,"CIH73CDJ1XV"),
-(NULL,"Chess",1,"18-05-03",2475,"FED52YXK2WQ"),
-(NULL,"Table Tennis Ball",1,"19-06-17",7360,"ICA84OHK8KL"),
-(NULL,"Raspi",1,"18-12-05",9803,"YCV79EXR5TC"),
-(NULL,"Hockey",1,"18-04-26",7185,"XAI64FXI2OV"),
-(NULL,"FootBall",1,"19-12-20",5203,"QLB15WSG3CR"),
-(NULL,"Printer",1,"19-12-04",1612,"RSW96ABI5UB"),
-(NULL,"Lock",1,"19-06-07",886,"KEE86YWM3GI"),
-(NULL,"Swimming gogles",1,"18-05-23",922,"HLG16DNV2WQ"),
-(NULL,"BasketBall",1,"18-07-29",5926,"ZEK12AZW0WN"),
-(NULL,"Raspi",1,"18-04-20",1122,"HKC61IBX7TD"),
-(NULL,"Lock",1,"20-01-31",1363,"NEK00OWY8LK"),
-(NULL,"Guard Dress",1,"19-10-14",7123,"NKV76PQP0KJ"),
-(NULL,"Guard Dress",1,"18-05-23",2532,"BWM36OWI7UG"),
-(NULL,"Table Tennis Bat",1,"18-07-24",2873,"DEA27OKW2AD"),
-(NULL,"Tennis Ball",1,"20-03-02",7394,"ZDM59MKL5QI"),
-(NULL,"Table Tennis Ball",1,"19-05-12",2957,"JJT21XLA7BT"),
-(NULL,"Air Pump",1,"18-11-02",6744,"ZQF15HXW2EH"),
-(NULL,"Ludo",1,"18-08-31",4763,"FJP03DVD0WP"),
-(NULL,"Printer",1,"20-04-07",5708,"LIV26KEH1MU"),
-(NULL,"VolleyBall",1,"18-11-18",2155,"ZXH43SLU0EY"),
-(NULL,"BasketBall",1,"19-11-03",6978,"GPX26TKZ9QK"),
-(NULL,"Printer",1,"18-08-01",4689,"FJI64KUM5OA"),
-(NULL,"First Aid bands",1,"20-03-23",9393,"UHP50BBP2WN"),
-(NULL,"Cricket Ball",1,"19-03-28",4178,"MYZ65UNL9LU"),
-(NULL,"FootBall",1,"19-06-14",7245,"TNM46JJV3JD"),
-(NULL,"Cricket Ball",1,"18-08-10",4798,"SFQ82HRP2NY"),
-(NULL,"Mess card",1,"19-09-26",6190,"LOU90SOK8YJ"),
-(NULL,"Carroms",1,"20-01-02",4746,"LEY51FUV3KK"),
-(NULL,"Cards",1,"20-03-07",5527,"DCV90ETZ0ZP"),
-(NULL,"Tennis Ball",1,"18-05-19",2183,"BWE44TKE6UJ"),
-(NULL,"Hockey",1,"18-09-01",979,"PQY81UUZ0AV"),
-(NULL,"VolleyBall",1,"18-07-02",6381,"SCU86NPU6YD"),
-(NULL,"Ludo",1,"19-11-12",571,"CZC85OHV8TT"),
-(NULL,"BasketBall",1,"20-03-14",8222,"WZA54TTB8AH"),
-(NULL,"First Aid bands",1,"19-11-09",505,"KXH38WVQ4WM"),
-(NULL,"First Aid bands",1,"19-09-10",2341,"DFY10FRS8AX"),
-(NULL,"Table Tennis Ball",1,"18-05-06",8390,"GSN56WGS9GG"),
-(NULL,"Carroms",1,"19-10-27",5572,"XNT38FLV9NZ"),
-(NULL,"First Aid bands",1,"19-10-17",927,"RSM08KYR1LQ"),
-(NULL,"Cards",1,"19-07-05",4949,"ECX71VAP7TT"),
-(NULL,"Screw Driver",1,"19-12-28",9316,"ARV79OMQ6IT"),
-(NULL,"Cricket Bat",1,"19-07-03",311,"TYU51EMA0NR"),
-(NULL,"Printer",1,"18-06-15",1052,"DHE70WHE6DI"),
-(NULL,"Motors",1,"19-07-27",6213,"VGA39JDK0QE"),
-(NULL,"Swimming sutis",1,"19-03-07",8816,"PCI30QPU9WO"),
-(NULL,"Cricket Ball",1,"18-05-11",2732,"IDL79XQC0UJ"),
+(NULL,"Motors",1,"19-12-19",2164,"HNS68MMX8DN");
+
+delimiter //
+
+create trigger issue 
+before insert on issued
+for each row
+begin
+update equipment set status=0 where eid=new.eid;
+end //
+
+create trigger returned
+before delete on issued
+for each row
+begin
+insert into issuehistory values(old.issueno,old.eid,old.rollno,old.dateofissue,curdate(),old.fine,old.reason);
+update equipment set status = case when old.reason=0 then 1 when old.reason=1 then 2 else 3 end;
+end //
+
+create event cal_fine
+on schedule every 1 day
+starts current_timestamp
+ends current_timestamp + interval 1 year
+do
+begin
+update issued set fine = case when datediff(curdate(),dateofissue)<=7 then fine+10 else fine end;
+end //
+
+delimiter ;
+
+create database THN1;
+use THN1;
+
+create table equipment
+(
+  eid int not null auto_increment,
+  name varchar(50) not null,
+  status int not null,
+  dateofpurchase date not null,
+  cost int not null,
+  invoiceno varchar(12) not null,
+  constraint pk_equipment primary key (eid)
+);
+
+create table issuehistory
+(
+  issueno int not null,
+  eid int not null,
+  rollno varchar(12) not null,
+  dateofissue date not null,
+  dateofreturn date not null,
+  fineamount int not null,
+  reasonforfine int,
+  constraint pk_issuehistory primary key (issueno),
+  constraint fk_issuehistory_eid foreign key (eid) references equipment(eid)
+);
+
+create table issued
+(
+  issueno int not null auto_increment,
+  eid int not null,
+  rollno varchar(12) not null,
+  dateofissue date not null,
+  fine int not null default 0,
+  reason int default 0,
+  constraint pk_issued primary key (issueno),
+  constraint fk_issued_eid foreign key (eid) references equipment(eid)
+);
+
+create table requests
+(
+  equipmentname varchar(50) not null,
+  rollno varchar(12) not null,
+  estimatedcost int not null,
+  purchaselinks varchar(1000),
+  reason int not null default 0,
+  constraint pk_requests primary key (equipmentname, rollno)
+);
+
+insert into equipment values
 (NULL,"Lock",1,"19-12-03",9980,"KQW95NQT6LD"),
 (NULL,"Water Ballon",1,"19-10-01",4863,"BGP03CKL4XG"),
 (NULL,"Tennis Ball",1,"18-09-27",5155,"IEU04MPR8CV"),
@@ -223,17 +255,12 @@ begin
 update equipment set status=0 where eid=new.eid;
 end //
 
--- create procedure test(IN issueno int)
--- begin
--- select * from issued where issueno = issueno;
--- end //
-
-create trigger returned 
+create trigger returned
 before delete on issued
 for each row
 begin
 insert into issuehistory values(old.issueno,old.eid,old.rollno,old.dateofissue,curdate(),old.fine,old.reason);
-update equipment set status = 0 where eid=old.eid;
+update equipment set status = case when old.reason=0 then 1 when old.reason=1 then 2 else 3 end;
 end //
 
 create event cal_fine
@@ -247,4 +274,210 @@ end //
 
 delimiter ;
 
-insert into issued values(NULL, 5, "16cs01041", curdate(), 0, NULL);
+create database MHR;
+use MHR;
+
+create table equipment
+(
+  eid int not null auto_increment,
+  name varchar(50) not null,
+  status int not null,
+  dateofpurchase date not null,
+  cost int not null,
+  invoiceno varchar(12) not null,
+  constraint pk_equipment primary key (eid)
+);
+
+create table issuehistory
+(
+  issueno int not null,
+  eid int not null,
+  rollno varchar(12) not null,
+  dateofissue date not null,
+  dateofreturn date not null,
+  fineamount int not null,
+  reasonforfine int,
+  constraint pk_issuehistory primary key (issueno),
+  constraint fk_issuehistory_eid foreign key (eid) references equipment(eid)
+);
+
+create table issued
+(
+  issueno int not null auto_increment,
+  eid int not null,
+  rollno varchar(12) not null,
+  dateofissue date not null,
+  fine int not null default 0,
+  reason int default 0,
+  constraint pk_issued primary key (issueno),
+  constraint fk_issued_eid foreign key (eid) references equipment(eid)
+);
+
+create table requests
+(
+  equipmentname varchar(50) not null,
+  rollno varchar(12) not null,
+  estimatedcost int not null,
+  purchaselinks varchar(1000),
+  reason int not null default 0,
+  constraint pk_requests primary key (equipmentname, rollno)
+);
+
+insert into equipment values
+(NULL,"Printer",1,"18-08-01",4689,"FJI64KUM5OA"),
+(NULL,"First Aid bands",1,"20-03-23",9393,"UHP50BBP2WN"),
+(NULL,"Cricket Ball",1,"19-03-28",4178,"MYZ65UNL9LU"),
+(NULL,"FootBall",1,"19-06-14",7245,"TNM46JJV3JD"),
+(NULL,"Cricket Ball",1,"18-08-10",4798,"SFQ82HRP2NY"),
+(NULL,"Mess card",1,"19-09-26",6190,"LOU90SOK8YJ"),
+(NULL,"Carroms",1,"20-01-02",4746,"LEY51FUV3KK"),
+(NULL,"Cards",1,"20-03-07",5527,"DCV90ETZ0ZP"),
+(NULL,"Tennis Ball",1,"18-05-19",2183,"BWE44TKE6UJ"),
+(NULL,"Hockey",1,"18-09-01",979,"PQY81UUZ0AV"),
+(NULL,"VolleyBall",1,"18-07-02",6381,"SCU86NPU6YD"),
+(NULL,"Ludo",1,"19-11-12",571,"CZC85OHV8TT"),
+(NULL,"BasketBall",1,"20-03-14",8222,"WZA54TTB8AH"),
+(NULL,"First Aid bands",1,"19-11-09",505,"KXH38WVQ4WM"),
+(NULL,"First Aid bands",1,"19-09-10",2341,"DFY10FRS8AX"),
+(NULL,"Table Tennis Ball",1,"18-05-06",8390,"GSN56WGS9GG"),
+(NULL,"Carroms",1,"19-10-27",5572,"XNT38FLV9NZ"),
+(NULL,"First Aid bands",1,"19-10-17",927,"RSM08KYR1LQ"),
+(NULL,"Cards",1,"19-07-05",4949,"ECX71VAP7TT"),
+(NULL,"Screw Driver",1,"19-12-28",9316,"ARV79OMQ6IT"),
+(NULL,"Cricket Bat",1,"19-07-03",311,"TYU51EMA0NR"),
+(NULL,"Printer",1,"18-06-15",1052,"DHE70WHE6DI"),
+(NULL,"Motors",1,"19-07-27",6213,"VGA39JDK0QE"),
+(NULL,"Swimming sutis",1,"19-03-07",8816,"PCI30QPU9WO"),
+(NULL,"Cricket Ball",1,"18-05-11",2732,"IDL79XQC0UJ");
+
+delimiter //
+
+create trigger issue 
+before insert on issued
+for each row
+begin
+update equipment set status=0 where eid=new.eid;
+end //
+
+create trigger returned
+before delete on issued
+for each row
+begin
+insert into issuehistory values(old.issueno,old.eid,old.rollno,old.dateofissue,curdate(),old.fine,old.reason);
+update equipment set status = case when old.reason=0 then 1 when old.reason=1 then 2 else 3 end;
+end //
+
+create event cal_fine
+on schedule every 1 day
+starts current_timestamp
+ends current_timestamp + interval 1 year
+do
+begin
+update issued set fine = case when datediff(curdate(),dateofissue)<=7 then fine+10 else fine end;
+end //
+
+delimiter ;
+
+create database SHR;
+use SHR;
+
+create table equipment
+(
+  eid int not null auto_increment,
+  name varchar(50) not null,
+  status int not null,
+  dateofpurchase date not null,
+  cost int not null,
+  invoiceno varchar(12) not null,
+  constraint pk_equipment primary key (eid)
+);
+
+create table issuehistory
+(
+  issueno int not null,
+  eid int not null,
+  rollno varchar(12) not null,
+  dateofissue date not null,
+  dateofreturn date not null,
+  fineamount int not null,
+  reasonforfine int,
+  constraint pk_issuehistory primary key (issueno),
+  constraint fk_issuehistory_eid foreign key (eid) references equipment(eid)
+);
+
+create table issued
+(
+  issueno int not null auto_increment,
+  eid int not null,
+  rollno varchar(12) not null,
+  dateofissue date not null,
+  fine int not null default 0,
+  reason int default 0,
+  constraint pk_issued primary key (issueno),
+  constraint fk_issued_eid foreign key (eid) references equipment(eid)
+);
+
+create table requests
+(
+  equipmentname varchar(50) not null,
+  rollno varchar(12) not null,
+  estimatedcost int not null,
+  purchaselinks varchar(1000),
+  reason int not null default 0,
+  constraint pk_requests primary key (equipmentname, rollno)
+);
+
+insert into equipment values
+(NULL,"BasketBall",1,"19-05-23",7719,"EKP09RNM1KH"),
+(NULL,"Swimming gogles",1,"19-06-21",8918,"BPG75PGY2IZ"),
+(NULL,"Swimming sutis",1,"19-12-06",9706,"GGI78XCY6IS"),
+(NULL,"Hockey",1,"20-02-14",3155,"CIH73CDJ1XV"),
+(NULL,"Chess",1,"18-05-03",2475,"FED52YXK2WQ"),
+(NULL,"Table Tennis Ball",1,"19-06-17",7360,"ICA84OHK8KL"),
+(NULL,"Raspi",1,"18-12-05",9803,"YCV79EXR5TC"),
+(NULL,"Hockey",1,"18-04-26",7185,"XAI64FXI2OV"),
+(NULL,"FootBall",1,"19-12-20",5203,"QLB15WSG3CR"),
+(NULL,"Printer",1,"19-12-04",1612,"RSW96ABI5UB"),
+(NULL,"Lock",1,"19-06-07",886,"KEE86YWM3GI"),
+(NULL,"Swimming gogles",1,"18-05-23",922,"HLG16DNV2WQ"),
+(NULL,"BasketBall",1,"18-07-29",5926,"ZEK12AZW0WN"),
+(NULL,"Raspi",1,"18-04-20",1122,"HKC61IBX7TD"),
+(NULL,"Lock",1,"20-01-31",1363,"NEK00OWY8LK"),
+(NULL,"Guard Dress",1,"19-10-14",7123,"NKV76PQP0KJ"),
+(NULL,"Guard Dress",1,"18-05-23",2532,"BWM36OWI7UG"),
+(NULL,"Table Tennis Bat",1,"18-07-24",2873,"DEA27OKW2AD"),
+(NULL,"Tennis Ball",1,"20-03-02",7394,"ZDM59MKL5QI"),
+(NULL,"Table Tennis Ball",1,"19-05-12",2957,"JJT21XLA7BT"),
+(NULL,"Air Pump",1,"18-11-02",6744,"ZQF15HXW2EH"),
+(NULL,"Ludo",1,"18-08-31",4763,"FJP03DVD0WP"),
+(NULL,"Printer",1,"20-04-07",5708,"LIV26KEH1MU"),
+(NULL,"VolleyBall",1,"18-11-18",2155,"ZXH43SLU0EY"),
+(NULL,"BasketBall",1,"19-11-03",6978,"GPX26TKZ9QK");
+
+delimiter //
+
+create trigger issue 
+before insert on issued
+for each row
+begin
+update equipment set status=0 where eid=new.eid;
+end //
+
+create trigger returned
+before delete on issued
+for each row
+begin
+insert into issuehistory values(old.issueno,old.eid,old.rollno,old.dateofissue,curdate(),old.fine,old.reason);
+update equipment set status = case when old.reason=0 then 1 when old.reason=1 then 2 else 3 end;
+end //
+
+create event cal_fine
+on schedule every 1 day
+starts current_timestamp
+ends current_timestamp + interval 1 year
+do
+begin
+update issued set fine = case when datediff(curdate(),dateofissue)<=7 then fine+10 else fine end;
+end //
+
+delimiter ;
