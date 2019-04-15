@@ -23,7 +23,7 @@ if($result->num_rows > 0) {
  		$activeBrands = "<label class='label label-danger'>Not Available</label>";
  	}
 
- 	$button = '
+ 	$button = '<!-- Single button -->
 	<div class="btn-group">
 	  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 	    Action <span class="caret"></span>
@@ -35,7 +35,7 @@ if($result->num_rows > 0) {
 	</div>';
 
  	$output['data'][] = array(
- 	    $row[0],
+ 		$row[0],
  		$row[1],
  		$activeBrands,
  		$button
