@@ -92,7 +92,7 @@
           <ul class="dropdown-menu">
 
               <?php if(isset($_SESSION['userId'])) { ?>
-                <li id="topNavSetting"><a href="setting.php"> <i class="glyphicon glyphicon-wrench"></i> Setting</a></li>
+                <li id="topNavSetting"><a href="setting.php"> <i class="glyphicon glyphicon-wrench"></i> Profile Settings</a></li>
               <?php } ?>
 
               <?php if(isset($_SESSION['userId']) && $_SESSION['userId']==1) { ?>

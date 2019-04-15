@@ -2,30 +2,28 @@
 
 <?php 
 $user_id = $_SESSION['userId'];
-$sql = "SELECT * FROM users WHERE user_id = {$user_id}";
+$sql = "SELECT * FROM student WHERE rollno = '$user_id'";
 $query = $connect->query($sql);
 $result = $query->fetch_assoc();
-
-$connect->close();
 ?>
 
 <div class="row">
 	<div class="col-md-12">
 		<ol class="breadcrumb">
 		  <li><a href="dashboard.php">Home</a></li>		  
-		  <li class="active">Setting</li>
+		  <li class="active">Profile Settings</li>
 		</ol>
 
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<div class="page-heading"> <i class="glyphicon glyphicon-wrench"></i> Setting</div>
+				<div class="page-heading"> <i class="glyphicon glyphicon-wrench"></i> Profile Settings</div>
 			</div> <!-- /panel-heading -->
 
 			<div class="panel-body">
 
 				
 
-				<form action="php_action/changeUsername.php" method="post" class="form-horizontal" id="changeUsernameForm">
+				<!--<form action="php_action/changeUsername.php" method="post" class="form-horizontal" id="changeUsernameForm">
 					<fieldset>
 						<legend>Change Username</legend>
 
@@ -45,7 +43,7 @@ $connect->close();
 					    </div>
 					  </div>
 					</fieldset>
-				</form>
+				</form>-->
 
 				<form action="php_action/changePassword.php" method="post" class="form-horizontal" id="changePasswordForm">
 					<fieldset>
