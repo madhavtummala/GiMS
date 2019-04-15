@@ -3,7 +3,7 @@ require_once 'php_action/db_connect.php';
 
 session_start();
 
-if(isset($_SESSION['userId'])==1) {
+if(isset($_SESSION['userId'])==2) {
 	header('location: dashboard.php');
 }
 
@@ -37,7 +37,8 @@ if($_POST) {
 				$value = $mainResult->fetch_assoc();
 
 				// set session
-				$_SESSION['userId'] = 1;
+				$_SESSION['userId'] = 2;
+				$_SESSION['hostel'] = $value['hostelname'];
 
 				header('location: dashboard.php');	
 			} else{
@@ -124,11 +125,3 @@ if($_POST) {
 	</div>
 </body>
 </html>
-
-
-
-
-
-
-
-	

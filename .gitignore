@@ -1,5 +1,5 @@
 .idea/
 *~
-php_action/db_connect.py
+php_action/db_connect.php
 .DStore
 php_action/core.php
