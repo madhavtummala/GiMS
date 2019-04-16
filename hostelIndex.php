@@ -3,7 +3,7 @@ require_once 'php_action/db_connect.php';
 
 session_start();
 
-if(isset($_SESSION['userId'])==2) {
+if(isset($_SESSION['userId'])) {
 	header('location: dashboard.php');
 }
 
@@ -25,21 +25,20 @@ if($_POST) {
 	} 
 	else {
 		$loginid = strtolower($loginid);
-		$sql = "SELECT * FROM centraladmin WHERE loginid = '$loginid'";
+		$sql = "SELECT * FROM hosteladmin WHERE loginid = '$loginid'";
 		$result = $connect->query($sql);
 
 		if($result->num_rows == 1) {
 			// exists
-			$mainSql = "SELECT * FROM centraladmin WHERE loginid = '$loginid' AND password = '$password'";
+			$mainSql = "SELECT * FROM hosteladmin WHERE loginid = '$loginid' AND password = '$password'";
 			$mainResult = $connect->query($mainSql);
 
 			if($mainResult->num_rows == 1) {
 				$value = $mainResult->fetch_assoc();
+				$login_id = $value['loginid'];
 
 				// set session
 				$_SESSION['userId'] = 2;
-				$_SESSION['hostel'] = $value['hostelname'];
-
 				header('location: dashboard.php');	
 			} else{
 				
@@ -83,7 +82,7 @@ if($_POST) {
 			<div class="col-md-6 col-md-offset-3">
 				<div class="panel panel-info">
 					<div class="panel-heading">
-						<h3 class="panel-title">Welcome Admin, please sign in</h3>
+						<h3 class="panel-title">Welcome Hostel Admin, please sign in</h3>
 					</div>
 					<div class="panel-body">
 
