@@ -1,24 +1,17 @@
 <?php 
 require_once 'php_action/db_connect.php';
-
 session_start();
-
-if(isset($_SESSION['userId'])==1) {
+if(isset($_SESSION['userId'])) {
 	header('location: dashboard.php');
 }
-
 $errors = array();
-
 if($_POST) {
-
 	$loginid = $_POST['loginid'];
 	$password = $_POST['password'];
-
 	if(empty($loginid) || empty($password)) {
 		if($loginid == "") {
 			$errors[] = "Login-id is required";
 		} 
-
 		if($password == "") {
 			$errors[] = "Password is required";
 		}
@@ -27,18 +20,15 @@ if($_POST) {
 		$loginid = strtolower($loginid);
 		$sql = "SELECT * FROM centraladmin WHERE loginid = '$loginid'";
 		$result = $connect->query($sql);
-
 		if($result->num_rows == 1) {
 			// exists
 			$mainSql = "SELECT * FROM centraladmin WHERE loginid = '$loginid' AND password = '$password'";
 			$mainResult = $connect->query($mainSql);
-
 			if($mainResult->num_rows == 1) {
 				$value = $mainResult->fetch_assoc();
-
+				$login_id = $value['loginid'];
 				// set session
 				$_SESSION['userId'] = 1;
-
 				header('location: dashboard.php');	
 			} else{
 				
@@ -124,11 +114,3 @@ if($_POST) {
 	</div>
 </body>
 </html>
-
-
-
-
-
-
-
-	
