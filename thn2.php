@@ -16,9 +16,12 @@
 
                     <div class="remove-messages"></div>
 
-                    <div class="div-action pull pull-right" style="padding-bottom:20px;">
-                        <button class="btn btn-default button1" data-toggle="modal" data-target="#addBrandModel"> <i class="glyphicon glyphicon-plus-sign"></i>  Add Item</button>
-                    </div>
+                    <?php if($_SESSION['userId']==1) { ?>
+                        <div class="div-action pull pull-right" style="padding-bottom:20px;">
+                            <button class="btn btn-default button1" data-toggle="modal" data-target="#addBrandModel"> <i class="glyphicon glyphicon-plus-sign"></i>  Add Item</button>
+                        </div>
+                    <?php } ?>
+
 
                     <table class="table" id="manageBrandTable">
                         <thead>
@@ -26,7 +29,9 @@
                             <th>ID</th>
                             <th>Name</th>
                             <th style="width:15%;">Status</th>
-                            <th style="width:15%;">Action</th>
+                            <?php if($_SESSION['userId']==1 || $_SESSION['userId']==2) { ?>
+                                <th style="width:15%;">Action</th>
+                            <?php } ?>
                         </tr>
                         </thead>
                     </table>

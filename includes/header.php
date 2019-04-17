@@ -83,7 +83,7 @@
 <!--          </ul>-->
 <!--        </li> -->
 		
-		<?php  if(isset($_SESSION['userId']) && $_SESSION['userId']==2) { ?>
+		<?php  if(isset($_SESSION['userId']) && $_SESSION['userId']!=1 && $_SESSION['userId']!=2) { ?>
         <li id="navRequest"><a href="request.php"> <i class="glyphicon glyphicon-check"></i> Request New Item </a></li>
 		<?php } ?>
 

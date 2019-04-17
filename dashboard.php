@@ -73,7 +73,7 @@ else
     $fine = $query->num_rows;
 }
 
-$hostel->close();
+#$hostel->close();
 ?>
 
 <!-- fullCalendar 2.2.5-->

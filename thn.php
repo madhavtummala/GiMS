@@ -16,9 +16,12 @@
 
                     <div class="remove-messages"></div>
 
-                    <div class="div-action pull pull-right" style="padding-bottom:20px;">
-                        <button class="btn btn-default button1" data-toggle="modal" data-target="#addBrandModel"> <i class="glyphicon glyphicon-plus-sign"></i>  Add Item</button>
-                    </div>
+                    <?php if($_SESSION['userId']==1) { ?>
+                        <div class="div-action pull pull-right" style="padding-bottom:20px;">
+                            <button class="btn btn-default button1" data-toggle="modal" data-target="#addBrandModel"> <i class="glyphicon glyphicon-plus-sign"></i>  Add Item</button>
+                        </div>
+                    <?php } ?>
+
 
                     <table class="table" id="manageBrandTable">
                         <thead>
@@ -38,7 +41,7 @@
         </div>
     </div>
 
-<?php  if(isset($_SESSION['userId']) && $_SESSION['userId']==1) { ?>
+    <?php  if(isset($_SESSION['userId']) && $_SESSION['userId']==1) { ?>
     <div class="modal fade" id="addBrandModel" tabindex="-1" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -96,11 +99,11 @@
             </div>
         </div>
     </div>
-<?php } ?>
+    <?php } ?>
 
 
     <!-- edit brand -->
-<?php  if(isset($_SESSION['userId']) && $_SESSION['userId']<=2) { ?>
+    <?php  if(isset($_SESSION['userId']) && $_SESSION['userId']<=2) { ?>
     <div class="modal fade" id="editBrandModel" tabindex="-1" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -151,10 +154,10 @@
             </div>
         </div>
     </div>
-<?php } ?>
+    <?php } ?>
 
 
-<?php  if(isset($_SESSION['userId']) && $_SESSION['userId']==1) { ?>
+    <?php  if(isset($_SESSION['userId']) && $_SESSION['userId']==1) { ?>
     <div class="modal fade" tabindex="-1" role="dialog" id="removeMemberModal">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -172,10 +175,10 @@
             </div>
         </div>
     </div>
-<?php } ?>
+    <?php } ?>
 
 
-<?php $_SESSION['hostel']="THN1" ?>
+    <?php $_SESSION['hostel']="THN2" ?>
     <script src="custom/js/brand.js"></script>
 
 <?php require_once 'includes/footer.php'; ?>

@@ -26,7 +26,9 @@
                             <th>ID</th>
                             <th>Name</th>
                             <th style="width:15%;">Status</th>
-                            <th style="width:15%;">Action</th>
+                            <?php if($_SESSION['userId']==1 || $_SESSION['userId']==2) { ?>
+                                <th style="width:15%;">Action</th>
+                            <?php } ?>
                         </tr>
                         </thead>
                     </table>

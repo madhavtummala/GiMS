@@ -36,9 +36,10 @@ if($_POST) {
 			if($mainResult->num_rows == 1) {
 				$value = $mainResult->fetch_assoc();
 				$login_id = $value['loginid'];
-
+				
 				// set session
 				$_SESSION['userId'] = 2;
+				$_SESSION['hostel'] = $value['hostelname'];
 				header('location: dashboard.php');	
 			} else{
 				
