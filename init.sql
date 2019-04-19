@@ -129,7 +129,7 @@ create table requests
   rollno varchar(12) not null,
   estimatedcost int not null,
   purchaselinks varchar(1000),
-  reason int not null default 0,
+  reason varchar(1000) not null,
   constraint pk_requests primary key (equipmentname, rollno)
 );
 
@@ -233,7 +233,7 @@ create table requests
   rollno varchar(12) not null,
   estimatedcost int not null,
   purchaselinks varchar(1000),
-  reason int not null default 0,
+  reason varchar(1000) not null,
   constraint pk_requests primary key (equipmentname, rollno)
 );
 
@@ -337,7 +337,7 @@ create table requests
   rollno varchar(12) not null,
   estimatedcost int not null,
   purchaselinks varchar(1000),
-  reason int not null default 0,
+  reason varchar(1000) not null,
   constraint pk_requests primary key (equipmentname, rollno)
 );
 
@@ -441,7 +441,7 @@ create table requests
   rollno varchar(12) not null,
   estimatedcost int not null,
   purchaselinks varchar(1000),
-  reason int not null default 0,
+  reason varchar(1000) not null,
   constraint pk_requests primary key (equipmentname, rollno)
 );
 
