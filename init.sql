@@ -142,7 +142,7 @@ insert into equipment values
 (NULL,"Cricket Ball",1,"19-03-27",1476,"LNL79JAQ6PK"),
 (NULL,"Motors",1,"19-12-19",2164,"HNS68MMX8DN");
 
-delimiter //
+DELIMITER //
 
 create trigger issue 
 before insert on issued
@@ -168,7 +168,7 @@ begin
 update issued set fine = case when datediff(curdate(),dateofissue)<=7 then fine+10 else fine end;
 end //
 
-delimiter ;
+DELIMITER ;
 
 create database THN1;
 use THN1;
@@ -246,7 +246,7 @@ insert into equipment values
 (NULL,"First Aid bands",1,"20-01-26",5540,"HKM58XHD5UG"),
 (NULL,"Cards",1,"18-07-14",3148,"BTO34YJP2DT");
 
-delimiter //
+DELIMITER //
 
 create trigger issue 
 before insert on issued
@@ -272,7 +272,7 @@ begin
 update issued set fine = case when datediff(curdate(),dateofissue)<=7 then fine+10 else fine end;
 end //
 
-delimiter ;
+DELIMITER ;
 
 create database MHR;
 use MHR;
@@ -350,7 +350,7 @@ insert into equipment values
 (NULL,"Swimming sutis",1,"19-03-07",8816,"PCI30QPU9WO"),
 (NULL,"Cricket Ball",1,"18-05-11",2732,"IDL79XQC0UJ");
 
-delimiter //
+DELIMITER //
 
 create trigger issue 
 before insert on issued
@@ -376,7 +376,7 @@ begin
 update issued set fine = case when datediff(curdate(),dateofissue)<=7 then fine+10 else fine end;
 end //
 
-delimiter ;
+DELIMITER ;
 
 create database SHR;
 use SHR;
@@ -454,7 +454,7 @@ insert into equipment values
 (NULL,"VolleyBall",1,"18-11-18",2155,"ZXH43SLU0EY"),
 (NULL,"BasketBall",1,"19-11-03",6978,"GPX26TKZ9QK");
 
-delimiter //
+DELIMITER //
 
 create trigger issue 
 before insert on issued
@@ -480,4 +480,4 @@ begin
 update issued set fine = case when datediff(curdate(),dateofissue)<=7 then fine+10 else fine end;
 end //
 
-delimiter ;
+DELIMITER ;
