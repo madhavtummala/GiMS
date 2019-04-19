@@ -40,12 +40,30 @@ create table student
   constraint uk_student_emailid unique (emailid)
 );
 
+create table centraladmin (
+  loginid varchar(50) NOT NULL,
+  password varchar(50) NOT NULL,
+  constraint pk_centraladmin primary key (loginid)
+);
+  
+create table hosteladmin (
+  loginid varchar(50) NOT NULL,
+  password varchar(50) NOT NULL,
+  hostelname varchar(50) NOT NULL,
+  constraint pk_centraladmin primary key (loginid),
+  constraint fk_hosteladmin_hostelname foreign key (hostelname) references hostel(hostelname)
+);
+
 insert into hostel values
 ("MHR", "MHR"),
 ("SHR", "SHR"),
 ("THN1", "THN1"),
 ("THN2", "THN2");
 
+insert into centraladmin values('admin1', 'admin');
+
+insert into hosteladmin values('thn1', 'thn', "THN1");
+insert into hosteladmin values('thn2', 'thn', "THN2");
 
 insert into student values("16cs01041", "Tummala Madhav", "tm15@iitbbs.ac.in", "madhav1999", "THN2");
 insert into student values("16cs01042", "Saksham Arneja", "sa26@iitbbs.ac.in", "sak@1234", "THN2");

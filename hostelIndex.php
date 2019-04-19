@@ -7,6 +7,8 @@ if(isset($_SESSION['userId'])) {
 	header('location: dashboard.php');
 }
 
+require_once 'includes/indexHeader.php';
+
 $errors = array();
 
 if($_POST) {
@@ -125,3 +127,5 @@ if($_POST) {
 	</div>
 </body>
 </html>
+
+<?php require_once 'includes/indexFooter.php'; ?>

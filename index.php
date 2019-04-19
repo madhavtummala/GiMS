@@ -7,6 +7,8 @@ if(isset($_SESSION['userId'])) {
 	header('location: dashboard.php');	
 }
 
+require_once 'includes/indexHeader.php';
+
 $errors = array();
 
 if($_POST) {
@@ -39,7 +41,7 @@ if($_POST) {
 
 				// set session
 				$_SESSION['hostel'] = $value['hostelname'];
-				$_SESSION['userId'] = 1;
+				$_SESSION['userId'] = $user_id;
 
 				header('location: dashboard.php');	
 			} else{
@@ -81,10 +83,10 @@ if($_POST) {
 <body>
 	<div class="container">
 		<div class="row vertical">
-			<div class="col-md-5 col-md-offset-4">
+			<div class="col-md-6 col-md-offset-3">
 				<div class="panel panel-info">
 					<div class="panel-heading">
-						<h3 class="panel-title">Please Sign in</h3>
+						<h3 class="panel-title">Welcome Student, please sign in</h3>
 					</div>
 					<div class="panel-body">
 
@@ -101,7 +103,7 @@ if($_POST) {
 						<form class="form-horizontal" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post" id="loginForm">
 							<fieldset>
 							  <div class="form-group">
-									<label for="rollno" class="col-sm-2 control-label">Rollno</label>
+									<label for="rollno" class="col-sm-2 control-label">Login id</label>
 									<div class="col-sm-10">
 									  <input type="text" class="form-control" id="rollno" name="rollno" placeholder="Enter your Insititute Roll No..." autocomplete="off" />
 									</div>
@@ -128,9 +130,4 @@ if($_POST) {
 </html>
 
 
-
-
-
-
-
-	
+<?php require_once 'includes/indexFooter.php'; ?>

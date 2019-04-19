@@ -4,6 +4,9 @@ session_start();
 if(isset($_SESSION['userId'])) {
 	header('location: dashboard.php');
 }
+
+require_once 'includes/indexHeader.php';
+
 $errors = array();
 if($_POST) {
 	$loginid = $_POST['loginid'];
@@ -114,3 +117,5 @@ if($_POST) {
 	</div>
 </body>
 </html>
+
+<?php require_once 'includes/indexFooter.php'; ?>

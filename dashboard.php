@@ -28,7 +28,11 @@ if($_SESSION['userId']>2) {
 
 
     $fine = $fine->fetch_assoc();
-    $fine = $fine['totalfine'];
+
+    if($fine['totalfine'])
+        $fine = $fine['totalfine'];
+    else
+        $fine = 0;
 }
 else if($_SESSION['userId']==2)
 {
@@ -101,7 +105,6 @@ else
     }
 }
 
-$hostel->close();
 $connect->close();
 ?>
 
