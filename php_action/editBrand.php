@@ -4,24 +4,24 @@ require_once 'core.php';
 
 $valid['success'] = array('success' => false, 'messages' => array());
 
-if($_POST) {	
+if($_POST) {
 
-	$brandName = $_POST['editBrandName'];
-  $brandStatus = $_POST['editBrandStatus']; 
-  $brandId = $_POST['brandId'];
+    $brandName = $_POST['editBrandName'];
+    $brandStatus = $_POST['editBrandStatus'];
+    $brandId = $_POST['brandId'];
 
-	$sql = "UPDATE brands SET brand_name = '$brandName', brand_active = '$brandStatus' WHERE brand_id = '$brandId'";
+	$sql = "UPDATE equipment SET name = '$brandName', status = '$brandStatus' WHERE eid = '$brandId'";
 
-	if($connect->query($sql) === TRUE) {
+	if($hostel->query($sql) === TRUE) {
 	 	$valid['success'] = true;
-		$valid['messages'] = "Successfully Updated";	
+		$valid['messages'] = "Successfully Changed";
 	} else {
 	 	$valid['success'] = false;
-	 	$valid['messages'] = "Error while adding the members";
+	 	$valid['messages'] = "Error while adding the Item";
 	}
 	 
-	$connect->close();
+	$hostel->close();
 
 	echo json_encode($valid);
  
-} // /if $_POST
+}

@@ -4,24 +4,24 @@ require_once 'core.php';
 
 $valid['success'] = array('success' => false, 'messages' => array());
 
-if($_POST) {	
 
-	$brandName = $_POST['brandName'];
-  $brandStatus = $_POST['brandStatus']; 
+if($_POST) {
 
-	$sql = "INSERT INTO brands (brand_name, brand_active, brand_status) VALUES ('$brandName', '$brandStatus', 1)";
+    $name = $_POST['addName'];
+    $invoiceno = $_POST['addInvoiceno'];
+    $cost = $_POST['addCost'];
 
-	if($connect->query($sql) === TRUE) {
-	 	$valid['success'] = true;
-		$valid['messages'] = "Successfully Added";	
-	} else {
-	 	$valid['success'] = false;
-	 	$valid['messages'] = "Error while adding the members";
-	}
-	 
+    $sql = "INSERT INTO equipment values(NULL,'$name', 1, curdate(), '$cost', '$invoiceno')";
 
-	$connect->close();
+    if ($hostel->query($sql) === TRUE) {
+        $valid['success'] = true;
+        $valid['messages'] = "Successfully Added";
+    } else {
+        $valid['success'] = false;
+        $valid['messages'] = "Error while adding the Item";
+    }
 
-	echo json_encode($valid);
- 
-} // /if $_POST
+    $hostel->close();
+
+    echo json_encode($valid);
+}

@@ -39,7 +39,7 @@ if($_POST) {
 
 				// set session
 				$_SESSION['hostel'] = $value['hostelname'];
-				$_SESSION['userId'] = $user_id;
+				$_SESSION['userId'] = 1;
 
 				header('location: dashboard.php');	
 			} else{
