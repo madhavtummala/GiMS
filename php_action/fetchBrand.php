@@ -20,7 +20,10 @@ if($result->num_rows > 0) {
  		$activeBrands = "<label class='label label-success'>Available</label>";
  	} else if($row[2] == 0){
  		// deactivate member
- 		$activeBrands = "<label class='label label-danger'>Not Available</label>";
+ 		$activeBrands = "<label class='label label-danger'>Issued</label>";
+ 	}
+ 	else if($row[2] == 2){
+ 		$activeBrands = "<label class='label label-danger'>Under Repair</label>";
  	}
  	else{
  		$activeBrands = "<label class='label label-danger'>Lost</label>";

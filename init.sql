@@ -156,7 +156,7 @@ before delete on issued
 for each row
 begin
 insert into issuehistory values(old.issueno,old.eid,old.rollno,old.dateofissue,curdate(),old.fine,old.reason);
-update equipment set status = case when old.reason=0 then 1 when old.reason=1 then 2 else 3 end;
+update equipment set status = case when old.reason=0 then 1 when old.reason=1 then 2 else 3 end where eid=old.eid;
 end //
 
 create event cal_fine
@@ -260,7 +260,7 @@ before delete on issued
 for each row
 begin
 insert into issuehistory values(old.issueno,old.eid,old.rollno,old.dateofissue,curdate(),old.fine,old.reason);
-update equipment set status = case when old.reason=0 then 1 when old.reason=1 then 2 else 3 end;
+update equipment set status = case when old.reason=0 then 1 when old.reason=1 then 2 else 3 end where eid=old.eid;
 end //
 
 create event cal_fine
@@ -364,7 +364,7 @@ before delete on issued
 for each row
 begin
 insert into issuehistory values(old.issueno,old.eid,old.rollno,old.dateofissue,curdate(),old.fine,old.reason);
-update equipment set status = case when old.reason=0 then 1 when old.reason=1 then 2 else 3 end;
+update equipment set status = case when old.reason=0 then 1 when old.reason=1 then 2 else 3 end where eid=old.eid;
 end //
 
 create event cal_fine
@@ -468,7 +468,7 @@ before delete on issued
 for each row
 begin
 insert into issuehistory values(old.issueno,old.eid,old.rollno,old.dateofissue,curdate(),old.fine,old.reason);
-update equipment set status = case when old.reason=0 then 1 when old.reason=1 then 2 else 3 end;
+update equipment set status = case when old.reason=0 then 1 when old.reason=1 then 2 else 3 end where eid=old.eid;
 end //
 
 create event cal_fine

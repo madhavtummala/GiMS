@@ -100,7 +100,7 @@
     </div>
 <?php } ?>
 
-    <!-- return brand -->
+<!-- return brand -->
 <?php  if(isset($_SESSION['userId']) && $_SESSION['userId']<=2) { ?>
     <div class="modal fade" id="returnBrandModel" tabindex="-1" role="dialog">
         <div class="modal-dialog">
