@@ -16,7 +16,7 @@ if($brandId) {
 	$valid['messages'] = "Successfully Removed";		
  } else {
  	$valid['success'] = false;
- 	$valid['messages'] = "Error while removing the Item";
+ 	$valid['messages'] = $sql;
  }
  
  $hostel->close();

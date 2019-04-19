@@ -100,6 +100,156 @@ $(document).ready(function() {
 
 });
 
+function returnBrands(){
+
+	// return brand form function
+	$("#returnBrandForm").unbind('submit').bind('submit', function()
+		{
+			// remove the error text
+			$(".text-danger").remove();
+			// remove the form error
+			$('.form-group').removeClass('has-error').removeClass('has-success');
+
+			$('.return-brand-result').addClass('div-hide');
+			// modal footer
+			$('.returnBrandFooter').addClass('div-hide');
+
+			var roll = $("#returnNo").val();
+
+			if(roll == "") {
+				$("#returnNo").after('<p class="text-danger">Roll field is required</p>');
+				$('#returnNo').closest('.form-group').addClass('has-error');
+			} else {
+				$("#returnNo").find('.text-danger').remove();
+				$("#returnNo").closest('.form-group').addClass('has-success');
+			}
+
+			if(roll) {
+				var form = $(this);
+				// button loading
+				$("#returnBrandBtn").button('loading');
+
+				$.ajax({
+					url : 'php_action/returnBrand.php',
+					type: 'post',
+					data: form.serialize(),
+					dataType: 'json',
+					success:function(response) {
+
+						console.log(response);
+
+						$("#returnBrandBtn").button('reset');
+
+						if(response.success == true) {
+							// reload the manage member table
+							manageBrandTable.ajax.reload(null, false);
+
+							$("#returnBrandForm")[0].reset();
+							// remove the error text
+							$(".text-danger").remove();
+							// remove the form error
+							$('.form-group').removeClass('has-error').removeClass('has-success');
+
+							$('#return-brand-messages').html('<div class="alert alert-success">'+
+								'<button type="button" class="close" data-dismiss="alert">&times;</button>'+
+								'<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> '+ response.messages +
+								'</div>');
+
+							$(".alert-success").delay(500).show(10, function() {
+								$(this).delay(3000).hide(10, function() {
+									$(this).remove();
+								});
+							}); // /.alert
+						}  // if
+
+					} // /success
+				}); // /ajax
+			} // if
+
+			return false;
+		}
+
+	);
+
+}
+
+function issueBrands(brandId = null) {
+	if(brandId) {
+
+		// update brand form
+		$('#issueBrandForm').unbind('submit').bind('submit', function() {
+
+
+			// remove hidden brand id text
+			$('#brandId').remove();
+
+			// remove the error
+			$('.text-danger').remove();
+			// remove the form-error
+			$('.form-group').removeClass('has-error').removeClass('has-success');
+
+			// modal result
+			$('.issue-brand-result').addClass('div-hide');
+			// modal footer
+			$('.issueBrandFooter').addClass('div-hide');
+
+			var roll = $('#issueRoll').val();
+
+			if(roll == "") {
+				$("#editBrandName").after('<p class="text-danger">Roll field is required</p>');
+				$('#editBrandName').closest('.form-group').addClass('has-error');
+			} else {
+				$("#editBrandName").find('.text-danger').remove();
+				$("#editBrandName").closest('.form-group').addClass('has-success');
+			}
+
+			if(roll) {
+				var form = $(this);
+
+				// submit btn
+				$('#issueBrandBtn').button('loading');
+
+				$.ajax({
+					url: form.attr('action'),
+					type: form.attr('method'),
+					data: {brandId: brandId, issueRoll: roll},
+					dataType: 'json',
+					success:function(response) {
+
+						if(response.success == true) {
+							// reload the manage member table
+							manageBrandTable.ajax.reload(null, false);
+
+							$("#editBrandForm")[0].reset();
+							// remove the error text
+							$(".text-danger").remove();
+							// remove the form error
+							$('.form-group').removeClass('has-error').removeClass('has-success');
+
+							$('#edit-brand-messages').html('<div class="alert alert-success">'+
+								'<button type="button" class="close" data-dismiss="alert">&times;</button>'+
+								'<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> '+ response.messages +
+								'</div>');
+
+							$(".alert-success").delay(500).show(10, function() {
+								$(this).delay(3000).hide(10, function() {
+									$(this).remove();
+								});
+							}); // /.alert
+						}
+
+					}// /success
+				});	 // /ajax
+			} // /if
+
+			return false;
+		}); // /update brand form
+
+	} else {
+		alert('error!! Refresh the page again');
+	}
+} // /edit brands function
+
 function editBrands(brandId = null) {
 	if(brandId) {
 
@@ -124,7 +274,7 @@ function editBrands(brandId = null) {
 					var brandStatus = $('#editBrandStatus').val();
 
 					if(brandName == "") {
-						$("#editBrandName").after('<p class="text-danger">Brand Name field is required</p>');
+						$("#editBrandName").after('<p class="text-danger"> Name field is required</p>');
 						$('#editBrandName').closest('.form-group').addClass('has-error');
 					} else {
 						// remov error text field
@@ -134,7 +284,7 @@ function editBrands(brandId = null) {
 					}
 
 					if(brandStatus == "") {
-						$("#editBrandStatus").after('<p class="text-danger">Brand Name field is required</p>');
+						$("#editBrandStatus").after('<p class="text-danger"> Status field is required</p>');
 
 						$('#editBrandStatus').closest('.form-group').addClass('has-error');
 					} else {

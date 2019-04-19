@@ -29,8 +29,9 @@ if($result->num_rows > 0) {
 	    Action <span class="caret"></span>
 	  </button>
 	  <ul class="dropdown-menu">
+	    <li><a type="button" data-toggle="modal" data-target="#issueBrandModel" onclick="issueBrands('.$brandId.')"> <i class="glyphicon glyphicon-plus"></i> Issue</a></li>
 	    <li><a type="button" data-toggle="modal" data-target="#editBrandModel" onclick="editBrands('.$brandId.')"> <i class="glyphicon glyphicon-edit"></i> Edit</a></li>
-	    <li><a type="button" data-toggle="modal" data-target="#removeMemberModal" onclick="removeBrands('.$brandId.')"> <i class="glyphicon glyphicon-trash"></i> Remove</a></li>       
+	    <li><a type="button" data-toggle="modal" data-target="#removeMemberModel" onclick="removeBrands('.$brandId.')"> <i class="glyphicon glyphicon-trash"></i> Remove</a></li>       
 	  </ul>
 	</div>';
 

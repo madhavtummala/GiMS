@@ -16,6 +16,12 @@
 
                     <div class="remove-messages"></div>
 
+                    <?php if($_SESSION['userId']<=2) { ?>
+                        <div class="div-action pull pull-right" style="padding-bottom:20px;">
+                            <button class="btn btn-default button1" data-toggle="modal" data-target="#returnBrandModel" onclick="returnBrands()"> <i class="glyphicon glyphicon-refresh"></i>  Return Item</button>
+                        </div>
+                    <?php } ?>
+
                     <?php if($_SESSION['userId']==1) { ?>
                         <div class="div-action pull pull-right" style="padding-bottom:20px;">
                             <button class="btn btn-default button1" data-toggle="modal" data-target="#addBrandModel"> <i class="glyphicon glyphicon-plus-sign"></i>  Add Item</button>
@@ -41,6 +47,7 @@
         </div>
     </div>
 
+    <!-- add brand -->
     <?php  if(isset($_SESSION['userId']) && $_SESSION['userId']==1) { ?>
     <div class="modal fade" id="addBrandModel" tabindex="-1" role="dialog">
         <div class="modal-dialog">
@@ -93,6 +100,99 @@
     </div>
     <?php } ?>
 
+    <!-- return brand -->
+    <?php  if(isset($_SESSION['userId']) && $_SESSION['userId']<=2) { ?>
+    <div class="modal fade" id="returnBrandModel" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <form class="form-horizontal" id="returnBrandForm">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title"><i class="fa fa-plus"></i> Return Item</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <div id="return-brand-messages"></div>
+
+                        <div id="return-brand-result">
+
+                            <div class="form-group">
+                                <label for="returnNo" class="col-sm-3 control-label">Issue No </label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="returnNo" placeholder="Issue No..." name="returnNo" autocomplete="off">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="returnFine" class="col-sm-3 control-label">Extra Fine </label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="returnFine" placeholder="Issue No..." name="returnFine" autocomplete="off">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="returnReason" class="col-sm-3 control-label">Status </label>
+                                <div class="col-sm-8">
+                                    <select class="form-control" id="returnReason" name="returnReason">
+                                        <option value="">~Select Option~</option>
+                                        <option value="0">Delay</option>
+                                        <option value="1">Damage</option>
+                                        <option value="2">Lost</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="modal-footer returnBrandFooter">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary" id="createBrandBtn" data-loading-text="Loading..." autocomplete="off">Return Item</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+    <?php } ?>
+
+    <!-- issue brand -->
+    <?php  if(isset($_SESSION['userId']) && $_SESSION['userId']<=2) { ?>
+    <div class="modal fade" id="issueBrandModel" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <form class="form-horizontal" id="issueBrandForm" action="php_action/issueBrand.php" method="POST">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title"><i class="fa fa-edit"></i> Issue Item</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <div id="issue-brand-messages"></div>
+
+                        <div class="issue-brand-result">
+                            <div class="form-group">
+                                <label for="issueBrandName" class="col-sm-3 control-label">Roll </label>
+                                <label class="col-sm-1 control-label">: </label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="issueRoll" placeholder="Student Roll No" name="issueRoll" autocomplete="off">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer issueBrandFooter">
+                        <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="glyphicon glyphicon-remove-sign"></i> Close</button>
+                        <button type="submit" class="btn btn-success" id="issueBrandBtn" data-loading-text="Loading..." autocomplete="off"> <i class="glyphicon glyphicon-ok-sign"></i> Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <?php } ?>
 
     <!-- edit brand -->
     <?php  if(isset($_SESSION['userId']) && $_SESSION['userId']<=2) { ?>
@@ -108,11 +208,6 @@
                     <div class="modal-body">
 
                         <div id="edit-brand-messages"></div>
-
-<!--                        <div class="modal-loading div-hide" style="width:50px; margin:auto;padding-top:50px; padding-bottom:50px;">-->
-<!--                            <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>-->
-<!--                            <span class="sr-only">Loading...</span>-->
-<!--                        </div>-->
 
                         <div class="edit-brand-result">
                             <div class="form-group">
@@ -150,6 +245,7 @@
     <?php } ?>
 
 
+    <!-- remove brand -->
     <?php  if(isset($_SESSION['userId']) && $_SESSION['userId']==1) { ?>
     <div class="modal fade" tabindex="-1" role="dialog" id="removeMemberModal">
         <div class="modal-dialog">
