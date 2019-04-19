@@ -223,9 +223,10 @@
                                 <div class="col-sm-8">
                                     <select class="form-control" id="editBrandStatus" name="editBrandStatus">
                                         <option value="">~Select Option~</option>
-                                        <option value="0">Not Available</option>
+                                        <option value="0">Issued</option>
                                         <option value="1">Available</option>
-                                        <option value="2">Repair</option>
+                                        <option value="2">Under Repair</option>
+                                        <option value="3">>Lost</option>
                                     </select>
                                 </div>
                             </div>
