@@ -88,7 +88,7 @@
                   <?php if(isset($_SESSION['userId']) && $_SESSION['userId']==1) { ?>
                       <li id="topNavUser"><a href="user.php"> <i class="glyphicon glyphicon-wrench"></i> Add User</a></li>
                   <?php } ?>
-
+		    <li id="topNavOB"><a href="officebearers.php"> <i class="glyphicon glyphicon-user"></i> Office Bearers</a></li>
                     <li id="topNavLogout"><a href="logout.php"> <i class="glyphicon glyphicon-log-out"></i> Logout</a></li>
               </ul>
             </li>
