@@ -37,6 +37,21 @@ create table student
   constraint uk_student_emailid unique (emailid)
 );
 
+CREATE TABLE centraladmin (
+  loginid varchar(50) NOT NULL,
+  password varchar(50) NOT NULL,
+  constraint pk_centraladmin primary key (loginid)
+);
+
+CREATE TABLE hosteladmin (
+  loginid varchar(50) NOT NULL,
+  password varchar(50) NOT NULL,
+  hostelname varchar(50) NOT NULL,
+  constraint pk_centraladmin primary key (loginid),
+  constraint fk_hosteladmin_hostelname foreign key (hostelname) references hostel(hostelname)
+);
+
+
 insert into hostel values
 ("MHR", "MHR"),
 ("SHR", "SHR"),
@@ -62,6 +77,14 @@ insert into student values
 
 insert into officebearer values("Gsec Science and Technology", "Geeth Nischal", "8500936193", "ggn10@iitbbs.ac.in");
 insert into officebearer values("Vice President", "Punith", "9999999999", "vp.sg@iitbbs.ac.in");
+
+INSERT INTO centraladmin VALUES
+('admin1', 'admin');
+
+INSERT INTO hosteladmin VALUES
+('man1', 'man1', 'THN2'),
+('t1', 't1', 'THN1');
+
 
 create database THN2;
 use THN2;
