@@ -374,9 +374,9 @@ function editBrands(brandId = null) {
 
 function removeBrands(brandId = null) {
 	if(brandId) {
-		$('#removeBrandId').remove();
+		// $('#removeBrandId').remove();
 
-				$('.removeBrandFooter').after('<input type="hidden" name="removeBrandId" id="removeBrandId" value="'+response.brand_id+'" /> ');
+				// $('.removeBrandFooter').after('<input type="hidden" name="removeBrandId" id="removeBrandId" value="'+response.brand_id+'" /> ');
 
 				// click on remove button to remove the brand
 				$("#removeBrandBtn").unbind('click').bind('click', function() {
