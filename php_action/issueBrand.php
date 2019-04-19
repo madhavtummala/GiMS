@@ -18,14 +18,27 @@ if($_POST) {
     }
 
     else{
-        $sql = "INSERT INTO issued values (NULL, '$brandId', '$roll', curdate(), 0, 0)";
 
-        if($hostel->query($sql) === TRUE) {
-            $valid['success'] = true;
-            $valid['messages'] = "Successfully Changed";
-        } else {
+        $sql = "SELECT status from equipment WHERE eid='$brandId'";
+        $query = $hostel->query($sql);
+
+        $query = $query->fetch_assoc();
+
+        if($query['status']==1) {
+
+            $sql = "INSERT INTO issued values (NULL, '$brandId', '$roll', curdate(), 0, 0)";
+
+            if ($hostel->query($sql) === TRUE) {
+                $valid['success'] = true;
+                $valid['messages'] = "Successfully Changed";
+            } else {
+                $valid['success'] = false;
+                $valid['messages'] = "Error while issuing the Item";
+            }
+        }
+        else{
             $valid['success'] = false;
-            $valid['messages'] = "Error while issuing the Item";
+            $valid['messages'] = "Trying to issue an Item which is Not Availiable";
         }
     }
 
