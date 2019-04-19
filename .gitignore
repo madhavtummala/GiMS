@@ -1,5 +1,6 @@
 .idea/
 *~
+php_action/db_connect.php
 <<<<<<< HEAD
 php_action/db_connect.php
 .DS_Store

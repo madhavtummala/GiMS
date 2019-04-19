@@ -9,6 +9,8 @@
 			<!-- /panel-heading -->
 			<div class="panel-body">
 				
+				<div class="changePasswordMessages"></div>
+				
 				<form class="form-horizontal" action="php_action/newRequest.php" method="post" id="newRequestForm">
 				  <div class="form-group">
 				    <label for="equipmentName" class="col-sm-2 control-label">Equipment Name</label>

@@ -1,6 +1,11 @@
 $(document).ready(function() {
+	// main menu
+	$("#navSetting").addClass('active');
+	// sub manin
+	$("#topNavSetting").addClass('active');
 
-	$("#getOrderReportForm").unbind('submit').bind('submit', function() {
+	$("#newRequestForm").unbind('submit').bind('submit', function() {
+		var form = $(this);
 		
 		var equipmentName = $("#equipmentName").val();
 		var estimatedCost = $("#estimatedCost").val();
@@ -36,26 +41,41 @@ $(document).ready(function() {
 			$(".form-group").removeClass('has-error');
 			$(".text-danger").remove();
 
-			var form = $(this);
 
 			$.ajax({
 				url: form.attr('action'),
 				type: form.attr('method'),
 				data: form.serialize(),
-				dataType: 'text',
+				dataType: 'json',
 				success:function(response) {
-					var mywindow = window.open('', 'Stock Management System', 'height=400,width=600');
-	        mywindow.document.write('<html><head><title>Order Report Slip</title>');        
-	        mywindow.document.write('</head><body>');
-	        mywindow.document.write(response);
-	        mywindow.document.write('</body></html>');
+					console.log(response);
+					if(response.success == true) {
+						$('.changePasswordMessages').html('<div class="alert alert-success">'+
+	            '<button type="button" class="close" data-dismiss="alert">&times;</button>'+
+	            '<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> '+ response.messages +
+	          '</div>');
 
-	        mywindow.document.close(); // necessary for IE >= 10
-	        mywindow.focus(); // necessary for IE >= 10
+						// remove the mesages
+	          $(".alert-success").delay(500).show(10, function() {
+							$(this).delay(3000).hide(10, function() {
+								$(this).remove();
+							});
+						}); // /.alert	    
+					} else {
 
-	        mywindow.print();
-	        mywindow.close();
-				} // /success
+						$('.changePasswordMessages').html('<div class="alert alert-warning">'+
+	            '<button type="button" class="close" data-dismiss="alert">&times;</button>'+
+	            '<strong><i class="glyphicon glyphicon-exclamation-sign"></i></strong> '+ response.messages +
+	          '</div>');
+
+						// remove the mesages
+	          $(".alert-warning").delay(500).show(10, function() {
+							$(this).delay(3000).hide(10, function() {
+								$(this).remove();
+							});
+						}); // /.alert	          	
+					}
+				} // /success function
 			});	// /ajax
 
 		} // /else
