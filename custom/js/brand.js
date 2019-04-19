@@ -162,6 +162,28 @@ function returnBrands(){
 							}); // /.alert
 						}  // if
 
+						else{
+							// reload the manage member table
+							manageBrandTable.ajax.reload(null, false);
+
+							$("#returnBrandForm")[0].reset();
+							// remove the error text
+							$(".text-danger").remove();
+							// remove the form error
+							$('.form-group').removeClass('has-error').removeClass('has-success');
+
+							$('#return-brand-messages').html('<div class="alert alert-warning">'+
+								'<button type="button" class="close" data-dismiss="alert">&times;</button>'+
+								'<strong><i class="glyphicon glyphicon-warning-sign"></i></strong> '+ response.messages +
+								'</div>');
+
+							$(".alert-success").delay(500).show(10, function() {
+								$(this).delay(3000).hide(10, function() {
+									$(this).remove();
+								});
+							}); // /.alert
+						}
+
 					} // /success
 				}); // /ajax
 			} // if
@@ -216,8 +238,12 @@ function issueBrands(brandId = null) {
 					dataType: 'json',
 					success:function(response) {
 
+						console.log(response);
+
 						if(response.success == true) {
 							// reload the manage member table
+
+							$('#issueBrandModel').modal('hide');
 							manageBrandTable.ajax.reload(null, false);
 
 							$("#editBrandForm")[0].reset();
@@ -226,7 +252,7 @@ function issueBrands(brandId = null) {
 							// remove the form error
 							$('.form-group').removeClass('has-error').removeClass('has-success');
 
-							$('#edit-brand-messages').html('<div class="alert alert-success">'+
+							$('.issue-messages').html('<div class="alert alert-success">'+
 								'<button type="button" class="close" data-dismiss="alert">&times;</button>'+
 								'<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> '+ response.messages +
 								'</div>');
@@ -236,8 +262,28 @@ function issueBrands(brandId = null) {
 									$(this).remove();
 								});
 							}); // /.alert
-						}
+						} else {
 
+							$('#issueBrandModel').modal('hide');
+							manageBrandTable.ajax.reload(null, false);
+
+							$("#editBrandForm")[0].reset();
+							// remove the error text
+							$(".text-danger").remove();
+							// remove the form error
+							$('.form-group').removeClass('has-error').removeClass('has-success');
+
+							$('.issue-messages').html('<div class="alert alert-warning">'+
+								'<button type="button" class="close" data-dismiss="alert">&times;</button>'+
+								'<strong><i class="glyphicon glyphicon-warning-sign"></i></strong> '+ response.messages +
+								'</div>');
+
+							$(".alert-success").delay(500).show(10, function() {
+								$(this).delay(3000).hide(10, function() {
+									$(this).remove();
+								});
+							}); // /.alert
+						}
 					}// /success
 				});	 // /ajax
 			} // /if
@@ -307,8 +353,12 @@ function editBrands(brandId = null) {
 							dataType: 'json',
 							success:function(response) {
 
+								console.log(response);
+
 								if(response.success == true) {
 									// reload the manage member table
+
+									$('#editBrandModel').modal('hide');
 									manageBrandTable.ajax.reload(null, false);
 
 									$("#editBrandForm")[0].reset();
@@ -317,9 +367,29 @@ function editBrands(brandId = null) {
 									// remove the form error
 									$('.form-group').removeClass('has-error').removeClass('has-success');
 
-									$('#edit-brand-messages').html('<div class="alert alert-success">'+
+									$('.edit-messages').html('<div class="alert alert-success">'+
 										'<button type="button" class="close" data-dismiss="alert">&times;</button>'+
 										'<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> '+ response.messages +
+										'</div>');
+
+									$(".alert-success").delay(500).show(10, function() {
+										$(this).delay(3000).hide(10, function() {
+											$(this).remove();
+										});
+									}); // /.alert
+								} else {
+									$('#editBrandModel').modal('hide');
+									manageBrandTable.ajax.reload(null, false);
+
+									$("#editBrandForm")[0].reset();
+									// remove the error text
+									$(".text-danger").remove();
+									// remove the form error
+									$('.form-group').removeClass('has-error').removeClass('has-success');
+
+									$('.edit-messages').html('<div class="alert alert-warning">'+
+										'<button type="button" class="close" data-dismiss="alert">&times;</button>'+
+										'<strong><i class="glyphicon glyphicon-warning-sign"></i></strong> '+ response.messages +
 										'</div>');
 
 									$(".alert-success").delay(500).show(10, function() {
@@ -364,7 +434,7 @@ function removeBrands(brandId = null) {
 							if(response.success == true) {
 
 								// hide the remove modal
-								$('#removeMemberModal').modal('hide');
+								$('#removeMemberModel').modal('hide');
 
 								// reload the brand table
 								manageBrandTable.ajax.reload(null, false);
@@ -374,13 +444,28 @@ function removeBrands(brandId = null) {
 			            '<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> '+ response.messages +
 			          '</div>');
 
-			  	  			$(".alert-success").delay(500).show(10, function() {
-										$(this).delay(3000).hide(10, function() {
-											$(this).remove();
-										});
-									}); // /.alert
+								$(".alert-success").delay(100).show(5, function() {
+									$(this).delay(1000).hide(5, function() {
+										$(this).remove();
+									});
+								}); // /.alert
 							} else {
+								// hide the remove modal
+								$('#removeMemberModel').modal('hide');
 
+								// reload the brand table
+								manageBrandTable.ajax.reload(null, false);
+
+								$('.remove-messages').html('<div class="alert alert-warning">'+
+									'<button type="button" class="close" data-dismiss="alert">&times;</button>'+
+									'<strong><i class="glyphicon glyphicon-warning-sign"></i></strong> '+ response.messages +
+									'</div>');
+
+								$(".alert-success").delay(500).show(10, function() {
+									$(this).delay(3000).hide(10, function() {
+										$(this).remove();
+									});
+								}); // /.alert
 							} // /else
 						} // /response messages
 					}); // /ajax function to remove the brand

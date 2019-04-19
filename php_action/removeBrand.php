@@ -16,7 +16,7 @@ if($brandId) {
 	$valid['messages'] = "Successfully Removed";		
  } else {
  	$valid['success'] = false;
- 	$valid['messages'] = $sql;
+ 	$valid['messages'] = "Error while removing the Item (Maybe Constraint error)";
  }
  
  $hostel->close();

@@ -15,6 +15,8 @@
                 <div class="panel-body">
 
                     <div class="remove-messages"></div>
+                    <div class="issue-messages"></div>
+                    <div class="edit-messages"></div>
 
                     <?php if($_SESSION['userId']<=2) { ?>
                         <div class="div-action pull pull-right" style="padding-bottom:20px;">
@@ -148,7 +150,7 @@
 
                     <div class="modal-footer returnBrandFooter">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-primary" id="createBrandBtn" data-loading-text="Loading..." autocomplete="off">Return Item</button>
+                        <button type="submit" class="btn btn-primary" id="returnBrandBtn" data-loading-text="Loading..." autocomplete="off">Return Item</button>
                     </div>
 
                 </form>
@@ -169,8 +171,6 @@
                         <h4 class="modal-title"><i class="fa fa-edit"></i> Issue Item</h4>
                     </div>
                     <div class="modal-body">
-
-                        <div id="issue-brand-messages"></div>
 
                         <div class="issue-brand-result">
                             <div class="form-group">
@@ -206,8 +206,6 @@
                         <h4 class="modal-title"><i class="fa fa-edit"></i> Edit Item</h4>
                     </div>
                     <div class="modal-body">
-
-                        <div id="edit-brand-messages"></div>
 
                         <div class="edit-brand-result">
                             <div class="form-group">
@@ -246,9 +244,9 @@
 <?php } ?>
 
 
-    <!-- remove brand -->
-<?php  if(isset($_SESSION['userId']) && $_SESSION['userId']==1) { ?>
-    <div class="modal fade" tabindex="-1" role="dialog" id="removeMemberModal">
+<!-- remove brand -->
+     <?php  if(isset($_SESSION['userId']) && $_SESSION['userId']==1) { ?>
+    <div class="modal fade" tabindex="-1" role="dialog" id="removeMemberModel">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -265,7 +263,7 @@
             </div>
         </div>
     </div>
-<?php } ?>
+     <?php } ?>
 
 
 <?php $_SESSION['hostel']="THN1" ?>

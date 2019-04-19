@@ -39,7 +39,7 @@ if($_POST) {
         $valid['messages'] = "Successfully Changed";
     } else {
         $valid['success'] = false;
-        $valid['messages'] = "Error while issuing the Item";
+        $valid['messages'] = "Error while returning Item";
     }
 
     $hostel->close();
