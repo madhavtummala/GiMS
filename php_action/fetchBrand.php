@@ -18,9 +18,12 @@ if($result->num_rows > 0) {
  	if($row[2] == 1) {
  		// activate member
  		$activeBrands = "<label class='label label-success'>Available</label>";
- 	} else {
+ 	} else if($row[2] == 0) {
  		// deactivate member
  		$activeBrands = "<label class='label label-danger'>Not Available</label>";
+ 	}
+ 	else{
+		$activeBrands = "<label class='label label-danger'>Lost</label>";
  	}
 
  	$button = '
