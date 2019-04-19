@@ -68,12 +68,41 @@ else if($_SESSION['userId']==2)
 }
 else
 {
-    $sql = "SELECT * FROM student";
-    $query = $connect->query($sql);
-    $fine = $query->num_rows;
+    $sql = "SELECT * FROM hostel";
+    $output = $connect->query($sql);
+    $fine = $output->num_rows;
+
+    $query = array();
+
+    while($row = $output->fetch_array()) {
+
+        $test = new mysqli($localhost, $username, $password, $row[1]);
+        // check connection
+        if ($hostel->connect_error) {
+            die("Connection Failed : " . $hostel->connect_error);
+        } else {
+//               echo "Successfully connected " . $row[1];
+        }
+
+        $sql = "SELECT * FROM student WHERE hostelname='$row[0]'";
+        $stud = $connect->query($sql);
+
+        $sql = "SELECT * FROM equipment";
+        $equip = $test->query($sql);
+
+        $query[] = array(
+                $row[1],
+            $stud->num_rows,
+            $equip->num_rows
+        );
+
+//        echo json_encode($query);
+//        echo "\n\n\n\n\n\n";
+    }
 }
 
-#$hostel->close();
+$hostel->close();
+$connect->close();
 ?>
 
 <!-- fullCalendar 2.2.5-->
@@ -142,8 +171,11 @@ else
 		  </div>
 
 		  <div class="cardContainer">
-              <?php  if(isset($_SESSION['userId']) && $_SESSION['userId']<=2) { ?>
+              <?php  if(isset($_SESSION['userId']) && $_SESSION['userId']==2) { ?>
 		        <p> Total Students</p>
+              <?php } ?>
+              <?php  if(isset($_SESSION['userId']) && $_SESSION['userId']==1) { ?>
+                  <p> Total Hostels</p>
               <?php } ?>
               <?php  if(isset($_SESSION['userId']) && $_SESSION['userId']>2) { ?>
                   <p> Total Fine</p>
@@ -156,25 +188,23 @@ else
 	<?php  if(isset($_SESSION['userId']) && $_SESSION['userId']==1) { ?>
 	<div class="col-md-8">
 		<div class="panel panel-default">
-			<div class="panel-heading"> <i class="glyphicon glyphicon-calendar"></i> All Students</div>
+			<div class="panel-heading"> <i class="glyphicon glyphicon-calendar"></i> All Hostels</div>
 			<div class="panel-body">
 				<table class="table" id="productTable">
 			  	<thead>
 			  		<tr>
-			  			<th style="width:20%;">Roll No</th>
-                        <th style="width:20%;">Name</th>
 			  			<th style="width:20%;">Hostel</th>
+                        <th style="width:20%;">Students</th>
+			  			<th style="width:20%;">Equipment</th>
 			  		</tr>
 			  	</thead>
 			  	<tbody>
-					<?php while ($issued = $query->fetch_assoc()) { ?>
+					<?php for($x = 0;$x<$fine;$x++) { ?>
 						<tr>
-							<td><?php echo $issued['rollno']?></td>
-                            <td><?php echo $issued['name']?></td>
-							<td><?php echo $issued['hostelname']?></td>
-
+							<td><?php echo $query[$x][0]?></td>
+                            <td><?php echo $query[$x][1]?></td>
+							<td><?php echo $query[$x][2]?> Items</td>
 						</tr>
-
 					<?php } ?>
 				</tbody>
 				</table>
