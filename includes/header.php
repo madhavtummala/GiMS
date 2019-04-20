@@ -162,7 +162,7 @@
               <a href="user.php"> 
                 <i class="glyphicon glyphicon-wrench">
                   
-                </i> Add User
+                </i> Manage Students
               </a>
             </li>
 
