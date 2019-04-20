@@ -25,10 +25,9 @@ if($_POST) {
 		$result = $connect->query($sql);
 		if($result->num_rows == 1) {
 			// exists
-			$mainSql = "SELECT * FROM centraladmin WHERE loginid = '$loginid' AND password = '$password'";
-			$mainResult = $connect->query($mainSql);
-			if($mainResult->num_rows == 1) {
-				$value = $mainResult->fetch_assoc();
+			$value = $result->fetch_assoc();
+			if(password_verify($password, $value['password'])) {
+				
 				$login_id = $value['loginid'];
 				// set session
 				$_SESSION['userId'] = 1;
