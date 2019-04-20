@@ -32,10 +32,8 @@ if($_POST) {
 
 		if($result->num_rows == 1) {
 			// exists
-			$mainSql = "SELECT * FROM student WHERE rollno = '$rollno'";
-			$mainResult = $connect->query($mainSql);
 			
-			$value = $mainResult->fetch_assoc();
+			$value = $result->fetch_assoc();
 			if(password_verify($password, $value['password'])) {
 				$user_id = $value['rollno'];
 
