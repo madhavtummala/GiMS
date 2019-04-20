@@ -1,12 +1,5 @@
 <?php require_once 'includes/header.php'; ?>
 
-<?php 
-$user_id = $_SESSION['userId'];
-$sql = "SELECT * FROM student WHERE rollno = '$user_id'";
-$query = $connect->query($sql);
-$result = $query->fetch_assoc();
-?>
-
 <div class="row">
 	<div class="col-md-12">
 		<ol class="breadcrumb">
@@ -17,13 +10,12 @@ $result = $query->fetch_assoc();
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<div class="page-heading"> <i class="glyphicon glyphicon-wrench"></i> Profile Settings</div>
-			</div> <!-- /panel-heading -->
+			</div>
 
 			<div class="panel-body">
-
 				
-
-				<!--<form action="php_action/changeUsername.php" method="post" class="form-horizontal" id="changeUsernameForm">
+				<?php if($_SESSION['userId']<=2) { ?>
+				<form action="php_action/changeUsername.php" method="post" class="form-horizontal" id="changeUsernameForm">
 					<fieldset>
 						<legend>Change Username</legend>
 
@@ -32,18 +24,19 @@ $result = $query->fetch_assoc();
 						<div class="form-group">
 					    <label for="username" class="col-sm-2 control-label">Username</label>
 					    <div class="col-sm-10">
-					      <input type="text" class="form-control" id="username" name="username" placeholder="Usename" value="<?php echo $result['username']; ?>"/>
+					      <input type="text" class="form-control" id="username" name="username" placeholder="Username" value="<?php echo $_SESSION['loginId']; ?>"/>
 					    </div>
 					  </div>
 
 					  <div class="form-group">
 					    <div class="col-sm-offset-2 col-sm-10">
-					    	<input type="hidden" name="user_id" id="user_id" value="<?php echo $result['user_id'] ?>" /> 
+					    	<input type="hidden" name="user_id" id="user_id" value="<?php echo $_SESSION['loginId']; ?>" /> 
 					      <button type="submit" class="btn btn-success" data-loading-text="Loading..." id="changeUsernameBtn"> <i class="glyphicon glyphicon-ok-sign"></i> Save Changes </button>
 					    </div>
 					  </div>
 					</fieldset>
-				</form>-->
+				</form>
+				<?php } ?>
 
 				<form action="php_action/changePassword.php" method="post" class="form-horizontal" id="changePasswordForm">
 					<fieldset>
@@ -74,21 +67,18 @@ $result = $query->fetch_assoc();
 
 					  <div class="form-group">
 					    <div class="col-sm-offset-2 col-sm-10">
-					    	<input type="hidden" name="user_id" id="user_id" value="<?php echo $result['rollno'] ?>" /> 
 					      <button type="submit" class="btn btn-primary"> <i class="glyphicon glyphicon-ok-sign"></i> Save Changes </button>
-					      
 					    </div>
 					  </div>
-
-
+					  
 					</fieldset>
 				</form>
 
-			</div> <!-- /panel-body -->		
+			</div>
 
-		</div> <!-- /panel -->		
-	</div> <!-- /col-md-12 -->	
-</div> <!-- /row-->
+		</div>	
+	</div>
+</div>
 
 
 <script src="custom/js/setting.js"></script>

@@ -26,19 +26,16 @@ if($_POST) {
 		if($result->num_rows == 1) {
 			// exists
 			$value = $result->fetch_assoc();
-			if($password == $value['password']) {
-				
-				$login_id = $value['loginid'];
-				// set session
+			if(password_verify($password,$value['password'])) {
 				$_SESSION['userId'] = 1;
+				$_SESSION['loginId'] = $value['loginid'];
 				header('location: dashboard.php');	
 			} else{
-				
 				$errors[] = "Incorrect loginid/password combination";
-			} // /else
+			}
 		} else {		
 			$errors[] = "Invalid Login-id!";
-		} // /else
+		}
 	} 
 	
 }

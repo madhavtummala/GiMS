@@ -34,7 +34,7 @@ if($_POST) {
 			// exists
 			
 			$value = $result->fetch_assoc();
-			if($password == $value['password']) {
+			if(password_verify($password,$value['password'])) {
 				$user_id = $value['rollno'];
 
 				// set session

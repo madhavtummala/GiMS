@@ -60,13 +60,13 @@ insert into hostel values
 ("THN1", "THN1"),
 ("THN2", "THN2");
 
-insert into centraladmin values('admin1', 'admin');
+insert into centraladmin values('admin1', '$2y$10$lajkwiXNugj0eKHZdGLeiun8bsQ/JyejepwbDnIJOZWJxB3.sGFYm');
 
-insert into hosteladmin values('thn1', 'thn', "THN1");
-insert into hosteladmin values('thn2', 'thn', "THN2");
+insert into hosteladmin values('thn1', '$2y$10$0cLXibHZh6mdhNc9a5cs1.vW6rH/7T3SuF2HZAad9qLZ32EsrnINi', "THN1");
+insert into hosteladmin values('thn2', '$2y$10$0cLXibHZh6mdhNc9a5cs1.vW6rH/7T3SuF2HZAad9qLZ32EsrnINi', "THN2");
 
-insert into student values("16cs01041", "Tummala Madhav", "tm15@iitbbs.ac.in", "madhav1999", "THN2");
-insert into student values("16cs01042", "Saksham Arneja", "sa26@iitbbs.ac.in", "sak@1234", "THN2");
+insert into student values("16cs01041", "Tummala Madhav", "tm15@iitbbs.ac.in", "$2y$10$yW9XMzeQuBlRaL7IwTjbYeWZUrgqgjHEcxkniaXswkzYKKAJDqxZO", "THN2");
+insert into student values("16cs01042", "Saksham Arneja", "sa26@iitbbs.ac.in", "$2y$10$NgRzVrrE2JccpkE1Cz9NJuYeVukKtHrBpKFufkKW4VrOUuVoF76jO", "THN2");
 
 insert into student values
 ("43NP98555","Oren Ballard","bibendum.ullamcorper@iitbbs.ac.in","EYJ21VDJ6KU","SHR"),

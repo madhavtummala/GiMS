@@ -156,7 +156,7 @@
               </a>
             </li>
 
-            <?php if(isset($_SESSION['userId']) && $_SESSION['userId']==1) { ?>
+            <?php if($_SESSION['userId']==1) { ?>
 
             <li id="topNavUser">
               <a href="user.php"> 

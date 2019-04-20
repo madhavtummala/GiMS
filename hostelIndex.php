@@ -31,15 +31,13 @@ if($_POST) {
 		$result = $connect->query($sql);
 
 		if($result->num_rows == 1) {
-			// exists
 			$value = $result->fetch_assoc();
 			
-			if($password == $value['password']) {
-				$login_id = $value['loginid'];
+			if(password_verify($password,$value['password'])) {
 				
-				// set session
 				$_SESSION['userId'] = 2;
 				$_SESSION['hostel'] = $value['hostelname'];
+				$_SESSION['loginId'] = $value['loginid'];
 				header('location: dashboard.php');	
 			} else{
 				

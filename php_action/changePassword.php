@@ -9,9 +9,19 @@ if($_POST) {
 	$currentPassword = $_POST['password'];
 	$newPassword = $_POST['npassword'];
 	$conformPassword = $_POST['cpassword'];
-	$userId = $_POST['user_id'];
 
-	$sql ="SELECT * FROM student WHERE rollno = '$userId'";
+	if($_SESSION['userId'] > 2)
+		$userId = $_SESSION['userId'];
+	else
+		$userId = $_SESSION['loginId'];
+
+	if($_SESSION['userId'] > 2)
+		$sql ="SELECT * FROM student WHERE rollno = '$userId'";
+	else if($_SESSION['userId'] == 2)
+		$sql ="SELECT * FROM hosteladmin WHERE loginid = '$userId'";
+	else
+		$sql ="SELECT * FROM centraladmin WHERE loginid = '$userId'";
+
 	$query = $connect->query($sql);
 	$result = $query->fetch_assoc();
 
@@ -19,8 +29,15 @@ if($_POST) {
 
 		if($newPassword == $conformPassword) {
 			$np = password_hash($newPassword, PASSWORD_DEFAULT);
-			$updateSql = "UPDATE student SET password = '$np' WHERE rollno = '$userId'";
-			if($connect->query($updateSql) === TRUE) {
+
+			if($_SESSION['userId'] > 2)
+				$updateSql = "UPDATE student SET password = '$np' WHERE rollno = '$userId'";
+			else if($_SESSION['userId'] == 2)
+				$updateSql = "UPDATE hosteladmin SET password = '$np' WHERE loginid = '$userId'";
+			else
+				$updateSql = "UPDATE centraladmin SET password = '$np' WHERE loginid = '$userId'";
+
+			if($connect->query($updateSql) === true) {
 				$valid['success'] = true;
 				$valid['messages'] = "Successfully Updated";
 			} else {
@@ -39,7 +56,6 @@ if($_POST) {
 	}
 
 	echo json_encode($valid);
-
 }
 
 ?>
