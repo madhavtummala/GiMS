@@ -4,7 +4,7 @@
 	<div class="col-md-12">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<i class="glyphicon glyphicon-check"></i>	Request New Item
+				<i class="glyphicon glyphicon-heart"></i>	Request New Item
 			</div>
 			<!-- /panel-heading -->
 			<div class="panel-body">
@@ -38,6 +38,7 @@
 				  </div>
 				  <div class="form-group">
 				    <div class="col-sm-offset-2 col-sm-10">
+				    	<input type="hidden" name="user_id" id="user_id" value="<?php echo $result['rollno'] ?>" />
 				      <button type="submit" class="btn btn-success" id="submitRequestBtn"> <i class="glyphicon glyphicon-ok-sign"></i> Submit Request</button>
 				    </div>
 				  </div>

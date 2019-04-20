@@ -75,8 +75,12 @@
               <li id="navSHR"><a href="shr.php"><i class="glyphicon glyphicon-th-list"></i>  SHR</a></li>
           <?php } ?>
 
+	<?php if($_SESSION['userId']==2) { ?>
+              <li id="navseerequest"><a href="seeRequests.php"><i class="glyphicon glyphicon-heart"></i>  Students' Requests</a></li>
+          <?php } ?>
+
 		<?php  if($_SESSION['userId']>2) { ?>
-        <li id="navRequest"><a href="request.php"> <i class="glyphicon glyphicon-check"></i> Request New Item </a></li>
+        <li id="navRequest"><a href="request.php"> <i class="glyphicon glyphicon-heart"></i> Request New Item </a></li>
 		<?php } ?>
 
             <li class="dropdown" id="navSetting">
