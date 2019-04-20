@@ -33,7 +33,7 @@ create table student
   rollno varchar(12) not null,
   name varchar(50) not null,
   emailid varchar(50) not null,
-  password varchar(50) not null,
+  password varchar(256) not null,
   hostelname varchar(50) not null,
   constraint pk_student primary key (rollno),
   constraint fk_student_hostelname foreign key (hostelname) references hostel(hostelname),
@@ -42,13 +42,13 @@ create table student
 
 create table centraladmin (
   loginid varchar(50) NOT NULL,
-  password varchar(50) NOT NULL,
+  password varchar(256) NOT NULL,
   constraint pk_centraladmin primary key (loginid)
 );
   
 create table hosteladmin (
   loginid varchar(50) NOT NULL,
-  password varchar(50) NOT NULL,
+  password varchar(256) NOT NULL,
   hostelname varchar(50) NOT NULL,
   constraint pk_centraladmin primary key (loginid),
   constraint fk_hosteladmin_hostelname foreign key (hostelname) references hostel(hostelname)
