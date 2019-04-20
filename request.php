@@ -6,7 +6,6 @@
 			<div class="panel-heading">
 				<i class="glyphicon glyphicon-heart"></i>	Request New Item
 			</div>
-			<!-- /panel-heading -->
 			<div class="panel-body">
 				
 				<div class="changePasswordMessages"></div>
@@ -45,12 +44,9 @@
 				</form>
 
 			</div>
-			<!-- /panel-body -->
 		</div>
 	</div>
-	<!-- /col-dm-12 -->
 </div>
-<!-- /row -->
 
 <script src="custom/js/request.js"></script>
 

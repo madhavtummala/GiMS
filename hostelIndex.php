@@ -34,7 +34,7 @@ if($_POST) {
 			// exists
 			$value = $result->fetch_assoc();
 			
-			if(password_verify($password, $value['password'])) {
+			if($password == $value['password']) {
 				$login_id = $value['loginid'];
 				
 				// set session

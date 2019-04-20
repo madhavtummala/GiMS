@@ -80,16 +80,16 @@ $(document).ready(function() {
 						$('.text-danger').remove();
 						$('.form-group').removeClass('has-error').removeClass('has-success');
 
-		  	  			$('#add-brand-messages').html('<div class="alert alert-success">'+
-				            '<button type="button" class="close" data-dismiss="alert">&times;</button>'+
-				            '<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> '+ response.messages +
-				          '</div>');
+		  	  			$('#add-brand-messages').html('<div class="alert alert-warning">'+
+							'<button type="button" class="close" data-dismiss="alert">&times;</button>'+
+							'<strong><i class="glyphicon glyphicon-warning-sign"></i></strong> '+ response.messages +
+							'</div>');
 
-		  	  			$('.alert-success').delay(500).show(10, function() {
+						$('.alert-warning').delay(500).show(10, function() {
 							$(this).delay(3000).hide(10, function() {
 								$(this).remove();
 							});
-						});						
+						});					
 					}
 
 				}
@@ -163,12 +163,12 @@ function returnBrands(){
 							$('.text-danger').remove();
 							$('.form-group').removeClass('has-error').removeClass('has-success');
 
-							$('#return-brand-messages').html('<div class="alert alert-success">'+
-								'<button type="button" class="close" data-dismiss="alert">&times;</button>'+
-								'<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> '+ response.messages +
-								'</div>');
+							$('#return-brand-messages').html('<div class="alert alert-warning">'+
+							'<button type="button" class="close" data-dismiss="alert">&times;</button>'+
+							'<strong><i class="glyphicon glyphicon-warning-sign"></i></strong> '+ response.messages +
+							'</div>');
 
-							$('.alert-success').delay(500).show(10, function() {
+							$('.alert-warning').delay(500).show(10, function() {
 								$(this).delay(3000).hide(10, function() {
 									$(this).remove();
 								});
@@ -249,12 +249,12 @@ function issueBrands(brandId = null) {
 
 							$('#issueBrandModel').modal('hide');
 
-							$('.issue-messages').html('<div class="alert alert-success">'+
-								'<button type="button" class="close" data-dismiss="alert">&times;</button>'+
-								'<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> '+ response.messages +
-								'</div>');
+							$('.issue-messages').html('<div class="alert alert-warning">'+
+							'<button type="button" class="close" data-dismiss="alert">&times;</button>'+
+							'<strong><i class="glyphicon glyphicon-warning-sign"></i></strong> '+ response.messages +
+							'</div>');
 
-							$('.alert-success').delay(500).show(10, function() {
+							$('.alert-warning').delay(500).show(10, function() {
 								$(this).delay(3000).hide(10, function() {
 									$(this).remove();
 								});
@@ -336,12 +336,12 @@ function editBrands(brandId = null) {
 
 							$('#editBrandModel').modal('hide');
 
-							$('.edit-messages').html('<div class="alert alert-success">'+
-								'<button type="button" class="close" data-dismiss="alert">&times;</button>'+
-								'<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> '+ response.messages +
-								'</div>');
+							$('.edit-messages').html('<div class="alert alert-warning">'+
+							'<button type="button" class="close" data-dismiss="alert">&times;</button>'+
+							'<strong><i class="glyphicon glyphicon-warning-sign"></i></strong> '+ response.messages +
+							'</div>');
 
-							$('.alert-success').delay(500).show(10, function() {
+							$('.alert-warning').delay(500).show(10, function() {
 								$(this).delay(3000).hide(10, function() {
 									$(this).remove();
 								});
@@ -404,7 +404,7 @@ function removeBrands(brandId = null) {
 							'<strong><i class="glyphicon glyphicon-warning-sign"></i></strong> '+ response.messages +
 							'</div>');
 
-						$('.alert-success').delay(500).show(10, function() {
+						$('.alert-warning').delay(500).show(10, function() {
 							$(this).delay(3000).hide(10, function() {
 								$(this).remove();
 							});

@@ -26,7 +26,7 @@ if($_POST) {
 		if($result->num_rows == 1) {
 			// exists
 			$value = $result->fetch_assoc();
-			if(password_verify($password, $value['password'])) {
+			if($password == $value['password']) {
 				
 				$login_id = $value['loginid'];
 				// set session

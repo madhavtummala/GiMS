@@ -131,7 +131,7 @@ create table requests
   purchaselinks varchar(1000),
   reason varchar(1000) not null,
   ts timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  constraint pk_requests primary key (equipmentname, rollno)
+  constraint pk_requests primary key (equipmentname, rollno, ts)
 );
 
 insert into equipment values
@@ -236,7 +236,7 @@ create table requests
   purchaselinks varchar(1000),
   reason varchar(1000) not null,
   ts timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  constraint pk_requests primary key (equipmentname, rollno)
+  constraint pk_requests primary key (equipmentname, rollno, ts)
 );
 
 insert into equipment values
@@ -341,7 +341,7 @@ create table requests
   purchaselinks varchar(1000),
   reason varchar(1000) not null,
   ts timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  constraint pk_requests primary key (equipmentname, rollno)
+  constraint pk_requests primary key (equipmentname, rollno, ts)
 );
 
 insert into equipment values
@@ -446,7 +446,7 @@ create table requests
   purchaselinks varchar(1000),
   reason varchar(1000) not null,
   ts timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  constraint pk_requests primary key (equipmentname, rollno)
+  constraint pk_requests primary key (equipmentname, rollno, ts)
 );
 
 insert into equipment values
