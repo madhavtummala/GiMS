@@ -13,7 +13,7 @@ $query = $hostel->query($sql);
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <div class="page-heading"> <i class="glyphicon glyphicon-heart"></i> Students' Requests</div>
+                    <div class="page-heading"> <i class="glyphicon glyphicon-inbox"></i> Students' Requests</div>
                 </div>
                 <div class="panel-body">
 

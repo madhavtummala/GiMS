@@ -4,7 +4,7 @@
 	<div class="col-md-12">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<i class="glyphicon glyphicon-heart"></i>	Request New Item
+				<i class="glyphicon glyphicon-shopping-cart"></i>	Request New Item
 			</div>
 			<div class="panel-body">
 				

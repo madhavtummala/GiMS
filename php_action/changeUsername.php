@@ -6,10 +6,14 @@ if($_POST) {
 
 	$valid['success'] = array('success' => false, 'messages' => array());
 
-	$username = $_POST['username'];
-	$userId = $_POST['user_id'];
+	$newlogin = $_POST['username'];
+	$loginid = $_SESSION['loginId'];
 
-	$sql = "UPDATE users SET username = '$username' WHERE user_id = '$userId'";
+	if($_SESSION['userId']==2)
+		$sql = "UPDATE hosteladmin SET loginid = '$newlogin' WHERE loginid = '$loginid'";
+	else
+		$sql = "UPDATE centraladmin SET loginid = '$newlogin' WHERE loginid = '$loginid'";
+
 	if($connect->query($sql) === TRUE) {
 		$valid['success'] = true;
 		$valid['messages'] = "Successfully Update";	
@@ -21,7 +25,6 @@ if($_POST) {
 	$connect->close();
 
 	echo json_encode($valid);
-
 }
 
 ?>

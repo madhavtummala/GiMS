@@ -116,7 +116,7 @@
 
         <li id="navseerequest">
           <a href="seeRequests.php">
-            <i class="glyphicon glyphicon-tags">
+            <i class="glyphicon glyphicon-inbox">
               
             </i>  Students' Requests
           </a>
@@ -128,7 +128,7 @@
 
         <li id="navRequest">
           <a href="request.php"> 
-            <i class="glyphicon glyphicon-tag">
+            <i class="glyphicon glyphicon-shopping-cart">
               
             </i> Request New Item 
           </a>

@@ -42,10 +42,10 @@ if($_POST) {
 			} else{
 				
 				$errors[] = "Incorrect loginid/password combination";
-			} // /else
+			}
 		} else {		
 			$errors[] = "Invalid Login-id!";
-		} // /else
+		}
 	} 
 	
 }

@@ -24,13 +24,12 @@
 						<div class="form-group">
 					    <label for="username" class="col-sm-2 control-label">Username</label>
 					    <div class="col-sm-10">
-					      <input type="text" class="form-control" id="username" name="username" placeholder="Username" value="<?php echo $_SESSION['loginId']; ?>"/>
+					      <input type="text" class="form-control" id="username" name="username" placeholder="Old Username: <?php echo $_SESSION['loginId']; ?>"/>
 					    </div>
 					  </div>
 
 					  <div class="form-group">
 					    <div class="col-sm-offset-2 col-sm-10">
-					    	<input type="hidden" name="user_id" id="user_id" value="<?php echo $_SESSION['loginId']; ?>" /> 
 					      <button type="submit" class="btn btn-success" data-loading-text="Loading..." id="changeUsernameBtn"> <i class="glyphicon glyphicon-ok-sign"></i> Save Changes </button>
 					    </div>
 					  </div>
