@@ -1,58 +1,48 @@
 var manageBrandTable;
 
 $(document).ready(function() {
-	// top bar active
-	// $('#navBrand').addClass('active');
 	
-	// manage brand table
 	manageBrandTable = $("#manageBrandTable").DataTable({
 		'ajax': 'php_action/fetchBrand.php',
 		'order': []
 	});
 
-	// submit brand form function
-	$("#submitBrandForm").unbind('submit').bind('submit', function()
+	$('#submitBrandForm').unbind('submit').bind('submit', function()
 	{
-		// remove the error text
-		$(".text-danger").remove();
-		// remove the form error
+		$('.text-danger').remove();
 		$('.form-group').removeClass('has-error').removeClass('has-success');
 
-		$('.add-brand-result').addClass('div-hide');
-		// modal footer
-		$('.addBrandFooter').addClass('div-hide');
-
-		var name = $("#addName").val();
-		var invoiceno = $("#addInvoiceno").val();
-		var cost =  $("#addCost").val();
+		var name = $('#addName').val();
+		var invoiceno = $('#addInvoiceno').val();
+		var cost =  $('#addCost').val();
 
 		if(name == "") {
-			$("#addName").after('<p class="text-danger">Name field is required</p>');
-			$('#addName').closest('.form-group').addClass('has-error');
+			$('#addName').after('<p class="text-danger">Name field is required</p>');
+			$('#addName').closest('#form-group').addClass('has-error');
 		} else {
-			$("#addName").find('.text-danger').remove();
-			$("#addName").closest('.form-group').addClass('has-success');
+			$('#addName').find('#text-danger').remove();
+			$('#addName').closest('#form-group').addClass('has-success');
 		}
 		if(cost == "") {
-			$("#addCost").after('<p class="text-danger">Cost field is required</p>');
-			$("#addCost").closest('.form-group').addClass('has-error');
+			$('#addCost').after('<p class="text-danger">Cost field is required</p>');
+			$('#addCost').closest('#form-group').addClass('has-error');
 		} else {
-			$("#addCost").find('.text-danger').remove();
-			$("#addCost").closest('.form-group').addClass('has-success');
+			$('#addCost').find('#text-danger').remove();
+			$('#addCost').closest('#form-group').addClass('has-success');
 		}
 
 		if(invoiceno == "") {
 			$("#addInvoiceno").after('<p class="text-danger">Invoice No field is required</p>');
-			$('#addInvoiceno').closest('.form-group').addClass('has-error');
+			$('#addInvoiceno').closest('#form-group').addClass('has-error');
 		} else {
-			$("#addInvoiceno").find('.text-danger').remove();
-			$("#addInvoiceno").closest('.form-group').addClass('has-success');
+			$("#addInvoiceno").find('#text-danger').remove();
+			$("#addInvoiceno").closest('#form-group').addClass('has-success');
 		}
 
 		if(name && invoiceno && cost) {
 			var form = $(this);
-			// button loading
-			$("#createBrandBtn").button('loading');
+
+			$('#createBrandBtn').button('loading');
 
 			$.ajax({
 				url : 'php_action/createBrand.php',
@@ -63,34 +53,49 @@ $(document).ready(function() {
 
 					console.log(response);
 
-					$("#createBrandBtn").button('reset');
+					$('#createBrandBtn').button('reset');
 
 					if(response.success == true) {
-						// reload the manage member table
+
 						manageBrandTable.ajax.reload(null, false);
 
-						$("#submitBrandForm")[0].reset();
-						// remove the error text
-						$(".text-danger").remove();
-						// remove the form error
+						$('#submitBrandForm')[0].reset();
+						$('.text-danger').remove();
 						$('.form-group').removeClass('has-error').removeClass('has-success');
 
-  	  			$('#add-brand-messages').html('<div class="alert alert-success">'+
-            '<button type="button" class="close" data-dismiss="alert">&times;</button>'+
-            '<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> '+ response.messages +
-          '</div>');
+		  	  			$('#add-brand-messages').html('<div class="alert alert-success">'+
+				            '<button type="button" class="close" data-dismiss="alert">&times;</button>'+
+				            '<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> '+ response.messages +
+				          '</div>');
 
-  	  			$(".alert-success").delay(500).show(10, function() {
+		  	  			$('.alert-success').delay(500).show(10, function() {
 							$(this).delay(3000).hide(10, function() {
 								$(this).remove();
 							});
-						}); // /.alert
-					}  // if
+						});	
+					}
+					else{
 
-				} // /success
-			}); // /ajax
+						$('#submitBrandForm')[0].reset();
+						$('.text-danger').remove();
+						$('.form-group').removeClass('has-error').removeClass('has-success');
 
-		} // if
+		  	  			$('#add-brand-messages').html('<div class="alert alert-success">'+
+				            '<button type="button" class="close" data-dismiss="alert">&times;</button>'+
+				            '<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> '+ response.messages +
+				          '</div>');
+
+		  	  			$('.alert-success').delay(500).show(10, function() {
+							$(this).delay(3000).hide(10, function() {
+								$(this).remove();
+							});
+						});						
+					}
+
+				}
+			});
+
+		}
 
 		return false;
 	}
@@ -101,32 +106,25 @@ $(document).ready(function() {
 
 function returnBrands(){
 
-	// return brand form function
-	$("#returnBrandForm").unbind('submit').bind('submit', function()
+	$('#returnBrandForm').unbind('submit').bind('submit', function()
 		{
-			// remove the error text
-			$(".text-danger").remove();
-			// remove the form error
+			$('.text-danger').remove();
 			$('.form-group').removeClass('has-error').removeClass('has-success');
-
-			$('.return-brand-result').addClass('div-hide');
-			// modal footer
-			$('.returnBrandFooter').addClass('div-hide');
 
 			var roll = $("#returnNo").val();
 
 			if(roll == "") {
-				$("#returnNo").after('<p class="text-danger">Roll field is required</p>');
-				$('#returnNo').closest('.form-group').addClass('has-error');
+				$('#returnNo').after('<p class="text-danger">EID field is required</p>');
+				$('#returnNo').closest('#form-group').addClass('has-error');
 			} else {
-				$("#returnNo").find('.text-danger').remove();
-				$("#returnNo").closest('.form-group').addClass('has-success');
+				$('#returnNo').find('#text-danger').remove();
+				$('#returnNo').closest('#form-group').addClass('has-success');
 			}
 
 			if(roll) {
 				var form = $(this);
-				// button loading
-				$("#returnBrandBtn").button('loading');
+				
+				$('#returnBrandBtn').button('loading');
 
 				$.ajax({
 					url : 'php_action/returnBrand.php',
@@ -137,16 +135,14 @@ function returnBrands(){
 
 						console.log(response);
 
-						$("#returnBrandBtn").button('reset');
+						$('#returnBrandBtn').button('reset');
 
 						if(response.success == true) {
-							// reload the manage member table
+
 							manageBrandTable.ajax.reload(null, false);
 
-							$("#returnBrandForm")[0].reset();
-							// remove the error text
-							$(".text-danger").remove();
-							// remove the form error
+							$('#returnBrandForm')[0].reset();
+							$('.text-danger').remove();
 							$('.form-group').removeClass('has-error').removeClass('has-success');
 
 							$('#return-brand-messages').html('<div class="alert alert-success">'+
@@ -154,40 +150,34 @@ function returnBrands(){
 								'<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> '+ response.messages +
 								'</div>');
 
-							$(".alert-success").delay(500).show(10, function() {
+							$('.alert-success').delay(500).show(10, function() {
 								$(this).delay(3000).hide(10, function() {
 									$(this).remove();
 								});
-							}); // /.alert
-						}  // if
-
-						else{
-							// reload the manage member table
-							manageBrandTable.ajax.reload(null, false);
-
-							$("#returnBrandForm")[0].reset();
-							// remove the error text
-							$(".text-danger").remove();
-							// remove the form error
-							$('.form-group').removeClass('has-error').removeClass('has-success');
-
-							$('#return-brand-messages').html('<div class="alert alert-warning">'+
-								'<button type="button" class="close" data-dismiss="alert">&times;</button>'+
-								'<strong><i class="glyphicon glyphicon-warning-sign"></i></strong> '+ response.messages +
-								'</div>');
-
-							$(".alert-success").delay(500).show(10, function() {
-								$(this).delay(3000).hide(10, function() {
-									$(this).remove();
-								});
-							}); // /.alert
+							});
 						}
 
-					} // /success
-				}); // /ajax
+						else{
 
-				location.reload();
-			} // if
+							$('#returnBrandForm')[0].reset();
+							$('.text-danger').remove();
+							$('.form-group').removeClass('has-error').removeClass('has-success');
+
+							$('#return-brand-messages').html('<div class="alert alert-success">'+
+								'<button type="button" class="close" data-dismiss="alert">&times;</button>'+
+								'<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> '+ response.messages +
+								'</div>');
+
+							$('.alert-success').delay(500).show(10, function() {
+								$(this).delay(3000).hide(10, function() {
+									$(this).remove();
+								});
+							});
+						}
+
+					}
+				});
+			}
 
 			return false;
 		}
@@ -199,11 +189,7 @@ function returnBrands(){
 function issueBrands(brandId = null) {
 	if(brandId) {
 
-		// update brand form
 		$('#issueBrandForm').unbind('submit').bind('submit', function() {
-
-
-			$('#brandId').remove();
 
 			$('.text-danger').remove();
 			$('.form-group').removeClass('has-error').removeClass('has-success');
@@ -211,20 +197,17 @@ function issueBrands(brandId = null) {
 
 			var roll = $('#issueRoll').val();
 
-			// window.alert('{'+roll+'}');
-
 			if(roll == "") {
-				$("#issueRoll").after('<p class="text-danger">Roll field is required</p>');
-				$('#issueRoll').closest('.form-group').addClass('has-error');
+				$('#issueRoll').after('<p class="text-danger">Roll field is required</p>');
+				$('#issueRoll').closest('#form-group').addClass('has-error');
 			} else {
-				$("#issueRoll").find('.text-danger').remove();
-				$("#issueRoll").closest('.form-group').addClass('has-success');
+				$('#issueRoll').find('#text-danger').remove();
+				$('#issueRoll').closest('#form-group').addClass('has-success');
 			}
 
 			if(roll) {
 				var form = $(this);
 
-				// submit btn
 				$('#issueBrandBtn').button('loading');
 
 				$.ajax({
@@ -236,56 +219,50 @@ function issueBrands(brandId = null) {
 
 						console.log(response);
 
-						if(response.success == true) {
-							// reload the manage member table
+						$('#issueBrandBtn').button('reset');
 
-							$('#issueBrandModel').modal('hide');
+						if(response.success == true) {
+
 							manageBrandTable.ajax.reload(null, false);
 
-							$("#editBrandForm")[0].reset();
-							// remove the error text
-							$(".text-danger").remove();
-							// remove the form error
+							$('#issueBrandForm')[0].reset();
+							$('.text-danger').remove();
 							$('.form-group').removeClass('has-error').removeClass('has-success');
+
+							$('#issueBrandModel').modal('hide');
 
 							$('.issue-messages').html('<div class="alert alert-success">'+
 								'<button type="button" class="close" data-dismiss="alert">&times;</button>'+
 								'<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> '+ response.messages +
 								'</div>');
 
-							$(".alert-success").delay(500).show(10, function() {
+							$('.alert-success').delay(500).show(10, function() {
 								$(this).delay(3000).hide(10, function() {
 									$(this).remove();
 								});
-							}); // /.alert
+							});
 						} else {
 
-							$('#issueBrandModel').modal('hide');
-							manageBrandTable.ajax.reload(null, false);
-
-							$("#editBrandForm")[0].reset();
-							// remove the error text
-							$(".text-danger").remove();
-							// remove the form error
+							$('#issueBrandForm')[0].reset();
+							$('.text-danger').remove();
 							$('.form-group').removeClass('has-error').removeClass('has-success');
 
-							$('.issue-messages').html('<div class="alert alert-warning">'+
+							$('#issueBrandModel').modal('hide');
+
+							$('.issue-messages').html('<div class="alert alert-success">'+
 								'<button type="button" class="close" data-dismiss="alert">&times;</button>'+
-								'<strong><i class="glyphicon glyphicon-warning-sign"></i></strong> '+ response.messages +
+								'<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> '+ response.messages +
 								'</div>');
 
-							$(".alert-success").delay(500).show(10, function() {
+							$('.alert-success').delay(500).show(10, function() {
 								$(this).delay(3000).hide(10, function() {
 									$(this).remove();
 								});
-							}); // /.alert
+							});
 						}
-					}// /success
-				});	 // /ajax
-
-				location.reload();
-
-			} // /if
+					}
+				});
+			}
 
 			return false;
 		});
@@ -293,40 +270,30 @@ function issueBrands(brandId = null) {
 	} else {
 		alert('error!! Refresh the page again');
 	}
-} // /edit brands function
+}
 
 function editBrands(brandId = null) {
 	if(brandId) {
 
-		// update brand form
 		$('#editBrandForm').unbind('submit').bind('submit', function() {
 
-
-			// remove hidden brand id text
-			$('#brandId').remove();
-
-			// remove the error
 			$('.text-danger').remove();
-			// remove the form-error
 			$('.form-group').removeClass('has-error').removeClass('has-success');
-
 
 			var brandName = $('#editBrandName').val();
 			var brandStatus = $('#editBrandStatus').val();
 
 			if(brandStatus == "") {
-
-				$("#editBrandStatus").after('<p class="text-danger"> Status field is required</p>');
-				$('#editBrandStatus').closest('.form-group').addClass('has-error');
+				$('#editBrandStatus').after('<p class="text-danger"> Status field is required</p>');
+				$('#editBrandStatus').closest('#form-group').addClass('has-error');
 			} else {
-				$("#editBrandStatus").find('.text-danger').remove();
-				$("#editBrandStatus").closest('.form-group').addClass('has-success');
+				$('#editBrandStatus').find('#text-danger').remove();
+				$('#editBrandStatus').closest('#form-group').addClass('has-success');
 			}
 
 			if(brandStatus) {
 				var form = $(this);
 
-				// submit btn
 				$('#editBrandBtn').button('loading');
 
 				$.ajax({
@@ -336,33 +303,55 @@ function editBrands(brandId = null) {
 					dataType: 'json',
 					success:function(response) {
 
+						console.log(response);
+
+						$('#editBrandBtn').button('reset');
+
 						if(response.success == true) {
-							// reload the manage member table
+
 							manageBrandTable.ajax.reload(null, false);
 
-							$("#editBrandForm")[0].reset();
-							// remove the error text
-							$(".text-danger").remove();
-							// remove the form error
+							$('#editBrandForm')[0].reset();
+							$('.text-danger').remove();
 							$('.form-group').removeClass('has-error').removeClass('has-success');
 
-							$('#edit-brand-messages').html('<div class="alert alert-success">'+
+							$('#editBrandModel').modal('hide');
+
+							$('.edit-messages').html('<div class="alert alert-success">'+
 								'<button type="button" class="close" data-dismiss="alert">&times;</button>'+
 								'<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> '+ response.messages +
 								'</div>');
 
-							$(".alert-success").delay(500).show(10, function() {
+							$('.alert-success').delay(500).show(10, function() {
 								$(this).delay(3000).hide(10, function() {
 									$(this).remove();
 								});
-							}); // /.alert
+							});
+						}
+						else{
+
+							$('#editBrandForm')[0].reset();
+							$('.text-danger').remove();
+							$('.form-group').removeClass('has-error').removeClass('has-success');
+
+							$('#editBrandModel').modal('hide');
+
+							$('.edit-messages').html('<div class="alert alert-success">'+
+								'<button type="button" class="close" data-dismiss="alert">&times;</button>'+
+								'<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> '+ response.messages +
+								'</div>');
+
+							$('.alert-success').delay(500).show(10, function() {
+								$(this).delay(3000).hide(10, function() {
+									$(this).remove();
+								});
+							});
 						}
 
-					}// /success
-				});	 // /ajax
+					}
+				});
 
-				location.reload();
-			} // /if
+			}
 
 			return false;
 		});
@@ -374,69 +363,57 @@ function editBrands(brandId = null) {
 
 function removeBrands(brandId = null) {
 	if(brandId) {
-		// $('#removeBrandId').remove();
 
-				// $('.removeBrandFooter').after('<input type="hidden" name="removeBrandId" id="removeBrandId" value="'+response.brand_id+'" /> ');
+		$('#removeBrandBtn').unbind('click').bind('click', function() {
 
-				// click on remove button to remove the brand
-				$("#removeBrandBtn").unbind('click').bind('click', function() {
-					// button loading
-					$("#removeBrandBtn").button('loading');
+			$('#removeBrandBtn').button('loading');
 
-					$.ajax({
-						url: 'php_action/removeBrand.php',
-						type: 'post',
-						data: {brandId : brandId},
-						dataType: 'json',
-						success:function(response) {
-							console.log(response);
-							// button loading
-							$("#removeBrandBtn").button('reset');
-							if(response.success == true) {
+			$.ajax({
+				url: 'php_action/removeBrand.php',
+				type: 'post',
+				data: {brandId : brandId},
+				dataType: 'json',
+				success:function(response) {
 
-								// hide the remove modal
-								$('#removeMemberModel').modal('hide');
+					console.log(response);
 
-								// reload the brand table
-								manageBrandTable.ajax.reload(null, false);
+					$('#removeBrandBtn').button('reset');
 
-								$('.remove-messages').html('<div class="alert alert-success">'+
-			            '<button type="button" class="close" data-dismiss="alert">&times;</button>'+
-			            '<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> '+ response.messages +
-			          '</div>');
+					if(response.success == true) {
 
-								$(".alert-success").delay(100).show(5, function() {
-									$(this).delay(1000).hide(5, function() {
-										$(this).remove();
-									});
-								}); // /.alert
-							} else {
-								// hide the remove modal
-								$('#removeMemberModel').modal('hide');
+						manageBrandTable.ajax.reload(null, false);
 
-								// reload the brand table
-								manageBrandTable.ajax.reload(null, false);
+						$('#removeMemberModel').modal('hide');
 
-								$('.remove-messages').html('<div class="alert alert-warning">'+
-									'<button type="button" class="close" data-dismiss="alert">&times;</button>'+
-									'<strong><i class="glyphicon glyphicon-warning-sign"></i></strong> '+ response.messages +
-									'</div>');
+						$('.remove-messages').html('<div class="alert alert-success">'+
+				            '<button type="button" class="close" data-dismiss="alert">&times;</button>'+
+				            '<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> '+ response.messages +
+				          	'</div>');
 
-								$(".alert-success").delay(500).show(10, function() {
-									$(this).delay(3000).hide(10, function() {
-										$(this).remove();
-									});
-								}); // /.alert
-							} // /else
-						} // /response messages
-					}); // /ajax function to remove the brand
+						$('.alert-success').delay(500).show(10, function() {
+							$(this).delay(3000).hide(10, function() {
+								$(this).remove();
+							});
+						});
+					} else {
 
-				}); // /click on remove button to remove the brand
+						$('#removeMemberModel').modal('hide');
 
-			// } // /success
-		// }); // /ajax
+						$('.remove-messages').html('<div class="alert alert-warning">'+
+							'<button type="button" class="close" data-dismiss="alert">&times;</button>'+
+							'<strong><i class="glyphicon glyphicon-warning-sign"></i></strong> '+ response.messages +
+							'</div>');
 
-		$('.removeBrandFooter').after();
+						$('.alert-success').delay(500).show(10, function() {
+							$(this).delay(3000).hide(10, function() {
+								$(this).remove();
+							});
+						});
+					}
+				} 
+			});
+		});
+
 	} else {
 		alert('error!! Refresh the page again');
 	}

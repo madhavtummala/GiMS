@@ -18,7 +18,7 @@
                     <div class="issue-messages"></div>
                     <div class="edit-messages"></div>
 
-                    <?php if($_SESSION['userId']<=2) { ?>
+                    <?php if($_SESSION['userId']==2) { ?>
                         <div class="div-action pull pull-right" style="padding-bottom:20px;">
                             <button class="btn btn-default button1" data-toggle="modal" data-target="#returnBrandModel" onclick="returnBrands()"> <i class="glyphicon glyphicon-refresh"></i>  Return Item</button>
                         </div>
@@ -50,7 +50,7 @@
     </div>
 
     <!-- add brand -->
-<?php  if(isset($_SESSION['userId']) && $_SESSION['userId']==1) { ?>
+    <?php  if(isset($_SESSION['userId']) && $_SESSION['userId']==1) { ?>
     <div class="modal fade" id="addBrandModel" tabindex="-1" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -100,10 +100,10 @@
             </div>
         </div>
     </div>
-<?php } ?>
+    <?php } ?>
 
     <!-- return brand -->
-<?php  if(isset($_SESSION['userId']) && $_SESSION['userId']<=2) { ?>
+    <?php  if(isset($_SESSION['userId']) && $_SESSION['userId']==2) { ?>
     <div class="modal fade" id="returnBrandModel" tabindex="-1" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -129,7 +129,7 @@
                             <div class="form-group">
                                 <label for="returnFine" class="col-sm-3 control-label">Extra Fine </label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="returnFine" placeholder="Issue No..." name="returnFine" autocomplete="off">
+                                    <input type="text" class="form-control" id="returnFine" placeholder="Extra Fine" name="returnFine" autocomplete="off">
                                 </div>
                             </div>
 
@@ -157,10 +157,10 @@
             </div>
         </div>
     </div>
-<?php } ?>
+    <?php } ?>
 
     <!-- issue brand -->
-<?php  if(isset($_SESSION['userId']) && $_SESSION['userId']<=2) { ?>
+    <?php  if(isset($_SESSION['userId']) && $_SESSION['userId']==2) { ?>
     <div class="modal fade" id="issueBrandModel" tabindex="-1" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -186,16 +186,17 @@
 
                     <div class="modal-footer issueBrandFooter">
                         <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="glyphicon glyphicon-remove-sign"></i> Close</button>
+
                         <button type="submit" class="btn btn-success" id="issueBrandBtn" data-loading-text="Loading..." autocomplete="off"> <i class="glyphicon glyphicon-ok-sign"></i> Save Changes</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-<?php } ?>
+    <?php } ?>
 
     <!-- edit brand -->
-<?php  if(isset($_SESSION['userId']) && $_SESSION['userId']<=2) { ?>
+    <?php  if(isset($_SESSION['userId']) && $_SESSION['userId']<=2) { ?>
     <div class="modal fade" id="editBrandModel" tabindex="-1" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -240,11 +241,11 @@
             </div>
         </div>
     </div>
-<?php } ?>
+    <?php } ?>
 
 
     <!-- remove brand -->
-<?php  if(isset($_SESSION['userId']) && $_SESSION['userId']==1) { ?>
+    <?php  if(isset($_SESSION['userId']) && $_SESSION['userId']==1) { ?>
     <div class="modal fade" tabindex="-1" role="dialog" id="removeMemberModel">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -262,10 +263,10 @@
             </div>
         </div>
     </div>
-<?php } ?>
+    <?php } ?>
 
 
-<?php $_SESSION['hostel']="THN2" ?>
+    <?php $_SESSION['hostel']="THN2" ?>
     <script src="custom/js/brand.js"></script>
 
 <?php require_once 'includes/footer.php'; ?>

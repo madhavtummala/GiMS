@@ -10,7 +10,7 @@ if($_POST) {
     $brandStatus = $_POST['editBrandStatus'];
     $brandId = $_POST['brandId'];
 
-    if($brandName==""){
+    if(!$brandName){
         $sql = "UPDATE equipment SET status = '$brandStatus' WHERE eid = '$brandId'";
 
         if($hostel->query($sql) === TRUE) {
@@ -35,6 +35,5 @@ if($_POST) {
 	 
 	$hostel->close();
 
-	echo json_encode($valid);
- 
+	echo json_encode($valid); 
 }
