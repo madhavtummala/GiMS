@@ -129,7 +129,7 @@
                             <div class="form-group">
                                 <label for="returnFine" class="col-sm-3 control-label">Extra Fine </label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="returnFine" placeholder="Issue No..." name="returnFine" autocomplete="off">
+                                    <input type="text" class="form-control" id="returnFine" placeholder="Extra Fine..." name="returnFine" autocomplete="off">
                                 </div>
                             </div>
 
@@ -244,7 +244,7 @@
 
 
 <!-- remove brand -->
-     <?php  if(isset($_SESSION['userId']) && $_SESSION['userId']==1) { ?>
+     <?php  if(isset($_SESSION['userId']) && $_SESSION['userId']==1 || $_SESSION['userId']==2) { ?>
     <div class="modal fade" tabindex="-1" role="dialog" id="removeMemberModel">
         <div class="modal-dialog">
             <div class="modal-content">
