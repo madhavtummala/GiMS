@@ -125,13 +125,14 @@ create table issued
 
 create table requests
 (
+  requestno int not null auto_increment,
   equipmentname varchar(50) not null,
   rollno varchar(12) not null,
   estimatedcost int not null,
   purchaselinks varchar(1000),
   reason varchar(1000) not null,
   ts timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  constraint pk_requests primary key (equipmentname, rollno, ts)
+  constraint pk_requests primary key (requestno)
 );
 
 insert into equipment values
@@ -230,13 +231,14 @@ create table issued
 
 create table requests
 (
+  requestno int not null auto_increment,
   equipmentname varchar(50) not null,
   rollno varchar(12) not null,
   estimatedcost int not null,
   purchaselinks varchar(1000),
   reason varchar(1000) not null,
   ts timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  constraint pk_requests primary key (equipmentname, rollno, ts)
+  constraint pk_requests primary key (requestno)
 );
 
 insert into equipment values
@@ -335,13 +337,14 @@ create table issued
 
 create table requests
 (
+  requestno int not null auto_increment,
   equipmentname varchar(50) not null,
   rollno varchar(12) not null,
   estimatedcost int not null,
   purchaselinks varchar(1000),
   reason varchar(1000) not null,
   ts timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  constraint pk_requests primary key (equipmentname, rollno, ts)
+  constraint pk_requests primary key (requestno)
 );
 
 insert into equipment values
@@ -440,13 +443,14 @@ create table issued
 
 create table requests
 (
+  requestno int not null auto_increment,
   equipmentname varchar(50) not null,
   rollno varchar(12) not null,
   estimatedcost int not null,
   purchaselinks varchar(1000),
   reason varchar(1000) not null,
   ts timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  constraint pk_requests primary key (equipmentname, rollno, ts)
+  constraint pk_requests primary key (requestno)
 );
 
 insert into equipment values

@@ -114,8 +114,8 @@
 
         <?php if($_SESSION['userId']==2) { ?>
 
-        <li id="navseerequest">
-          <a href="seeRequests.php">
+        <li id="navreport">
+          <a href="report.php">
             <i class="glyphicon glyphicon-inbox">
               
             </i>  Students' Requests

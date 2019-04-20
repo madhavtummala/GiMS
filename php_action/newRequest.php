@@ -10,7 +10,7 @@ if($_POST) {
 	$reason = $_POST['reason'];
 	$rollnum = $_SESSION['userId'];
 
-	$sql = "INSERT INTO requests VALUES('$equipmentName', '$rollnum', '$estimatedCost', '$purchaseLinks', '$reason', CURRENT_TIMESTAMP)";
+	$sql = "INSERT INTO requests VALUES(NULL, '$equipmentName', '$rollnum', '$estimatedCost', '$purchaseLinks', '$reason', CURRENT_TIMESTAMP)";
 
 	$query = $hostel->query($sql);
 
