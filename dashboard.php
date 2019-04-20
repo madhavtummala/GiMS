@@ -119,7 +119,7 @@ $connect->close();
 		<div class="panel panel-success">
 			<div class="panel-heading">
 				
-				<a href="brand.php" style="text-decoration:none;color:black;">
+				<a href="#" style="text-decoration:none;color:black;">
 					Items Available
 					<span class="badge pull pull-right"><?php echo $countAvailable; ?></span>
 				</a>
@@ -131,7 +131,7 @@ $connect->close();
 	<div class="col-md-4">
 		<div class="panel panel-info">
 			<div class="panel-heading">
-				<a href="brand.php" style="text-decoration:none;color:black;">
+				<a href="#" style="text-decoration:none;color:black;">
 					Issued Items
 					<span class="badge pull pull-right"><?php echo $countIssued; ?></span>
 				</a>
@@ -143,7 +143,7 @@ $connect->close();
         <div class="col-md-4">
 			<div class="panel panel-danger">
 			<div class="panel-heading">
-				<a href="brand.php?o=manord" style="text-decoration:none;color:black;">
+				<a href="#" style="text-decoration:none;color:black;">
 					Items Under Repair
 					<span class="badge pull pull-right"><?php echo $countRepair; ?></span>
 				</a>
@@ -153,8 +153,6 @@ $connect->close();
 		</div>
 
     <?php } ?>
-
-
 
     <div class="col-md-4">
 		<div class="card">
