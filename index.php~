@@ -32,7 +32,7 @@ if($_POST) {
 
 		if($result->num_rows == 1) {
 			// exists
-			$mainSql = "SELECT * FROM student WHERE rollno = '$rollno'";
+			$mainSql = "SELECT * FROM student WHERE rollno = '$rollno'";// AND password = '$password'";
 			$mainResult = $connect->query($mainSql);
 			
 			$value = $mainResult->fetch_assoc();
