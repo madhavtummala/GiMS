@@ -166,6 +166,14 @@
               </a>
             </li>
 
+            <li id="topNavUser">
+              <a href="hostelAdmin.php"> 
+                <i class="glyphicon glyphicon-wrench">
+                  
+                </i> Manage Hostel Admins
+              </a>
+            </li>            
+
             <?php } ?>
 
             <li id="topNavLogout">
