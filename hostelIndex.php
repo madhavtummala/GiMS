@@ -27,10 +27,15 @@ if($_POST) {
 	} 
 	else {
 		$loginid = strtolower($loginid);
-		$sql = "SELECT * FROM hosteladmin WHERE loginid = '$loginid'";
-		$result = $connect->query($sql);
+		$sql = "SELECT * FROM hosteladmin WHERE loginid = ?";
+		$stmt = $connect->prepare($sql);
+		$stmt->bind_param("s", $loginid);
+		$stmt->execute();
+
+		$result = $stmt->get_result();
 
 		if($result->num_rows == 1) {
+			$result->data_seek(0);
 			$value = $result->fetch_assoc();
 			
 			if(password_verify($password,$value['password'])) {

@@ -27,12 +27,16 @@ if($_POST) {
 	} 
 	else {
 		$rollno = strtolower($rollno);
-		$sql = "SELECT * FROM student WHERE rollno = '$rollno'";
-		$result = $connect->query($sql);
+		$sql = "SELECT * FROM student WHERE rollno = ?";
+		$stmt = $connect->prepare($sql);
+		$stmt->bind_param("s", $rollno);
+		$stmt->execute();
+
+		$result = $stmt->get_result();
 
 		if($result->num_rows == 1) {
 			// exists
-			
+			$result->data_seek(0);
 			$value = $result->fetch_assoc();
 			if(password_verify($password,$value['password'])) {
 				$user_id = $value['rollno'];
@@ -40,7 +44,7 @@ if($_POST) {
 				// set session
 				$_SESSION['hostel'] = $value['hostelname'];
 				$_SESSION['userId'] = $user_id;
-
+				$result->close();
 				header('location: dashboard.php');	
 			} else{
 				
