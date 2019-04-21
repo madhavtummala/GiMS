@@ -168,14 +168,6 @@
 
             <?php } ?>
 
-            <li id="topNavOB">
-              <a href="officebearers.php"> 
-                <i class="glyphicon glyphicon-user">
-                  
-                </i> Office Bearers
-              </a>
-            </li>
-
             <li id="topNavLogout">
               <a href="logout.php"> 
                 <i class="glyphicon glyphicon-log-out">
