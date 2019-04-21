@@ -17,8 +17,6 @@ if($request) {
  	$valid['success'] = false;
  	$valid['messages'] = "Error while remove the request";
  }
- 
- $hostel->close();
 
  echo json_encode($valid);
  

@@ -120,9 +120,9 @@
                         <div id="return-brand-result">
 
                             <div class="form-group">
-                                <label for="returnNo" class="col-sm-3 control-label">Issue No </label>
+                                <label for="returnNo" class="col-sm-3 control-label">EID </label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="returnNo" placeholder="Issue No..." name="returnNo" autocomplete="off">
+                                    <input type="text" class="form-control" id="returnNo" placeholder="Item EID..." name="returnNo" autocomplete="off">
                                 </div>
                             </div>
 
@@ -267,6 +267,6 @@
 
 
     <?php $_SESSION['hostel']="SHR" ?>
-    <script src="custom/js/brand.js"></script>
+    <script src="custom/js/item.js"></script>
 
 <?php require_once 'includes/footer.php'; ?>

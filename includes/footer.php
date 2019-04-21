@@ -19,9 +19,9 @@
     /*    font-family: Arial, Helvetica, sans-serif;*/
     /*}*/
 
-    .bottombar {
-        overflow: visible;
-        background-color: #dddddd;
+/*    .bottombar {
+        overflow: hidden;
+        background-color: #ffffff;
         position: fixed;
         bottom: 0;
         width: 100%;
@@ -29,30 +29,51 @@
 
     .bottombar:hover {
         overflow: visible;
-        background-color: #aaaaaa;
+        background-color: #ffffff;
         position: fixed;
         bottom: 0;
         width: 100%;
     }    
 
     .bottombar a {
-        float: middle;
-        display: block;
+        float: right;
+        display: ruby-text;
         color: black;
         text-align: center;
-        padding: 14px 150px;
+        padding: 5px 14px;
         text-decoration: none;
         font-size: 17px;
     }
 
     .bottombar a:hover {
-        background: #aaaaaa;
+        background: #ffffff;
+        bottom: 0;
         color: black;
+    }*/
+
+    .fixedbutton{
+        overflow: visible;
+        background: #ffffff;
+        bottom: 0;
+        right: 0;
+        position: fixed;
     }
+
+    .fixedbutton a{
+        background: #ffffff;
+        display: ruby-text;
+        font-size: 17px;
+        color: black;
+        bottom: 0px;
+        right: 0px;
+        padding: 15px 30px;
+        position: fixed;
+        text-decoration: none;
+    }    
 
 </style>
 
-<div class="bottombar">
+<div class="fixedbutton">
     <a href="officebearers.php">Contact Us</a>
 </div>
 

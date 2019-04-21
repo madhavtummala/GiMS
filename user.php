@@ -133,7 +133,7 @@
 		        	<label for="editPassword" class="col-sm-3 control-label">Password: </label>
 		        	
 					    <div class="col-sm-8">
-					      <input type="password" class="form-control" id="editPassword" placeholder="New Password" name="editPassword" autocomplete="off">
+					      <input type="password" class="form-control" id="editPassword" placeholder="New Password" value="password" name="editPassword" autocomplete="off">
 					    </div>
 		        </div> 
 		        <div class="form-group">

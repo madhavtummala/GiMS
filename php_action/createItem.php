@@ -11,17 +11,18 @@ if($_POST) {
     $invoiceno = $_POST['addInvoiceno'];
     $cost = $_POST['addCost'];
 
-    $sql = "INSERT INTO equipment values(NULL,'$name', 1, curdate(), '$cost', '$invoiceno')";
+    $sql = "INSERT INTO equipment values(NULL, ?, 1, curdate(), ?, ?)";
 
-    if ($hostel->query($sql) === TRUE) {
+    $stmt = $hostel->prepare($sql);
+    $stmt->bind_param("sss", $name,$cost,$invoiceno);
+
+    if ($stmt->execute()) {
         $valid['success'] = true;
         $valid['messages'] = "Successfully Added";
     } else {
         $valid['success'] = false;
         $valid['messages'] = "Error while adding the Item";
     }
-
-    $hostel->close();
 
     echo json_encode($valid);
 }

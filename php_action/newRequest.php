@@ -10,23 +10,22 @@ if($_POST) {
 	$reason = $_POST['reason'];
 	$rollnum = $_SESSION['userId'];
 
-	$sql = "INSERT INTO requests VALUES(NULL, '$equipmentName', '$rollnum', '$estimatedCost', '$purchaseLinks', '$reason', CURRENT_TIMESTAMP)";
+	$sql = "INSERT INTO requests VALUES(NULL, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)";
 
-	$query = $hostel->query($sql);
+    $stmt = $hostel->prepare($sql);
+    $stmt->bind_param("sssss", $equipmentName,$rollnum,$estimatedCost,$purchaseLinks,$reason);
 
-	if($query===true)
-	{
-		$valid['success'] = true;
-		$valid['messages'] = "Request Successfully Registered.";
-	} 
-	else
-	{
-		$valid['success'] = false;
-		$valid['messages'] = $sql;	
-	}
+    if($stmt->execute()) {
+        $valid['success'] = true;
+        $valid['messages'] = "Successfully Updated";
+    } else {
+        $valid['success'] = false;
+        $valid['messages'] = "Error while Updating";
+    }		
+
 	echo json_encode($valid);
 }
 
-$hostel->close();
+// $hostel->close();
 
 ?>

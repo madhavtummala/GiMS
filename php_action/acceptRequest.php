@@ -19,15 +19,17 @@ if($_POST){
 	
 	$stmt = $hostel->prepare($sql);
 	$stmt->bind_param("s", $invoice);
-	echo "im here";
+
 	if($stmt->execute()) {
-		echo "IM here";
+
 		$valid['success'] = true;
 		$valid['messages'] = "Successfully Added";
 
-		/*$result=$hostel->query("select max(eid) as a from equipment");
-		$value=result->fetch_assoc();
-		$eid=value['a'];
+		$sql = "SELECT max(eid) AS a FROM equipment";
+
+		$result=$hostel->query($sql);
+		$value=$result->fetch_assoc();
+		$eid=$value['a'];
 
 		if($name){
 			$sql = "UPDATE equipment SET name=? WHERE eid='$eid'";
@@ -40,17 +42,16 @@ if($_POST){
 			$stmt = $hostel->prepare($sql);
 			$stmt->bind_param("i", $cost);
 			$stmt->execute();			
-		}*/
+		}
 
-		//$sql2 = "DELETE FROM requests WHERE requestno = '$request'";
-		//$result = $hostel->query($sql2);
+		$sql = "DELETE FROM requests WHERE requestno = '$request'";
+		$result = $hostel->query($sql);
 
 	} else {
 		$valid['success'] = false;
 		$valid['messages'] = "Error while adding the equipment";
 	}	
 
-	$hostel->close();
 	echo json_encode($valid);
  
 }

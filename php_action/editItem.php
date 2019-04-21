@@ -11,9 +11,13 @@ if($_POST) {
     $brandId = $_POST['brandId'];
 
     if(!$brandName){
-        $sql = "UPDATE equipment SET status = '$brandStatus' WHERE eid = '$brandId'";
 
-        if($hostel->query($sql) === TRUE) {
+        $sql = "UPDATE equipment SET status = ? WHERE eid = '$brandId'";
+
+        $stmt = $hostel->prepare($sql);
+        $stmt->bind_param("s", $brandStatus);
+
+        if($stmt->execute()) {
             $valid['success'] = true;
             $valid['messages'] = "Successfully Changed";
         } else {
@@ -22,9 +26,12 @@ if($_POST) {
         }
     }
     else{
-        $sql = "UPDATE equipment SET name = '$brandName', status = '$brandStatus' WHERE eid = '$brandId'";
+        $sql = "UPDATE equipment SET name = ?, status = ? WHERE eid = '$brandId'";
 
-        if($hostel->query($sql) === TRUE) {
+        $stmt = $hostel->prepare($sql);
+        $stmt->bind_param("ss", $brandName,$brandStatus);
+
+        if($stmt->execute()) {
             $valid['success'] = true;
             $valid['messages'] = "Successfully Changed";
         } else {
@@ -32,8 +39,6 @@ if($_POST) {
             $valid['messages'] = "Error while adding the Item";
         }
     }
-	 
-	$hostel->close();
 
 	echo json_encode($valid); 
 }

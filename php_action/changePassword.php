@@ -30,14 +30,23 @@ if($_POST) {
 		if($newPassword == $conformPassword) {
 			$np = password_hash($newPassword, PASSWORD_DEFAULT);
 
-			if($_SESSION['userId'] > 2)
-				$updateSql = "UPDATE student SET password = '$np' WHERE rollno = '$userId'";
-			else if($_SESSION['userId'] == 2)
-				$updateSql = "UPDATE hosteladmin SET password = '$np' WHERE loginid = '$userId'";
-			else
-				$updateSql = "UPDATE centraladmin SET password = '$np' WHERE loginid = '$userId'";
+			if($_SESSION['userId'] > 2){
+				$updateSql = "UPDATE student SET password = ? WHERE rollno = '$userId'";
+				$stmt = $connect->prepare($updateSql);
+				$stmt->bind_param("s", $np);
+			}
+			else if($_SESSION['userId'] == 2){
+				$updateSql = "UPDATE hosteladmin SET password = ? WHERE loginid = '$userId'";
+				$stmt = $connect->prepare($updateSql);
+				$stmt->bind_param("s", $np);				
+			}
+			else{
+				$updateSql = "UPDATE centraladmin SET password = ? WHERE loginid = '$userId'";
+				$stmt = $connect->prepare($updateSql);
+				$stmt->bind_param("s", $np);				
+			}
 
-			if($connect->query($updateSql) === true) {
+			if($stmt->execute()) {
 				$valid['success'] = true;
 				$valid['messages'] = "Successfully Updated";
 			} else {

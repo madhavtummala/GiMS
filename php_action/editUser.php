@@ -11,40 +11,50 @@ if($_POST) {
 	$roll = $_POST['roll'];
 
 	if($uname){
-		$sql = "UPDATE student SET name='$uname' WHERE rollno='$roll'";
-		if($connect->query($sql) == true) {
-			$valid['success'] = true;
-			$valid['messages'] = "Successfully Update";	
-		} else {
-			$valid['success'] = false;
-			$valid['messages'] = "Error while updating product info";
-		}		
+		$sql = "UPDATE student SET name=? WHERE rollno='$roll'";
+
+        $stmt = $connect->prepare($sql);
+        $stmt->bind_param("s", $uname);
+
+        if($stmt->execute()) {
+            $valid['success'] = true;
+            $valid['messages'] = "Successfully Updated";
+        } else {
+            $valid['success'] = false;
+            $valid['messages'] = "Error while Updating";
+        }			
 	}
 	if($upass){
 		$upass = password_hash($upass, PASSWORD_DEFAULT);
-		$sql = "UPDATE student SET password='$upass' WHERE rollno='$roll'";
-		if($connect->query($sql) == true) {
-			$valid['success'] = true;
-			$valid['messages'] = "Successfully Update";	
-		} else {
-			$valid['success'] = false;
-			$valid['messages'] = "Error while updating product info";
-		}		
+		$sql = "UPDATE student SET password=? WHERE rollno='$roll'";
+        $stmt = $connect->prepare($sql);
+        $stmt->bind_param("s", $upass);
+
+        if($stmt->execute()) {
+            $valid['success'] = true;
+            $valid['messages'] = "Successfully Updated";
+        } else {
+            $valid['success'] = false;
+            $valid['messages'] = "Error while Updating";
+        }			
 	}
 	if($uemail){
-		$sql = "UPDATE student SET emailid='$uemail' WHERE rollno='$roll'";
-		if($connect->query($sql) == true) {
-			$valid['success'] = true;
-			$valid['messages'] = "Successfully Update";	
-		} else {
-			$valid['success'] = false;
-			$valid['messages'] = "Error while updating product info";
-		}		
+		$sql = "UPDATE student SET emailid=? WHERE rollno='$roll'";
+        $stmt = $connect->prepare($sql);
+        $stmt->bind_param("s", $uemail);
+
+        if($stmt->execute()) {
+            $valid['success'] = true;
+            $valid['messages'] = "Successfully Updated";
+        } else {
+            $valid['success'] = false;
+            $valid['messages'] = "Error while Updating";
+        }			
 	}
 
 }
 	 
-$connect->close();
+// $connect->close();
 
 echo json_encode($valid);
  

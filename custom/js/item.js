@@ -3,7 +3,7 @@ var manageBrandTable;
 $(document).ready(function() {
 	
 	manageBrandTable = $("#manageBrandTable").DataTable({
-		'ajax': 'php_action/fetchBrand.php',
+		'ajax': 'php_action/fetchItem.php',
 		'order': []
 	});
 
@@ -45,7 +45,7 @@ $(document).ready(function() {
 			$('#createBrandBtn').button('loading');
 
 			$.ajax({
-				url : 'php_action/createBrand.php',
+				url : 'php_action/createItem.php',
 				type: 'post',
 				data: form.serialize(),
 				dataType: 'json',
@@ -127,7 +127,7 @@ function returnBrands(){
 				$('#returnBrandBtn').button('loading');
 
 				$.ajax({
-					url : 'php_action/returnBrand.php',
+					url : 'php_action/returnItem.php',
 					type: 'post',
 					data: form.serialize(),
 					dataType: 'json',
@@ -211,7 +211,7 @@ function issueBrands(brandId = null) {
 				$('#issueBrandBtn').button('loading');
 
 				$.ajax({
-					url: 'php_action/issueBrand.php',
+					url: 'php_action/issueItem.php',
 					type: 'post',
 					data: {brandId: brandId, issueRoll: roll},
 					dataType: 'json',
@@ -297,7 +297,7 @@ function editBrands(brandId = null) {
 				$('#editBrandBtn').button('loading');
 
 				$.ajax({
-					url: 'php_action/editBrand.php',
+					url: 'php_action/editItem.php',
 					type: 'post',
 					data: {brandId: brandId, editBrandName: brandName, editBrandStatus: brandStatus},
 					dataType: 'json',
@@ -369,7 +369,7 @@ function removeBrands(brandId = null) {
 			$('#removeBrandBtn').button('loading');
 
 			$.ajax({
-				url: 'php_action/removeBrand.php',
+				url: 'php_action/removeItem.php',
 				type: 'post',
 				data: {brandId : brandId},
 				dataType: 'json',

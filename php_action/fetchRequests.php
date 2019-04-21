@@ -33,6 +33,6 @@ if($result->num_rows > 0) {
 
 }
 
-$hostel->close();
+// $hostel->close();
 
 echo json_encode($output);

@@ -9,20 +9,24 @@ if($_POST) {
 	$newlogin = $_POST['username'];
 	$loginid = $_SESSION['loginId'];
 
-	if($_SESSION['userId']==2)
-		$sql = "UPDATE hosteladmin SET loginid = '$newlogin' WHERE loginid = '$loginid'";
-	else
-		$sql = "UPDATE centraladmin SET loginid = '$newlogin' WHERE loginid = '$loginid'";
-
-	if($connect->query($sql) === TRUE) {
-		$valid['success'] = true;
-		$valid['messages'] = "Successfully Update";	
-	} else {
-		$valid['success'] = false;
-		$valid['messages'] = "Error while updating product info";
+	if($_SESSION['userId']==2){
+		$sql = "UPDATE hosteladmin SET loginid = ? WHERE loginid = '$loginid'";
+		$stmt = $connect->prepare($sql);
+		$stmt->bind_param("s", $newlogin);		
+	}
+	else{
+		$sql = "UPDATE centraladmin SET loginid = ? WHERE loginid = '$loginid'";
+		$stmt = $connect->prepare($sql);
+		$stmt->bind_param("s", $newlogin);		
 	}
 
-	$connect->close();
+	if($stmt->execute()) {
+		$valid['success'] = true;
+		$valid['messages'] = "Successfully updated the user name";	
+	} else {
+		$valid['success'] = false;
+		$valid['messages'] = "Error while updating the user name";
+	}
 
 	echo json_encode($valid);
 }

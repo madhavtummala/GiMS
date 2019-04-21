@@ -14,17 +14,18 @@ if($_POST) {
 
     $pass = password_hash($pass, PASSWORD_DEFAULT);
 	
-	$sql = "INSERT INTO student VALUES ('$roll', '$name' , '$email', '$pass', '$uhostel')";
+	$sql = "INSERT INTO student VALUES (?, ? , ?, ?, ?)";
 
-	if($connect->query($sql) === true) {
+    $stmt = $connect->prepare($sql);
+    $stmt->bind_param("sssss", $roll,$name,$email,$pass,$uhostel);		
+
+	if($stmt->execute()) {
 		$valid['success'] = true;
-		$valid['messages'] = "Successfully Added";	
+		$valid['messages'] = "Successfully Added Student";	
 	} else {
 		$valid['success'] = false;
 		$valid['messages'] = "Error while adding the members";
 	}
-
-	$connect->close();
 
 	echo json_encode($valid);
 }	

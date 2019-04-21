@@ -10,8 +10,12 @@ if($_POST) {
     $brandId = $_POST['brandId'];
     $hostel_name = $_SESSION['hostel'];
 
-    $sql = "SELECT * from student WHERE rollno='$roll' and hostelname = '$hostel_name'";
-    $query = $connect->query($sql);
+    $sql = "SELECT * from student WHERE rollno=? and hostelname = '$hostel_name'";
+    $stmt = $connect->prepare($sql);
+    $stmt->bind_param("s", $roll);
+    $stmt->execute();
+
+    $query = $stmt->get_result();
 
     if($query->num_rows == 0){
         $valid['success'] = false;
@@ -21,7 +25,10 @@ if($_POST) {
     else{
 
         $sql = "SELECT * FROM issued WHERE rollno='$roll'";
-        $query = $hostel->query($sql);
+        $stmt = $hostel->prepare($sql);
+        $stmt->bind_param("s", $roll);
+        $stmt->execute();
+        $query = $stmt->get_result();
 
         if($query->num_rows >= 3){
             $valid['success'] = false;
@@ -37,14 +44,17 @@ if($_POST) {
 
             if($query['status']==1) {
 
-                $sql = "INSERT INTO issued values (NULL, '$brandId', '$roll', curdate(), 0, 0)";
+                $sql = "INSERT INTO issued values (NULL, '$brandId', ?, curdate(), 0, 0)";
 
-                if ($hostel->query($sql) === TRUE) {
+                $stmt = $hostel->prepare($sql);
+                $stmt->bind_param("s", $roll);
+
+                if($stmt->execute()) {
                     $valid['success'] = true;
-                    $valid['messages'] = "Successfully Changed";
+                    $valid['messages'] = "Successfully Updated";
                 } else {
                     $valid['success'] = false;
-                    $valid['messages'] = "Error while issuing the Item";
+                    $valid['messages'] = "Error while Updating";
                 }
             }
             else{
@@ -54,7 +64,7 @@ if($_POST) {
         }
     }
 
-    $hostel->close();
+    // $hostel->close();
 
     echo json_encode($valid);
 }

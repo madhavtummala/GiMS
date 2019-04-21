@@ -27,8 +27,11 @@ $(document).ready(function() {
 				success:function(response) {
 
 					$('#changeUsernameBtn').button('reset');
+
+					$('#changeUsernameForm')[0].reset();
 					$('.text-danger').remove();
 					$('.form-group').removeClass('has-error').removeClass('has-success');
+					
 
 					if(response.success == true)  {												
 																
@@ -68,6 +71,7 @@ $(document).ready(function() {
 		var form = $(this);
 
 		$('.text-danger').remove();
+		$('.form-group').removeClass('has-error').removeClass('has-success');
 
 		var currentPassword = $('#password').val();
 		var newPassword = $('#npassword').val();
@@ -98,8 +102,6 @@ $(document).ready(function() {
 				$('#text-danger').remove();
 			}
 		} else {
-			$('.form-group').removeClass('has-error');
-			$('.text-danger').remove();
 
 			$.ajax({
 				url: form.attr('action'),
@@ -109,6 +111,10 @@ $(document).ready(function() {
 				success:function(response) {
 
 					console.log(response);
+
+					$('#changePasswordForm')[0].reset();
+					$('.text-danger').remove();
+					$('.form-group').removeClass('has-error').removeClass('has-success');
 
 					if(response.success == true) {
 						$('.changePasswordMessages').html('<div class="alert alert-success">'+
