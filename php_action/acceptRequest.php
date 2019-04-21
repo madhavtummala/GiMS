@@ -15,22 +15,35 @@ if($_POST){
 	$result = $hostel->query($sql);
 	$row = $result->fetch_array();
 
-	$sql = "INSERT INTO equipment values(NULL, '$row[1]', 1, curdate(), '$row[3]', '$invoice')";
-	if($hostel->query($sql) === true) {
+	$sql = "INSERT INTO equipment values(NULL, '$row[1]', 1, curdate(), '$row[3]', ?)";
+	
+	$stmt = $hostel->prepare($sql);
+	$stmt->bind_param("s", $invoice);
+	echo "im here";
+	if($stmt->execute()) {
+		echo "IM here";
 		$valid['success'] = true;
 		$valid['messages'] = "Successfully Added";
 
+		/*$result=$hostel->query("select max(eid) as a from equipment");
+		$value=result->fetch_assoc();
+		$eid=value['a'];
+
 		if($name){
-			$sql = "UPDATE equipment SET name='$name' WHERE invoiceno='$invoice'";
-			$hostel->query($sql);
+			$sql = "UPDATE equipment SET name=? WHERE eid='$eid'";
+			$stmt = $hostel->prepare($sql);
+			$stmt->bind_param("s", $name);
+			$stmt->execute();
 		}	
 		if($cost){
-			$sql = "UPDATE equipment SET cost='$cost' WHERE invoiceno='$invoice'";
-			$hostel->query($sql);			
-		}
+			$sql = "UPDATE equipment SET cost=? WHERE eid='$eid'";
+			$stmt = $hostel->prepare($sql);
+			$stmt->bind_param("i", $cost);
+			$stmt->execute();			
+		}*/
 
-		$sql = "DELETE FROM requests WHERE requestno = '$request'";
-		$result = $hostel->query($sql);
+		//$sql2 = "DELETE FROM requests WHERE requestno = '$request'";
+		//$result = $hostel->query($sql2);
 
 	} else {
 		$valid['success'] = false;
@@ -38,7 +51,6 @@ if($_POST){
 	}	
 
 	$hostel->close();
-
 	echo json_encode($valid);
  
 }
