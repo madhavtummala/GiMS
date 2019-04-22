@@ -41,10 +41,10 @@
         <div class="modal-dialog">
             <div class="modal-content">
 
-                <form class="form-horizontal" id="editBrandForm">
+                <form class="form-horizontal" id="editBrandForm" method="post" enctype="multipart/form-data" action="php_action/acceptRequest.php">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title"><i class="fa fa-edit"></i> Edit Item</h4>
+                        <h4 class="modal-title"><i class="fa fa-edit"></i> Accept Request</h4>
                     </div>
                     <div class="modal-body">
 
@@ -68,6 +68,13 @@
                                 <label class="col-sm-1 control-label">: </label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control" id="editBrandInvoice" placeholder="Invoice No" name="editBrandInvoice" autocomplete="off">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="image" class="col-sm-3 control-label">Upload jpeg image(<2MB) </label>
+                                <label class="col-sm-1 control-label">: </label>
+                                <div class="col-sm-8">
+    																<input type="file" name="image" id="image">
                                 </div>
                             </div>
                         </div>

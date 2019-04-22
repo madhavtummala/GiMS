@@ -20,7 +20,7 @@ function editBrands(request = null) {
 			var brandName = $('#editBrandName').val();
 			var brandCost = $('#editBrandCost').val();
 			var brandInvoice = $('#editBrandInvoice').val();
-
+			
 			if(brandInvoice == "") {
 				$('#editBrandInvoice').after('<p class="text-danger"> Invoice field is required</p>');
 				$('#editBrandInvoice').closest('#form-group').addClass('has-error');
@@ -33,12 +33,16 @@ function editBrands(request = null) {
 				var form = $(this);
 
 				$('#editBrandBtn').button('loading');
+				var data=new FormData(this);
+				data.append('request',request)
 
 				$.ajax({
 					url: 'php_action/acceptRequest.php',
 					type: 'post',
-					data: {request: request, editBrandName: brandName, editBrandInvoice: brandInvoice, editBrandCost: brandCost},
-					dataType: 'json',
+					data: data,
+					enctype: 'multipart/form-data',
+					processData: false,
+      		contentType: false,
 					success:function(response) {
 
 						console.log(response);
