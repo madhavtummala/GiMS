@@ -49,8 +49,9 @@ if($result->num_rows > 0) {
 		  </ul>
 		</div>';		
 	}
-	$imgname=strtolower(str_replace(' ','',$row[1]));
-	$img = "<img src='assests/images/"."$imgname".".jpeg' height='100' width ='100'>";
+
+	$img = "<img src='assests/images/".strtolower(str_replace(' ','',$row[1])).".jpeg' height='100' width ='100'>";
+
  	$output['data'][] = array(
  		$row[0],
  		$img,

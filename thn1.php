@@ -96,8 +96,7 @@ if($_SESSION['userId']!=1 || $_SESSION['hostel']!="THN1") {
                             </div>
 
                             <div class="form-group">
-                                <label for="productImage" class="col-sm-3 control-label">Product Image: </label>
-                                <label class="col-sm-1 control-label">: </label>
+                                <label for="productImage" class="col-sm-3 control-label">Product Image </label>
                                     <div class="col-sm-8">
                                             <div id="kv-avatar-errors-1" class="center-block" style="display:none;"></div>                          
                                         <div class="kv-avatar center-block">                            

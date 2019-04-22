@@ -77,7 +77,7 @@ if($_SESSION['userId']!=2) {
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="productImage" class="col-sm-3 control-label">Upload jpeg image(<2MB) </label>
+                                <label for="productImage" class="col-sm-3 control-label">Upload image(<2MB) </label>
                                 <label class="col-sm-1 control-label">: </label>
                                 <div class="col-sm-8">
     								<input type="file" name="productImage" id="productImage">
