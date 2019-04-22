@@ -21,15 +21,18 @@ $query = $connect->query($sql);
                         <thead>
                         <tr>
                             <th>Post</th>
+                            <th></th>
                             <th>Name</th>
                             <th>Contact No.</th>
                             <th>E-mail Id</th>
                         </tr>
                         </thead>
                         <tbody>
-                        	<?php while ($office = $query->fetch_assoc()) { ?>
+                        	<?php while ($office = $query->fetch_assoc()) { 
+                        	$imgname=strtolower(str_replace(' ','',$office['post'])); ?>
 				<tr>
 					<td><?php echo $office['post']?></td>
+					<td><img src='assests/images/<?php echo "$imgname" ?>.jpeg' height='100' width ='100'></td>
 					<td><?php echo $office['name']?></td>
 					<td><?php echo $office['contactnumber']?></td>
 					<td><?php echo $office['emailid']?></td>

@@ -35,6 +35,7 @@
                         <thead>
                         <tr>
                             <th>ID</th>
+                            <th></th>
                             <th>Name</th>
                             <th style="width:15%;">Status</th>
                             <?php if($_SESSION['userId']==1 || $_SESSION['userId']==2) { ?>
