@@ -3,6 +3,10 @@ error_reporting(E_ALL);
 
 require_once 'core.php';
 
+if($_SESSION['userId']!=2) {
+    header('location: dashboard.php');
+}
+
 $valid['success'] = array('success' => false, 'messages' => array());
 
 if($_POST){

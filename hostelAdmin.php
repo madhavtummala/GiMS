@@ -1,5 +1,10 @@
 <?php require_once 'php_action/db_connect.php' ?>
-<?php require_once 'includes/header.php'; ?>
+<?php require_once 'includes/header.php'; 
+
+if($_SESSION['userId']!=1) {
+    header('location: dashboard.php');
+}
+?>
 
 <div class="row">
 	<div class="col-md-12">

@@ -1,6 +1,5 @@
 <?php require_once 'includes/header.php';
 
-
 if($_SESSION['userId']>1) {
     $sql = "SELECT * FROM equipment WHERE status = 0";
     $query = $hostel->query($sql);

@@ -2,6 +2,10 @@
 
 require_once 'core.php';
 
+if($_SESSION['userId']!=1) {
+    header('location: dashboard.php');
+}
+
 $sql = "SELECT * FROM hosteladmin";
 
 $result = $connect->query($sql);

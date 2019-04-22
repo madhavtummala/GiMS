@@ -2,6 +2,10 @@
 
 require_once 'core.php';
 
+if($_SESSION['userId']!=2) {
+    header('location: dashboard.php');
+}
+
 $sql = "SELECT * FROM requests";
 $result = $hostel->query($sql);
 

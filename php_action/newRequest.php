@@ -2,6 +2,10 @@
 
 require_once 'core.php';
 
+if($_SESSION['userId']<=2) {
+    header('location: dashboard.php');
+}
+
 if($_POST) {
 
 	$equipmentName = $_POST['equipmentName'];

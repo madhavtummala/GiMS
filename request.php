@@ -1,4 +1,10 @@
-<?php require_once 'includes/header.php'; ?>
+<?php require_once 'includes/header.php'; 
+
+if($_SESSION['userId']<=2) {
+    header('location: dashboard.php');
+}
+
+?>
 
 <div class="row">
 	<div class="col-md-12">
