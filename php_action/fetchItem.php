@@ -50,9 +50,10 @@ if($result->num_rows > 0) {
 		</div>';		
 	}
 	$imgname=strtolower(str_replace(' ','',$row[1]));
+	$img = "<img src='assests/images/"."$imgname".".jpeg' height='100' width ='100'>";
  	$output['data'][] = array(
  		$row[0],
- 		"<img src='assests/images/"."$imgname".".jpeg' height='100' width ='100'>",
+ 		$img,
  		$row[1],
  		$activeBrands,
  		$button

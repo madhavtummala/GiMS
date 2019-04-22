@@ -65,7 +65,7 @@
 
                         <div id="add-brand-messages"></div>
 
-                        <div id="add-brand-result">
+                        <div id="add-brand-result">                          
 
                             <div class="form-group">
                                 <label for="addName" class="col-sm-3 control-label">Name </label>
@@ -88,6 +88,18 @@
                                 </div>
 
                             </div>
+
+                            <div class="form-group">
+                                <label for="productImage" class="col-sm-3 control-label">Product Image: </label>
+                                <label class="col-sm-1 control-label">: </label>
+                                    <div class="col-sm-8">
+                                            <div id="kv-avatar-errors-1" class="center-block" style="display:none;"></div>                          
+                                        <div class="kv-avatar center-block">                            
+                                            <input type="file" class="form-control" id="productImage" placeholder="Product Name" name="productImage" class="file-loading" style="width:auto;"/>
+                                        </div>
+                                      
+                                    </div>
+                            </div>                             
 
                         </div>
                     </div>

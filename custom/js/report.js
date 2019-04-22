@@ -40,9 +40,10 @@ function editBrands(request = null) {
 					url: 'php_action/acceptRequest.php',
 					type: 'post',
 					data: data,
-					enctype: 'multipart/form-data',
+					dataType: 'json',
+					cache: false,
+					contentType: false,
 					processData: false,
-      		contentType: false,
 					success:function(response) {
 
 						console.log(response);

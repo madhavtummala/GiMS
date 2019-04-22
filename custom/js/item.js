@@ -7,6 +7,7 @@ $(document).ready(function() {
 		'order': []
 	});
 
+
 	$('#submitBrandForm').unbind('submit').bind('submit', function()
 	{
 		$('.text-danger').remove();
@@ -15,7 +16,15 @@ $(document).ready(function() {
 		var name = $('#addName').val();
 		var invoiceno = $('#addInvoiceno').val();
 		var cost =  $('#addCost').val();
+		var productImage = $("#productImage").val();		
 
+		if(productImage == "") {
+			$("#productImage").closest('.center-block').after('<p class="text-danger">Product Image field is required</p>');
+			$('#productImage').closest('.form-group').addClass('has-error');
+		}	else {
+			$("#productImage").find('.text-danger').remove();
+			$("#productImage").closest('.form-group').addClass('has-success');	  	
+		}
 		if(name == "") {
 			$('#addName').after('<p class="text-danger">Name field is required</p>');
 			$('#addName').closest('#form-group').addClass('has-error');
@@ -39,16 +48,20 @@ $(document).ready(function() {
 			$("#addInvoiceno").closest('#form-group').addClass('has-success');
 		}
 
-		if(name && invoiceno && cost) {
+		if(name && invoiceno && cost && productImage) {
 			var form = $(this);
+			var formData = new FormData(this);
 
 			$('#createBrandBtn').button('loading');
 
 			$.ajax({
 				url : 'php_action/createItem.php',
 				type: 'post',
-				data: form.serialize(),
+				data: formData,
 				dataType: 'json',
+				cache: false,
+				contentType: false,
+				processData: false,
 				success:function(response) {
 
 					console.log(response);
