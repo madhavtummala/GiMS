@@ -16,6 +16,7 @@ if($_POST) {
  	$pass = $_POST['upass'];
     $uhostel = $_POST['uhostel'];
 
+    $roll = strtolower($roll);
     $pass = password_hash($pass, PASSWORD_DEFAULT);
 	
 	$sql = "INSERT INTO student VALUES (?, ? , ?, ?, ?)";

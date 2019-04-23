@@ -14,6 +14,8 @@ if($_POST) {
 	$uemail = $_POST['useremail'];
 	$roll = $_POST['roll'];
 
+    $roll = strtolower($roll);
+
 	if($uname){
 		$sql = "UPDATE student SET name=? WHERE rollno='$roll'";
 

@@ -31,7 +31,7 @@ if($result->num_rows > 0) {
 		</div>';
 
 		$output['data'][] = array( 		
-			$roll,
+			strtoupper($roll),
 			$row[1],
 			$row[2],
 			$button 		

@@ -26,7 +26,7 @@ if($result->num_rows > 0) {
 
 		$output['data'][] = array(
 			$row[1],
-			$row[2],
+			strtoupper($row[2]),
 			$row[3],
 			$row[4],
 			$row[5],

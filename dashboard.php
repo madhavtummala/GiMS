@@ -254,14 +254,16 @@ $connect->close();
                     <table class="table" id="productTable">
                         <thead>
                         <tr>
-                            <th style="width:20%;">Name of Equipment</th>
-                            <th style="width:20%;">Date of Issue</th>
-                            <th style="width:20%;">Fine</th>
+                            <th style="width:10%;">EID</th>
+                            <th style="width:30%;">Name of Equipment</th>
+                            <th style="width:30%;">Date of Issue</th>
+                            <th style="width:30%;">Fine</th>
                         </tr>
                         </thead>
                         <tbody>
                         <?php while ($issued = $query->fetch_assoc()) { ?>
                             <tr>
+                                <td><?php echo $issued['eid']?></td>
                                 <td><?php echo $issued['name']?></td>
                                 <td><?php echo $issued['dateofissue']?></td>
                                 <td>Rs. <?php echo $issued['fine']?></td>

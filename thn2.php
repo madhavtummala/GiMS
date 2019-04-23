@@ -1,6 +1,6 @@
 <?php require_once 'includes/header.php'; 
 
-if($_SESSION['userId']!=1 || $_SESSION['hostel']!="THN2") {
+if(!($_SESSION['userId']==1 || $_SESSION['hostel']=="THN2")) {
     header('location: dashboard.php');
 }
 
