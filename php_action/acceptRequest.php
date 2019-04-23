@@ -83,7 +83,7 @@ if($_POST){
 		$valid['messages'] = "Error while adding the equipment";
 	}	
 
-	$hostel->close();
+	// $hostel->close();
 
 	echo json_encode($valid);
  
