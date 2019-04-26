@@ -129,7 +129,7 @@ if($_SESSION['userId']!=1) {
 		        	<label for="editEmail" class="col-sm-3 control-label">Hostel: </label>
 		        	
 					    <div class="col-sm-8">
-					      <input type="password" class="form-control" id="editEmail" placeholder="New Email" name="editEmail" autocomplete="off">
+					      <input type="password" class="form-control" id="editEmail" placeholder="New Hostel" name="editEmail" autocomplete="off">
 					    </div>
 		        </div> 		        
 
