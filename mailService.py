@@ -44,7 +44,7 @@ while True:
         for std in gymcursor2:
           to = std[2];
           gmail_user = 'sg.iitbbs@gmail.com';
-          gmail_pwd = 'PassGymkhana';
+          gmail_pwd = 'Password';
           smtpserver = smtplib.SMTP("smtp.gmail.com",587);
           smtpserver.ehlo();
           smtpserver.starttls();
@@ -65,7 +65,7 @@ while True:
         for std in gymcursor2:
           to = std[2];
           gmail_user = 'sg.iitbbs@gmail.com';
-          gmail_pwd = 'PassGymkhana';
+          gmail_pwd = 'Password';
           smtpserver = smtplib.SMTP("smtp.gmail.com",587);
           smtpserver.ehlo();
           smtpserver.starttls();
@@ -86,7 +86,7 @@ while True:
         for std in gymcursor2:
           to = std[2];
           gmail_user = 'sg.iitbbs@gmail.com';
-          gmail_pwd = 'PassGymkhana';
+          gmail_pwd = 'Password';
           smtpserver = smtplib.SMTP("smtp.gmail.com",587);
           smtpserver.ehlo();
           smtpserver.starttls();
