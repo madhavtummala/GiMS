@@ -68,18 +68,6 @@ insert into hosteladmin values('thn2', '$2y$10$0cLXibHZh6mdhNc9a5cs1.vW6rH/7T3Su
 insert into student values("16cs01041", "Tummala Madhav", "tm15@iitbbs.ac.in", "$2y$10$yW9XMzeQuBlRaL7IwTjbYeWZUrgqgjHEcxkniaXswkzYKKAJDqxZO", "THN2");
 insert into student values("16cs01042", "Saksham Arneja", "sa26@iitbbs.ac.in", "$2y$10$NgRzVrrE2JccpkE1Cz9NJuYeVukKtHrBpKFufkKW4VrOUuVoF76jO", "THN2");
 
-insert into student values
-("43NP98555","Oren Ballard","bibendum.ullamcorper@iitbbs.ac.in","EYJ21VDJ6KU","SHR"),
-("10RV89956","Ira Medina","primis@iitbbs.ac.in","YZP63IDW4YH","THN1"),
-("55BO25293","Chandler Riley","ornare.lectus@iitbbs.ac.in","YSI75QAY6VD","THN1"),
-("85LS84759","Zeus Rasmussen","ultricies@iitbbs.ac.in","KGV86LSL4KF","THN2"),
-("79JY65401","Bruno Baird","dapibus@iitbbs.ac.in","ZDA81UZH2EC","SHR"),
-("60TE93343","Vaughan Ortiz","fermentum.metus@iitbbs.ac.in","VQW60XSV8RZ","THN1"),
-("74XJ62359","Cullen Cleveland","mi@iitbbs.ac.in","TWH92TUP8EU","THN2"),
-("07FJ98351","Dillon Carey","ipsum.Phasellus@iitbbs.ac.in","YJR75GJD4OG","SHR"),
-("16HI96639","Victor Haynes","metus@iitbbs.ac.in","QUM73VOS4SV","THN1"),
-("00BP39323","Fritz Morgan","laoreet.libero.et@iitbbs.ac.in","VTK43RKZ0HV","THN2");
-
 
 insert into officebearer values("Gsec Science and Technology", "Geeth Nischal", "8500936193", "ggn10@iitbbs.ac.in");
 insert into officebearer values("Vice President", "Punith", "9999999999", "vp.sg@iitbbs.ac.in");
