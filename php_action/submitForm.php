@@ -18,13 +18,23 @@ if($_POST) {
     $name = $_POST['addName'];
     $invoiceno = $_POST['addInvoiceno'];
     $cost = $_POST['addCost'];
-           $sql = "INSERT INTO currentapplications values(NULL, ?, ?, ?, 'New', curdate())";
 		   $arr = array('name' => $name, 'invoiceno' => $invoiceno, 'cost' => $cost);
 		   $data = json_encode($arr);
-		   $myFile = fopen("assignee.json","r") or die("Unable to open file!");
-		   $assignee_list = fread($myFile, filesize("assignee.json"));
-		   $assignee_list = json_decode($assignee_list, true);
-		   $assignee = $assignee_list[$_SESSION['formtype']];
+		   
+		   $formtype = $_SESSION['formtype'];
+		   $sql = "SELECT email from assignee WHERE formtype = '$formtype'";
+		   $result = $forms->query($sql);
+		   $assignee = $result->fetch_array();
+		   $assignee = $assignee[0];
+		   //echo $assignee;
+		   
+		   $sql = "SELECT name from officebearer WHERE emailid = '$assignee'";
+		   $result = $connect->query($sql);
+		   $assignee = $result->fetch_array();
+		   $assignee = $assignee[0];
+		   //echo $assignee;
+
+		   $sql = "INSERT INTO currentapplications values(NULL, ?, ?, ?, 'New', curdate())";
            $stmt = $forms->prepare($sql);
            $stmt->bind_param("sss", $_SESSION["userId"], $data, $assignee);
 

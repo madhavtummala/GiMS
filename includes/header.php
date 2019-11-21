@@ -64,7 +64,7 @@
           </a>
         </li>
 
-        <?php if($_SESSION['userId']==1 || $_SESSION['hostel']=="THN1") { ?>
+        <?php if($_SESSION['userId']==1 || $_SESSION['userId']==-2 || $_SESSION['hostel']=="THN1") { ?>
 
         <li id="navTHN1">
           <a href="thn1.php">
@@ -76,7 +76,7 @@
 
         <?php } ?>
 
-        <?php if($_SESSION['userId']==1 || $_SESSION['hostel']=="THN2") { ?>
+        <?php if($_SESSION['userId']==1 || $_SESSION['userId']==-2 || $_SESSION['hostel']=="THN2") { ?>
 
         <li id="navTHN2">
           <a href="thn2.php">
@@ -88,7 +88,7 @@
 
         <?php } ?>
 
-        <?php if($_SESSION['userId']==1 || $_SESSION['hostel']=="MHR") { ?>
+        <?php if($_SESSION['userId']==1 || $_SESSION['userId']==-2 || $_SESSION['hostel']=="MHR") { ?>
 
         <li id="navMHR">
           <a href="mhr.php">
@@ -100,7 +100,7 @@
 
         <?php } ?>
 
-        <?php if($_SESSION['userId']==1 || $_SESSION['hostel']=="SHR") { ?>
+        <?php if($_SESSION['userId']==1 || $_SESSION['userId']==-2 || $_SESSION['hostel']=="SHR") { ?>
 
         <li id="navSHR">
           <a href="shr.php">

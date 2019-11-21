@@ -73,6 +73,11 @@ insert into student values("16cs01042", "Saksham Arneja", "sa26@iitbbs.ac.in", "
 insert into officebearer values("Gsec Science and Technology", "Geeth Nischal", "8500936193", "ggn10@iitbbs.ac.in");
 insert into officebearer values("Vice President", "Punith", "9999999999", "vp.sg@iitbbs.ac.in");
 
+ALTER table officebearer add PASSWORD VARCHAR(500);
+update officebearer set PASSWORD='$2y$12$7iSfWrzmR5481Uck3UvNO.vvm2ZYHPdGF6I4ZBvmPJw8klC/A8jX2' WHERE email='ggn10@iitbbs.ac.in';
+update officebearer set PASSWORD='$2y$12$YGOxjbqzp2H2sX0PD25vHeq1EnJrS6/HPcIg/QG66gyXRM2cwtrYm' WHERE email='vp.sg@iitbbs.ac.in';
+
+
 create database THN2;
 use THN2;
 

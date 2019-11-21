@@ -47,6 +47,7 @@
 <div class="bottombar">
     <a href="adminIndex.php">Main Admin</a>
     <a href="hostelIndex.php">Hostel Admin</a>
+	 <a href="officebearerIndex.php">Office Bearer</a>
     <a href="index.php">Student</a>
 </div>
 

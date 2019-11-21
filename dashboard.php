@@ -12,6 +12,7 @@ if($_SESSION['userId']>1) {
     $sql = "SELECT * FROM equipment WHERE status = 1";
     $query = $hostel->query($sql);
     $countAvailable = $query->num_rows;
+
 }
 
 if($_SESSION['userId']>2) {
@@ -24,14 +25,34 @@ if($_SESSION['userId']>2) {
 
     $sql = "SELECT sum(fine) as totalfine FROM issued WHERE rollno = '$roll_no'";
     $fine = $hostel->query($sql);
-
-
     $fine = $fine->fetch_assoc();
 
     if($fine['totalfine'])
         $fine = $fine['totalfine'];
     else
         $fine = 0;
+
+    $sql = "SELECT name from student WHERE rollno = '$roll_no'";
+	//echo $sql;
+    $result = $connect->query($sql);
+	$studname = $result->fetch_array();
+	//var_dump($studname);
+}
+else if($_SESSION['userId']==-2)
+{
+	$emailid = $_SESSION['loginId'];
+	$sql = "SELECT name, post from officebearer WHERE emailid = '$emailid'";
+	$result = $connect->query($sql);
+	$ofname = $result->fetch_array();
+	$_SESSION['aname'] = $ofname[0];
+	$sql = "SELECT * from currentapplications WHERE assignee = '$ofname[0]'";
+	$result = $forms->query($sql);
+	$fine = $result->num_rows;
+	ob_start(); // begin collecting output
+	include 'php_action/fetchForm.php';
+    $result = ob_get_clean(); 
+	//echo $result;
+	$result = json_decode($result, true);
 }
 else if($_SESSION['userId']==2)
 {
@@ -180,6 +201,9 @@ $connect->close();
               <?php  if(isset($_SESSION['userId']) && $_SESSION['userId']>2) { ?>
                   <p> Total Fine</p>
               <?php } ?>
+			  <?php  if(isset($_SESSION['userId']) && $_SESSION['userId'] == -2) { ?>
+                  <p> Total Forms</p>
+              <?php } ?>
 		  </div>
 		</div> 
 		</br>
@@ -188,14 +212,18 @@ $connect->close();
 		  <div class="cardHeader">
 		  <!--TODO: Use logic to generate URL like < ?php echo date('l') .' '.date('d').', '.date('Y'); ?>-->
 		    <h1>
-			<?php  if(isset($_SESSION['userId']) && $_SESSION['userId']==2) { ?>
+			<?php  if(isset($_SESSION['userId']) && $_SESSION['userId'] == -1) { ?>
+			<!-- -1 means won't execute. Band aid for now-->
 		        <p> Hi, admin!</p>
               <?php } ?>
               <?php  if(isset($_SESSION['userId']) && $_SESSION['userId']==1) { ?>
                   <p> Hi, MainAdmin!</p>
               <?php } ?>
               <?php  if(isset($_SESSION['userId']) && $_SESSION['userId']>2) { ?>
-                  <p> Hi, student!</p>
+                  <p> Hi, <?php echo $studname[0]?>!</p>
+              <?php } ?>
+			  <?php  if(isset($_SESSION['userId']) && $_SESSION['userId'] == -2) { ?>
+                  <p> Hi, <?php echo $ofname[0]?>!</p>
               <?php } ?>
 			</h1>
 		  </div>
@@ -204,15 +232,46 @@ $connect->close();
 		    <p>
 			<?php if(isset($_SESSION['userId']) && $_SESSION['userId']>2) { ?>
 				<a href="submitForms.php">Submit Form</a> &nbsp&nbsp&nbsp <a href="checkForms.php">Check Status</a>
-			<?php } else { ?>
-				<a href="checkForms.php">Review Forms</a>
-			<?php } ?>
+			<?php } else if(isset($_SESSION['userId']) && $_SESSION['userId'] == 1) { ?>
+				<a href="manageAssignee.php">Change form assignee</a>
+			<?php } else if(isset($_SESSION['userId']) && $_SESSION['userId'] == -2) { 
+				echo $ofname[1];
+			} ?>
 			</p>
 		  </div>
 		</div> 
 		<br/>
 		
 	</div>
+	
+	<?php  if(isset($_SESSION['userId']) && $_SESSION['userId']==-2) { ?>
+	<div class="col-md-8">
+		<div class="panel panel-default">
+			<div class="panel-heading"> <i class="glyphicon glyphicon-calendar"></i> All forms</div>
+			<div class="panel-body">
+				<table class="table" id="productTable">
+			  	<thead>
+			  		<tr>
+			  			<th style="width:20%;">Submitter</th>
+                        <th style="width:20%;">Date</th>
+			  			<th style="width:20%;">Preview</th>
+			  		</tr>
+			  	</thead>
+			  	<tbody>
+					<?php foreach($result as $res) { ?>
+						<tr>
+							<td><?php echo $res[0]?></td>
+                            <td><?php echo $res[1]?></td>
+							<td><?php echo $res[2]?></td>
+						</tr>
+					<?php } ?>
+				</tbody>
+				</table>
+			</div>
+		</div>
+
+	</div>
+	<?php  } ?>
 	
 	<?php  if(isset($_SESSION['userId']) && $_SESSION['userId']==1) { ?>
 	<div class="col-md-8">
