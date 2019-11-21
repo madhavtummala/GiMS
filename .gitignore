@@ -3,3 +3,4 @@
 php_action/db_connect.php
 .DS_Store
 php_action/core.php
+php_action/*.pdf
