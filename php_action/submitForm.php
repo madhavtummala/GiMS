@@ -2,13 +2,13 @@
 
 require_once 'core.php';
 
-/*echo "Inside submitForm.php";
+echo "Inside submitForm.php";
 echo '<pre>';
 var_dump($_SESSION);
 echo '</pre>';
 if($_SESSION['userId']>2) {
     header('location: dashboard.php');
-}*/
+}
 
 $valid['success'] = array('success' => false, 'messages' => array());
 
@@ -26,13 +26,13 @@ if($_POST) {
 		   $result = $forms->query($sql);
 		   $assignee = $result->fetch_array();
 		   $assignee = $assignee[0];
-		   //echo $assignee;
+		   echo $assignee;
 		   
 		   $sql = "SELECT name from officebearer WHERE emailid = '$assignee'";
 		   $result = $connect->query($sql);
 		   $assignee = $result->fetch_array();
 		   $assignee = $assignee[0];
-		   //echo $assignee;
+		   echo $assignee;
 
 		   $sql = "INSERT INTO currentapplications values(NULL, ?, ?, ?, 'New', curdate())";
            $stmt = $forms->prepare($sql);
