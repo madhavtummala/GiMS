@@ -3,6 +3,7 @@ drop database if exists THN2;
 drop database if exists THN1;
 drop database if exists MHR;
 drop database if exists SHR;
+drop database if exists Forms;
 
 set global event_scheduler = ON;
 
@@ -494,4 +495,29 @@ begin
 update issued set fine = case when datediff(curdate(),dateofissue)<=7 then fine+10 else fine end;
 end //
 
+DELIMITER ;
+
+create database Forms;
+use Forms;
+
+CREATE TABLE `currentapplications` (
+  `formid` int(11) NOT NULL,
+  `userid` varchar(50) NOT NULL,
+  `formdata` text NOT NULL,
+  `assignee` varchar(50) NOT NULL,
+  `status` varchar(20) NOT NULL,
+  `submitdate` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+INSERT INTO `currentapplications` (`formid`, `userid`, `formdata`, `assignee`, `status`, `submitdate`) VALUES
+(1, '16cs01017', '{\"name\":\"b\",\"invoiceno\":\"fuili\",\"cost\":\"20\"}', '1', 'New', '2019-11-21'),
+(2, '16cs01017', '{\"name\":\"p\",\"invoiceno\":\"poj\",\"cost\":\"20\"}', '1', 'New', '2019-11-21'),
+(3, '16cs01017', '{\"name\":\"p\",\"invoiceno\":\"98\",\"cost\":\"8\"}', '1', 'New', '2019-11-21');
+
+ALTER TABLE `currentapplications`
+  ADD PRIMARY KEY (`formid`);
+
+ALTER TABLE `currentapplications`
+  MODIFY `formid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+ 
 DELIMITER ;

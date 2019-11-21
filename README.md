@@ -37,6 +37,14 @@ if(isset($_SESSION['hostel']){
   }
 }
 
+//Form connection
+$forms = new mysqli($localhost, $username, $password, "Forms");
+if($forms->connect_error) {
+  die("Connection Failed : " . $forms->connect_error);
+} else {
+//   echo "Successfully connected";
+}
+
 ```
 ### core.php: 
 ```

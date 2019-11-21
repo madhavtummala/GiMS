@@ -182,7 +182,36 @@ $connect->close();
               <?php } ?>
 		  </div>
 		</div> 
+		</br>
 
+		<div class="card">
+		  <div class="cardHeader">
+		  <!--TODO: Use logic to generate URL like < ?php echo date('l') .' '.date('d').', '.date('Y'); ?>-->
+		    <h1>
+			<?php  if(isset($_SESSION['userId']) && $_SESSION['userId']==2) { ?>
+		        <p> Hi, admin!</p>
+              <?php } ?>
+              <?php  if(isset($_SESSION['userId']) && $_SESSION['userId']==1) { ?>
+                  <p> Hi, MainAdmin!</p>
+              <?php } ?>
+              <?php  if(isset($_SESSION['userId']) && $_SESSION['userId']>2) { ?>
+                  <p> Hi, student!</p>
+              <?php } ?>
+			</h1>
+		  </div>
+
+		  <div class="cardContainer">
+		    <p>
+			<?php if(isset($_SESSION['userId']) && $_SESSION['userId']>2) { ?>
+				<a href="submitForms.php">Submit Form</a> &nbsp&nbsp&nbsp <a href="checkForms.php">Check Status</a>
+			<?php } else { ?>
+				<a href="checkForms.php">Review Forms</a>
+			<?php } ?>
+			</p>
+		  </div>
+		</div> 
+		<br/>
+		
 	</div>
 	
 	<?php  if(isset($_SESSION['userId']) && $_SESSION['userId']==1) { ?>
