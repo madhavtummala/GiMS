@@ -24,6 +24,7 @@ create table officebearer
   name varchar(50) not null,
   contactnumber numeric(10,0) not null,
   emailid varchar(50) not null,
+  password varchar(256) not null,
   constraint pk_officebearer primary key (post),
   constraint uk_officebearer_contactnumber unique (contactnumber),
   constraint uk_officebearer_emailid unique (emailid)
@@ -70,12 +71,8 @@ insert into student values("16cs01041", "Tummala Madhav", "tm15@iitbbs.ac.in", "
 insert into student values("16cs01042", "Saksham Arneja", "sa26@iitbbs.ac.in", "$2y$10$NgRzVrrE2JccpkE1Cz9NJuYeVukKtHrBpKFufkKW4VrOUuVoF76jO", "THN2");
 
 
-insert into officebearer values("Gsec Science and Technology", "Geeth Nischal", "8500936193", "ggn10@iitbbs.ac.in");
-insert into officebearer values("Vice President", "Punith", "9999999999", "vp.sg@iitbbs.ac.in");
-
-ALTER table officebearer add PASSWORD VARCHAR(500);
-update officebearer set PASSWORD='$2y$12$7iSfWrzmR5481Uck3UvNO.vvm2ZYHPdGF6I4ZBvmPJw8klC/A8jX2' WHERE email='ggn10@iitbbs.ac.in';
-update officebearer set PASSWORD='$2y$12$YGOxjbqzp2H2sX0PD25vHeq1EnJrS6/HPcIg/QG66gyXRM2cwtrYm' WHERE email='vp.sg@iitbbs.ac.in';
+insert into officebearer values("Gsec Science and Technology", "Geeth Nischal", "8500936193", "ggn10@iitbbs.ac.in","$2y$12$7iSfWrzmR5481Uck3UvNO.vvm2ZYHPdGF6I4ZBvmPJw8klC/A8jX2");
+insert into officebearer values("Vice President", "Punith", "9999999999", "vp.sg@iitbbs.ac.in","$2y$12$YGOxjbqzp2H2sX0PD25vHeq1EnJrS6/HPcIg/QG66gyXRM2cwtrYm");
 
 
 create database THN2;
@@ -524,5 +521,14 @@ ALTER TABLE `currentapplications`
 
 ALTER TABLE `currentapplications`
   MODIFY `formid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+ 
+CREATE TABLE `assignee` (
+  `email` varchar(50) NOT NULL,
+  `formtype` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+INSERT INTO `assignee` (`email`, `formtype`) VALUES
+('ggn10@iitbbs.ac.in', '3.1'),
+('vp.sg@iitbbs.ac.in', '3.1');
  
 DELIMITER ;

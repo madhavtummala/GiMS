@@ -33,7 +33,7 @@ if($_POST) {
 			// exists
 			$result->data_seek(0);
 			$value = $result->fetch_assoc();
-			if(password_verify($password,$value['PASSWORD'])) {
+			if(password_verify($password,$value['password'])) {
 				$_SESSION['userId'] = -2;
 				$_SESSION['loginId'] = $value['emailid'];
 				header('location: dashboard.php');	
