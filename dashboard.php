@@ -5,8 +5,6 @@
 require_once 'php_action/db_connect.php';
 require_once 'includes/header.php';
 
-// echo "in dashboard\n";
-
 if($_SESSION['userId']>1) {
 
     $sql = "SELECT * FROM equipment WHERE status = 0";
