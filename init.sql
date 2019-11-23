@@ -72,7 +72,7 @@ insert into student values("16cs01042", "Saksham Arneja", "sa26@iitbbs.ac.in", "
 insert into student values("16cs01017", "Aditya Pal", "ap37@iitbbs.ac.in", "$2y$10$gL5gSrZ2AVkRTdH/lKm3z.BWTP1vOQ274GzvRBQBF4tAfi3uwqZqa", "THN2");
 
 
-insert into officebearer values("Gsec Science and Technology", "Geeth Nischal", "8500936193", "ggn10@iitbbs.ac.in", "$2y$12$7iSfWrzmR5481Uck3UvNO.vvm2ZYHPdGF6I4ZBvmPJw8klC/A8jX2");
+insert into officebearer values("Gsec Science and Technology", "Geeth Nischal", "8500936193", "ggn10@iitbbs.ac.in", "$2y$10$fuZBYCV18qgzgbF5vSZ71OgkMY3WdrPzMrY7020kVLaixrwH7bfW2");
 insert into officebearer values("Vice President", "Punith", "9999999999", "vp.sg@iitbbs.ac.in", "$2y$12$YGOxjbqzp2H2sX0PD25vHeq1EnJrS6/HPcIg/QG66gyXRM2cwtrYm");
 
 
