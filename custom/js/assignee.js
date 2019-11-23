@@ -6,115 +6,6 @@ $(document).ready(function() {
 		'ajax': 'php_action/changeAssignee.php',
 		'order': []
 	});
-
-
-	$('#submitBrandForm').unbind('submit').bind('submit', function()
-	{
-		$('.text-danger').remove();
-		$('.form-group').removeClass('has-error').removeClass('has-success');
-
-		var name = $('#addName').val();
-		var invoiceno = $('#addInvoiceno').val();
-		var cost =  $('#addCost').val();
-		var productImage = $("#productImage").val();		
-
-		if(productImage == "") {
-			$("#productImage").closest('.center-block').after('<p class="text-danger">Product Image field is required</p>');
-			$('#productImage').closest('.form-group').addClass('has-error');
-		}	else {
-			$("#productImage").find('.text-danger').remove();
-			$("#productImage").closest('.form-group').addClass('has-success');	  	
-		}
-		if(name == "") {
-			$('#addName').after('<p class="text-danger">Name field is required</p>');
-			$('#addName').closest('#form-group').addClass('has-error');
-		} else {
-			$('#addName').find('#text-danger').remove();
-			$('#addName').closest('#form-group').addClass('has-success');
-		}
-		if(cost == "") {
-			$('#addCost').after('<p class="text-danger">Cost field is required</p>');
-			$('#addCost').closest('#form-group').addClass('has-error');
-		} else {
-			$('#addCost').find('#text-danger').remove();
-			$('#addCost').closest('#form-group').addClass('has-success');
-		}
-
-		if(invoiceno == "") {
-			$("#addInvoiceno").after('<p class="text-danger">Invoice No field is required</p>');
-			$('#addInvoiceno').closest('#form-group').addClass('has-error');
-		} else {
-			$("#addInvoiceno").find('#text-danger').remove();
-			$("#addInvoiceno").closest('#form-group').addClass('has-success');
-		}
-
-		if(name && invoiceno && cost && productImage) {
-			var form = $(this);
-			var formData = new FormData(this);
-
-			$('#createBrandBtn').button('loading');
-
-			$.ajax({
-				url : 'php_action/createItem.php',
-				type: 'post',
-				data: formData,
-				dataType: 'json',
-				cache: false,
-				contentType: false,
-				processData: false,
-				success:function(response) {
-
-					console.log(response);
-
-					$('#createBrandBtn').button('reset');
-
-					if(response.success == true) {
-
-						manageBrandTable.ajax.reload(null, false);
-
-						$('#submitBrandForm')[0].reset();
-						$('.text-danger').remove();
-						$('.form-group').removeClass('has-error').removeClass('has-success');
-
-		  	  			$('#add-brand-messages').html('<div class="alert alert-success">'+
-				            '<button type="button" class="close" data-dismiss="alert">&times;</button>'+
-				            '<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> '+ response.messages +
-				          '</div>');
-
-		  	  			$('.alert-success').delay(500).show(10, function() {
-							$(this).delay(3000).hide(10, function() {
-								$(this).remove();
-							});
-						});	
-					}
-					else{
-
-						$('#submitBrandForm')[0].reset();
-						$('.text-danger').remove();
-						$('.form-group').removeClass('has-error').removeClass('has-success');
-
-		  	  			$('#add-brand-messages').html('<div class="alert alert-warning">'+
-							'<button type="button" class="close" data-dismiss="alert">&times;</button>'+
-							'<strong><i class="glyphicon glyphicon-warning-sign"></i></strong> '+ response.messages +
-							'</div>');
-
-						$('.alert-warning').delay(500).show(10, function() {
-							$(this).delay(3000).hide(10, function() {
-								$(this).remove();
-							});
-						});					
-					}
-
-				}
-			});
-
-		}
-
-		return false;
-	}
-
-	);
-
 });
 
 function returnBrands(){
@@ -288,7 +179,6 @@ function issueBrands(brandId = null) {
 function editBrands(brandId = null) {
 	if(brandId) {
 		$('#editBrandForm').unbind('submit').bind('submit', function() {
-
 			$('.text-danger').remove();
 			$('.form-group').removeClass('has-error').removeClass('has-success');
 			var brandName = $('#editBrandName').val();
@@ -305,15 +195,17 @@ function editBrands(brandId = null) {
 			if(brandStatus) {
 				var form = $(this);
 				$('#editBrandBtn').button('loading');
+				console.log(brandId);
+				var data=new FormData(this);
+				data.append('brandId', brandId);
 				$.ajax({
 					url: 'php_action/editAssignee.php',
 					type: 'post',
-					data: {brandId: brandId, editBrandName: brandName, editBrandStatus: brandStatus},
+					data: data,
 					dataType: 'json',
 					success:function(response) {
-
 						console.log(response);
-
+						console.log(brandStatus);
 						$('#editBrandBtn').button('reset');
 
 						if(response.success == true) {
