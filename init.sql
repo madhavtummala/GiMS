@@ -67,7 +67,7 @@ insert into centraladmin values('admin1', '$2y$10$lajkwiXNugj0eKHZdGLeiun8bsQ/Jy
 insert into hosteladmin values('thn1', '$2y$10$0cLXibHZh6mdhNc9a5cs1.vW6rH/7T3SuF2HZAad9qLZ32EsrnINi', "THN1");
 insert into hosteladmin values('thn2', '$2y$10$0cLXibHZh6mdhNc9a5cs1.vW6rH/7T3SuF2HZAad9qLZ32EsrnINi', "THN2");
 
-insert into student values("16cs01041", "Tummala Madhav", "tm15@iitbbs.ac.in", "$2y$10$yW9XMzeQuBlRaL7IwTjbYeWZUrgqgjHEcxkniaXswkzYKKAJDqxZO", "THN2");
+insert into student values("16cs01041", "Tummala Madhav", "tm15@iitbbs.ac.in", "$2y$10$fuZBYCV18qgzgbF5vSZ71OgkMY3WdrPzMrY7020kVLaixrwH7bfW2", "THN2");
 insert into student values("16cs01042", "Saksham Arneja", "sa26@iitbbs.ac.in", "$2y$10$NgRzVrrE2JccpkE1Cz9NJuYeVukKtHrBpKFufkKW4VrOUuVoF76jO", "THN2");
 
 

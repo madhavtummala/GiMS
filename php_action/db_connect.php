@@ -1,5 +1,9 @@
 <?php 	
 
+session_start();
+
+// echo "in db_connect";
+
 require_once 'config.php';
 
 // db connection
@@ -29,5 +33,7 @@ if($forms->connect_error) {
 } else {
 //   echo "Successfully connected";
 }
+
+// echo "out db_connect";
 
 ?>

@@ -1,6 +1,14 @@
-<?php require_once 'includes/header.php';
+<?php 
+
+session_start();
+
+require_once 'php_action/db_connect.php';
+require_once 'includes/header.php';
+
+// echo "in dashboard\n";
 
 if($_SESSION['userId']>1) {
+
     $sql = "SELECT * FROM equipment WHERE status = 0";
     $query = $hostel->query($sql);
     $countIssued = $query->num_rows;
@@ -63,32 +71,6 @@ else if($_SESSION['userId']==2)
     $sql = "SELECT * FROM student WHERE hostelname = '$hostel_name'";
     $fine = $connect->query($sql);
     $fine = $fine->num_rows;
-
-//    $hostel_name = $_SESSION['hostel'];
-//    $sql = "SELECT rollno FROM student WHERE hostelname = '$hostel_name'";
-//    $query = $connect->query($sql);
-//
-//    $output = array();
-//
-//    while($row = $query->fetch_array())
-//    {
-//        $roll_no = $row['rollno'];
-//
-//        $sql = "SELECT sum(fine) as totalfine FROM issued WHERE rollno = '$roll_no'";
-//        $fine = $hostel->query($sql);
-//        $fine = $fine->fetch_assoc();
-//        $fine = $fine['totalfine'];
-//
-//        $sql = "SELECT count(*) as num_issued FROM issued WHERE rollno = '$roll_no'";
-//        $num = $hostel->query($sql);
-//        $num = $num->fetch_assoc();
-//        $num = $num['num_issued'];
-//
-//        $output[]=array($roll_no, $fine, $num);
-//    }
-//
-//    echo json_encode($output);
-
 }
 else
 {
@@ -120,12 +102,11 @@ else
             $equip->num_rows
         );
 
-//        echo json_encode($query);
-//        echo "\n\n\n\n\n\n";
     }
 }
 
-$connect->close();
+// echo "out dashboard";
+
 ?>
 
 <!-- fullCalendar 2.2.5-->
