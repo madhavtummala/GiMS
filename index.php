@@ -1,10 +1,11 @@
 <?php 
-require_once 'php_action/db_connect.php';
 
 session_start();
 
+require_once 'php_action/db_connect.php';
+
 if(isset($_SESSION['userId'])) {
-	header('location: dashboard.php');	
+	header('location: dashboard.php');
 }
 
 require_once 'includes/indexHeader.php';

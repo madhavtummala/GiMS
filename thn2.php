@@ -1,8 +1,14 @@
-<?php require_once 'includes/header.php'; 
+<?php 
+
+require_once 'includes/header.php'; 
+
+// echo "in thn2";
 
 if(!($_SESSION['userId']==1 || $_SESSION['hostel']=="THN2")) {
     header('location: dashboard.php');
 }
+
+// echo "out thn2";
 
 ?>
 

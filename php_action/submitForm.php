@@ -11,10 +11,10 @@ if($_SESSION['userId']>2) {
 }*/
 
 $valid['success'] = array('success' => false, 'messages' => array());
-
+echo "hi";
 
 if($_POST) {
-
+echo "string";
     $name = $_POST['addName'];
     $invoiceno = $_POST['addInvoiceno'];
     $cost = $_POST['addCost'];
@@ -22,17 +22,22 @@ if($_POST) {
 		   $data = json_encode($arr);
 		   
 		   $formtype = $_SESSION['formtype'];
+		   echo $formtype;
 		   $sql = "SELECT email from assignee WHERE formtype = '$formtype'";
+		   echo $sql;
 		   $result = $forms->query($sql);
+		   echo 
 		   $assignee = $result->fetch_array();
+		   var_dump($assignee);
 		   $assignee = $assignee[0];
-		   //echo $assignee;
+		   echo $assignee;
 		   
 		   $sql = "SELECT name from officebearer WHERE emailid = '$assignee'";
 		   $result = $connect->query($sql);
 		   $assignee = $result->fetch_array();
 		   $assignee = $assignee[0];
 		   //echo $assignee;
+		   echo "bye";
 
 		   $sql = "INSERT INTO currentapplications values(NULL, ?, ?, ?, 'New', curdate())";
            $stmt = $forms->prepare($sql);
@@ -48,11 +53,13 @@ if($_POST) {
     $forms->close();
     if ($valid['success'])
 	{
-		header('location:../dashboard.php');
+		// header('location:../dashboard.php');
+		echo "success";
 	}
 	else
 	{
 		$_SESSION['inputValues'] = $arr;
-		header('location:form1.php');
+		echo "fail";
+		// header('location:form1.php');
 	}
 }

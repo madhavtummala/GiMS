@@ -67,12 +67,12 @@ insert into centraladmin values('admin1', '$2y$10$lajkwiXNugj0eKHZdGLeiun8bsQ/Jy
 insert into hosteladmin values('thn1', '$2y$10$0cLXibHZh6mdhNc9a5cs1.vW6rH/7T3SuF2HZAad9qLZ32EsrnINi', "THN1");
 insert into hosteladmin values('thn2', '$2y$10$0cLXibHZh6mdhNc9a5cs1.vW6rH/7T3SuF2HZAad9qLZ32EsrnINi', "THN2");
 
-insert into student values("16cs01041", "Tummala Madhav", "tm15@iitbbs.ac.in", "$2y$10$yW9XMzeQuBlRaL7IwTjbYeWZUrgqgjHEcxkniaXswkzYKKAJDqxZO", "THN2");
+insert into student values("16cs01041", "Tummala Madhav", "tm15@iitbbs.ac.in", "$2y$10$fuZBYCV18qgzgbF5vSZ71OgkMY3WdrPzMrY7020kVLaixrwH7bfW2", "THN2");
 insert into student values("16cs01042", "Saksham Arneja", "sa26@iitbbs.ac.in", "$2y$10$NgRzVrrE2JccpkE1Cz9NJuYeVukKtHrBpKFufkKW4VrOUuVoF76jO", "THN2");
 
+insert into officebearer values("Gsec Science and Technology", "Geeth Nischal", "8500936193", "ggn10@iitbbs.ac.in", "$2y$10$fuZBYCV18qgzgbF5vSZ71OgkMY3WdrPzMrY7020kVLaixrwH7bfW2");
+insert into officebearer values("Vice President", "Punith", "9999999999", "vp.sg@iitbbs.ac.in", "$2y$12$YGOxjbqzp2H2sX0PD25vHeq1EnJrS6/HPcIg/QG66gyXRM2cwtrYm");
 
-insert into officebearer values("Gsec Science and Technology", "Geeth Nischal", "8500936193", "ggn10@iitbbs.ac.in","$2y$12$7iSfWrzmR5481Uck3UvNO.vvm2ZYHPdGF6I4ZBvmPJw8klC/A8jX2");
-insert into officebearer values("Vice President", "Punith", "9999999999", "vp.sg@iitbbs.ac.in","$2y$12$YGOxjbqzp2H2sX0PD25vHeq1EnJrS6/HPcIg/QG66gyXRM2cwtrYm");
 
 
 create database THN2;

@@ -4,6 +4,8 @@ require_once 'core.php';
 define('__ROOT__', dirname(dirname(__FILE__)));
 require_once(__ROOT__.'/includes/fpdf.php');
 
+//echo __ROOT__.'/includes/fpdf.php';
+
 if($_SESSION['userId'] == -2)
 {
 	$output = array();
@@ -27,6 +29,7 @@ if($_SESSION['userId'] == -2)
 		$pdf->Ln();
 		$pdf->Cell(40,10,'The invoiceno is '.$formdata['invoiceno']);
 		$myfile_path = 'php_action/'.$res.$assignee.".pdf";
+		//echo $myfile_path;
 		$pdf->Output('F',$myfile_path);
 		$link = "<a href='$myfile_path'>Click here</a>"; 
 
@@ -44,6 +47,7 @@ if($_SESSION['userId'] == -2)
 }
 else
 {
+	//echo "hi";
 	$userid = $_SESSION['userId'];
 	$sql = "SELECT assignee, submitdate, status, formdata FROM currentapplications WHERE userid='$userid' ORDER BY formid";
 	$result = $forms->query($sql);
@@ -51,6 +55,8 @@ else
 	$res = 0;
 
 	if($result->num_rows > 0) {
+
+	//echo "hi2";
 
 	 $activeBrands = "";
 
@@ -95,6 +101,7 @@ else
 
 		/*$img = "<img src='assests/images/".strtolower(str_replace(' ','',$row[1])).".jpeg' height='100' width ='100'>";*/
 
+		//echo "ok";
 		$pdf = new FPDF();
 		$pdf->AddPage();
 		$pdf->SetFont('Arial','B',16);
