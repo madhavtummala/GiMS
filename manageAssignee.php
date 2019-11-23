@@ -47,68 +47,6 @@ if($_SESSION['userId']!=1){
     </div>
 
     <!-- add brand -->
-    <!--<?php  if(isset($_SESSION['userId']) && $_SESSION['userId']==1) { ?>
-    <div class="modal fade" id="addBrandModel" tabindex="-1" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-
-                <form class="form-horizontal" id="submitBrandForm">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title"><i class="fa fa-plus"></i> Add Item</h4>
-                    </div>
-                    <div class="modal-body">
-
-                        <div id="add-brand-messages"></div>
-
-                        <div id="add-brand-result">                          
-
-                            <div class="form-group">
-                                <label for="addName" class="col-sm-3 control-label">Name </label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="addName" placeholder="Name of the Item" name="addName" autocomplete="off">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="addCost" class="col-sm-3 control-label">Cost </label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="addCost" placeholder="Cost of the Item" name="addCost" autocomplete="off">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="addInvoiceno" class="col-sm-3 control-label">Invoice No </label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="addInvoiceno" placeholder="Invoice no of Bill" name="addInvoiceno" autocomplete="off">
-                                </div>
-
-                            </div>
-
-                            <div class="form-group">
-                                <label for="productImage" class="col-sm-3 control-label">Product Image </label>
-                                    <div class="col-sm-8">
-                                            <div id="kv-avatar-errors-1" class="center-block" style="display:none;"></div>                          
-                                        <div class="kv-avatar center-block">                            
-                                            <input type="file" class="form-control" id="productImage" placeholder="Product Name" name="productImage" class="file-loading" style="width:auto;"/>
-                                        </div>
-                                      
-                                    </div>
-                            </div>                             
-
-                        </div>
-                    </div>
-
-                    <div class="modal-footer createBrandFooter">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-primary" id="createBrandBtn" data-loading-text="Loading..." autocomplete="off">Add Item</button>
-                    </div>
-
-                </form>
-            </div>
-        </div>
-    </div>
-    <?php } ?>-->
     
     <!-- edit brand -->
     <?php  if(isset($_SESSION['userId']) && $_SESSION['userId'] == 1) { ?>
@@ -132,7 +70,7 @@ if($_SESSION['userId']!=1){
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="editBrandName" class="col-sm-3 control-label">Email id </label>
+                                <label for="editBrandEmail" class="col-sm-3 control-label">Email id </label>
                                 <label class="col-sm-1 control-label">: </label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control" id="editBrandEmail" placeholder="Email id of assignee" name="editBrandEmail" autocomplete="off">

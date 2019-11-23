@@ -71,9 +71,9 @@ insert into student values("16cs01041", "Tummala Madhav", "tm15@iitbbs.ac.in", "
 insert into student values("16cs01042", "Saksham Arneja", "sa26@iitbbs.ac.in", "$2y$10$NgRzVrrE2JccpkE1Cz9NJuYeVukKtHrBpKFufkKW4VrOUuVoF76jO", "THN2");
 insert into student values("16cs01017", "Aditya Pal", "ap37@iitbbs.ac.in", "$2y$10$gL5gSrZ2AVkRTdH/lKm3z.BWTP1vOQ274GzvRBQBF4tAfi3uwqZqa", "THN2");
 
-
 insert into officebearer values("Gsec Science and Technology", "Geeth Nischal", "8500936193", "ggn10@iitbbs.ac.in", "$2y$10$fuZBYCV18qgzgbF5vSZ71OgkMY3WdrPzMrY7020kVLaixrwH7bfW2");
 insert into officebearer values("Vice President", "Punith", "9999999999", "vp.sg@iitbbs.ac.in", "$2y$12$YGOxjbqzp2H2sX0PD25vHeq1EnJrS6/HPcIg/QG66gyXRM2cwtrYm");
+
 
 
 create database THN2;
@@ -530,5 +530,14 @@ CREATE TABLE `assignee` (
 INSERT INTO `assignee` (`email`, `formtype`) VALUES
 ('ggn10@iitbbs.ac.in', '3.1'),
 ('vp.sg@iitbbs.ac.in', '4.2');  
+ 
+CREATE TABLE `assignee` (
+  `email` varchar(50) NOT NULL,
+  `formtype` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+INSERT INTO `assignee` (`email`, `formtype`) VALUES
+('ggn10@iitbbs.ac.in', '3.1'),
+('vp.sg@iitbbs.ac.in', '3.1');
  
 DELIMITER ;

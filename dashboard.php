@@ -1,6 +1,6 @@
 <?php 
 
-session_start();
+//session_start();
 
 require_once 'php_action/db_connect.php';
 require_once 'includes/header.php';

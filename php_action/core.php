@@ -1,6 +1,6 @@
 <?php 
 
-session_start();
+//session_start();
 
 require_once 'config.php';
 require_once 'db_connect.php';
