@@ -1,14 +1,18 @@
-#!/usr/bin/env python3
-
 import mysql.connector;
 from datetime import date;
 from datetime import timedelta;
 import smtplib;
 import time;
+from email.MIMEMultipart import MIMEMultipart
+from email.MIMEText import MIMEText
+from email.MIMEImage import MIMEImage
+
+base_pdf_location = "/Applications/MAMP/htdocs/Gymkhana/forms"
 
 issue_add = set();
 issue_due = set();
 issue_ret = set();
+applications = set();
 
 gym = mysql.connector.connect(
   host="localhost",
@@ -21,6 +25,35 @@ gym = mysql.connector.connect(
 gymcursor = gym.cursor();
 
 while True:
+
+  # For sending application successful mail
+  gymcursor.execute("select * from currentapplications where status = 1");
+  for form in gymcursor:
+    if form[0] not in applications:
+      applications.add(form[0]);
+      gymcursor2 = gym.cursor();
+      gymcursor2.execute("select * from student where rollno=%s",(form[1], ) );
+      for std in gymcursor2:
+
+        msg = MIMEMultipart();
+        msg['From'] = 'sg.iitbbs@gmail.com';
+        msg['To'] = std[2];
+        msg['CC'] = form[6];
+        msg['Subject'] = "Application Accepted";
+        body = header + 'Dear ' + std[1] + ',\n\nThis is to infrom you that your application (id:'+str(form[0])+') for form ' + form[7] + ' is Accepted by the corresponding authority ('+form[3]+').'+ '\n\nRegards,\nStudents\' Gymkhana,\nIndian Institute of Technology Bhubaneswar\n\n';
+        msg.attach(MIMEText(body, 'plain'));
+        msg.attach(MIMEText(file('{}/{}.pdf'.format(base_pdf_location,form[0])).read()))
+
+        gmail_user = 'sg.iitbbs@gmail.com';
+        gmail_pwd = 'Password';
+        # smtpserver = smtplib.SMTP("smtp.gmail.com",587);
+        # smtpserver.ehlo();
+        # smtpserver.starttls();
+        # smtpserver.ehlo;
+        # smtpserver.login(gmail_user, gmail_pwd);
+        print (msg)
+        # smtpserver.sendmail(gmail_user, std[2], msg);
+        # smtpserver.close();   
 
   gymcursor.execute("select dbaddress from hostel");
 

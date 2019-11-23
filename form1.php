@@ -3,7 +3,7 @@ require_once 'includes/header.php';
 /*echo '<pre>';
 var_dump($_SESSION);
 echo '</pre>';*/
-$_SESSION['formtype'] = "3.1";
+$_SESSION['formtype'] = "3_1";
 ?>
 <form class="form-horizontal" id="submitCommunityCentreForm" action="submitForm.php" method="POST">
                     <div class="modal-header">

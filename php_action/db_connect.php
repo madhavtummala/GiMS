@@ -29,13 +29,13 @@ if(isset($_SESSION['hostel'])){
 }
 
 //Form connection
-$forms = new mysqli($localhost, $username, $password, "Forms");
-if($forms->connect_error) {
-  die("Connection Failed : " . $forms->connect_error);
+$forms = new mysqli($localhost, $username, $password, $dbname);
+// check connection
+if($connect->connect_error) {
+  die("Connection Failed : " . $connect->connect_error);
 } else {
-//   echo "Successfully connected";
+  // echo "Successfully connected";
 }
-
 // echo "out db_connect";
 
 ?>

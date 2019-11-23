@@ -3,3 +3,4 @@
 .DS_Store
 php_action/config.php
 php_action/*.pdf
+forms/*.pdf
