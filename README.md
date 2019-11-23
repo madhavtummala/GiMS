@@ -1,6 +1,6 @@
 ## Gymkhana Portal
 
-Add your own db_connect.py in `php_action/db_connect.py` and core.php in `php_action/core.php`.  
+Add your own config.php in `php_action/config.php`
 Run `init.sql` in your mysql db. If running in phpMyadmin, copy and paste the entire code sql entry field of phpMyAdmin localhost page (outside all the databases).  
 
 ## Main Admin: 
@@ -8,56 +8,21 @@ LoginID:  `admin1`
 Password:  `admin`  
 You can add,edit,remove, control basically everything from this account. Or you can manually tackle with sql code.  
 
-### db_connect.php
+### config.php
 ```
-<?php 	
+<?php   
 
+// echo "in config";
+
+$root = "http://localhost:8888/Gymkhana/";
 $localhost = "localhost";  //db location
 $username = "root";  //your db username
 $password = "root";  //your db password
 $dbname = "Gymkhana";
 
-// db connection
-$connect = new mysqli($localhost, $username, $password, $dbname);
-// check connection
-if($connect->connect_error) {
-  die("Connection Failed : " . $connect->connect_error);
-} else {
-//   echo "Successfully connected";
-}
+// echo "out config";
 
-// db connection
-if(isset($_SESSION['hostel']){
-  $hostel = new mysqli($localhost, $username, $password, $_SESSION['hostel']);
-  // check connection
-  if($hostel->connect_error) {
-    die("Connection Failed : " . $hostel->connect_error);
-  } else {
-  //   echo "Successfully connected";
-  }
-}
-
-//Form connection
-$forms = new mysqli($localhost, $username, $password, "Forms");
-if($forms->connect_error) {
-  die("Connection Failed : " . $forms->connect_error);
-} else {
-//   echo "Successfully connected";
-}
-
-```
-### core.php: 
-```
-<?php 
-
-session_start();
-
-require_once 'db_connect.php';
-
-if(!$_SESSION['userId']) {
-	header('location: <absolute location of index.php from root>);	//ex: http://localhost:8888/Gymkhana/index.php
-} 
-
+?>
 ```
  
 Invisible links to other login pages are at bottom right of any login page.  
