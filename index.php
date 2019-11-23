@@ -2,6 +2,8 @@
 
 session_start();
 
+// echo "came to index";
+
 require_once 'php_action/db_connect.php';
 
 if(isset($_SESSION['userId'])) {
