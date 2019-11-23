@@ -74,8 +74,6 @@ insert into student values("16cs01017", "Aditya Pal", "ap37@iitbbs.ac.in", "$2y$
 insert into officebearer values("Gsec Science and Technology", "Geeth Nischal", "8500936193", "ggn10@iitbbs.ac.in", "$2y$10$fuZBYCV18qgzgbF5vSZ71OgkMY3WdrPzMrY7020kVLaixrwH7bfW2");
 insert into officebearer values("Vice President", "Punith", "9999999999", "vp.sg@iitbbs.ac.in", "$2y$12$YGOxjbqzp2H2sX0PD25vHeq1EnJrS6/HPcIg/QG66gyXRM2cwtrYm");
 
-
-
 create database THN2;
 use THN2;
 
@@ -508,29 +506,21 @@ CREATE TABLE `currentapplications` (
   `userid` varchar(50) NOT NULL,
   `formdata` text NOT NULL,
   `assignee` varchar(50) NOT NULL,
-  `status` varchar(20) NOT NULL,
+  `status` int NOT NULL,
   `submitdate` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO `currentapplications` (`formid`, `userid`, `formdata`, `assignee`, `status`, `submitdate`) VALUES
-(1, '16cs01017', '{\"name\":\"b\",\"invoiceno\":\"fuili\",\"cost\":\"20\"}', '1', 'New', '2019-11-21'),
-(2, '16cs01017', '{\"name\":\"p\",\"invoiceno\":\"poj\",\"cost\":\"20\"}', '1', 'New', '2019-11-21'),
-(3, '16cs01017', '{\"name\":\"p\",\"invoiceno\":\"98\",\"cost\":\"8\"}', '1', 'New', '2019-11-21');
+(1, '16cs01017', '{\"name\":\"b\",\"invoiceno\":\"fuili\",\"cost\":\"20\"}', '1', 0, '2019-11-21'),
+(2, '16cs01017', '{\"name\":\"p\",\"invoiceno\":\"poj\",\"cost\":\"20\"}', '1', 0, '2019-11-21'),
+(3, '16cs01017', '{\"name\":\"p\",\"invoiceno\":\"98\",\"cost\":\"8\"}', '1', 0, '2019-11-21');
 
 ALTER TABLE `currentapplications`
   ADD PRIMARY KEY (`formid`);
 
 ALTER TABLE `currentapplications`
   MODIFY `formid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-CREATE TABLE `assignee` (
-  `email` varchar(50) NOT NULL,
-  `formtype` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-INSERT INTO `assignee` (`email`, `formtype`) VALUES
-('ggn10@iitbbs.ac.in', '3.1'),
-('vp.sg@iitbbs.ac.in', '4.2');  
- 
 CREATE TABLE `assignee` (
   `email` varchar(50) NOT NULL,
   `formtype` varchar(20) NOT NULL

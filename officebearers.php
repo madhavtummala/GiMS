@@ -1,6 +1,10 @@
-<?php require_once 'includes/header.php'; 
+<?php 
+
+require_once 'includes/header.php'; 
+
 $sql = "SELECT * FROM officebearer order by post";
 $query = $connect->query($sql);
+
 ?>
 
     <div class="row">
