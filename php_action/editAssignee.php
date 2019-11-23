@@ -8,27 +8,6 @@ if($_SESSION['userId']!=1) {
 
 $valid['success'] = array('success' => false, 'messages' => array());
 
-<<<<<<< HEAD
-$brandId = $_POST['brandId'];
-$email = $_POST['brandId'];
-//var_dump($_POST);
-if($brandId) { 
- /*$sql = "UPDATE assignee SET email = '$email' WHERE formtype = '$brandId'";
- if($forms->query($sql) == TRUE) {
- 	$valid['success'] = true;
-	$valid['messages'] = "Successfully updated assignee";		
- } else {
- 	$valid['success'] = false;
- 	$valid['messages'] = "Error while updating assignee (Maybe Constraint error)";
- }*/
- 
-  $valid['success'] = true;
-  $valid['messages'] = "$email";
- //$forms->close();
-
- echo json_encode($valid);
- 
-=======
 if($_POST) {
 
     $name = $_POST['editBrandName'];
@@ -48,5 +27,4 @@ if($_POST) {
         }
 
 	echo json_encode($valid); 
->>>>>>> f15407a24b505436f126c6b965598b7a594e1bf2
 }
