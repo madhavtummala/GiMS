@@ -10,10 +10,11 @@ if($_SESSION['userId'] == -2)
 {
 	$output = array();
 	$assignee = $_SESSION['aname'];
-	$sql = "SELECT userid, submitdate, formdata FROM currentapplications WHERE assignee='$assignee' order by formid";
+	$sql = "SELECT userid, submitdate, formdata, formid FROM currentapplications WHERE assignee='$assignee' AND status=0 order by formid";
 	$result = $forms->query($sql);
 	$res = 0;
 	if($result->num_rows > 0) {
+
 	while($row = $result->fetch_array()) {
 		$sql = "SELECT name from student WHERE rollno = '$row[0]'";
 		$result2 = $connect->query($sql);
@@ -31,25 +32,28 @@ if($_SESSION['userId'] == -2)
 		}
 		$initial = $initial.','.$res.$new_assignee.'.pdf';
 
-		$command = "python C://xampp//htdocs//Gymkhana//pdf.py ".$initial;
+		$command = "python ".$base."/pdf.py \"".$initial."\"";
 		exec("$command", $output); 
 
-		$x = array(
+		$output['data'][] = array(
 			$row[0],
 			$row[1],
-			$link
+			$link,
+			$button
 			);
 		array_push($output, $x);
 		$res = $res + 1;
 	 }
+
 	}
+
 	echo json_encode($output);
 }
 else
 {
 
 	$userid = $_SESSION['userId'];
-	$sql = "SELECT assignee, submitdate, status, formdata FROM currentapplications WHERE userid='$userid' ORDER BY formid";
+	$sql = "SELECT assignee, submitdate, status, formdata, formid FROM currentapplications WHERE userid='$userid' ORDER BY formid";
 	$result = $forms->query($sql);
 	$output = array('data' => array());
 	$res = 0;
@@ -75,14 +79,13 @@ else
 		$output['data'][] = array(
 			$row[0],
 			$row[1],
-			$row[2],
-			$link
+			$activeBrands,
+			$link,
+			$button
 			);
 	 }
 
 	}
-
-	// $hostel->close();
 
 	echo json_encode($output);
 }

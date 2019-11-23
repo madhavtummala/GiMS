@@ -1,9 +1,10 @@
 <?php 	
 
-require_once 'core.php';
+require_once 'php_action/core.php';
 
-$valid['success'] = array('success' => false, 'messages' => array());
-//echo "hi";
+if(!($_SESSION['userId']>2)) {
+    header('location: dashboard.php');
+}
 
 if($_POST) {
 //echo "string";

@@ -223,34 +223,75 @@ else
 		
 	</div>
 	
+<!-- This is the main change now -->
 	<?php  if(isset($_SESSION['userId']) && $_SESSION['userId']==-2) { ?>
-	<div class="col-md-8">
-		<div class="panel panel-default">
-			<div class="panel-heading"> <i class="glyphicon glyphicon-calendar"></i> All forms</div>
-			<div class="panel-body">
-				<table class="table" id="productTable">
-			  	<thead>
-			  		<tr>
-			  			<th style="width:20%;">Submitter</th>
-                        <th style="width:20%;">Date</th>
-			  			<th style="width:20%;">Preview</th>
-			  		</tr>
-			  	</thead>
-			  	<tbody>
-					<?php foreach($result as $res) { ?>
-						<tr>
-							<td><?php echo $res[0]?></td>
-                            <td><?php echo $res[1]?></td>
-							<td><?php echo $res[2]?></td>
-						</tr>
-					<?php } ?>
-				</tbody>
-				</table>
-			</div>
-		</div>
 
-	</div>
-	<?php  } ?>
+    <div class="col-md-8">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="page-heading"> <i class="glyphicon glyphicon-edit"></i> Manage Application</div>
+            </div>
+            <div class="panel-body">
+
+                <div class="remove-messages"></div>
+                <div class="accept-messages"></div>
+
+                <table class="table" id="manageBrandTable">
+                    <thead>
+                    <tr>
+                        <th>Assignee</th>
+                        <th>Date Submitted</th>
+                        <th style="width:15%;">Preview</th>
+                        <th style="width:15%;">Action</th>
+                    </tr>
+                    </thead>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- accept brand -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="acceptMemberModel">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title"><i class="glyphicon glyphicon-ok"></i> Accept Application</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Do you really want to accept?</p>
+                </div>
+                <div class="modal-footer acceptBrandFooter">
+                    <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="glyphicon glyphicon-accept-sign"></i> Close</button>
+                    <button type="button" class="btn btn-primary" id="acceptBrandBtn" data-loading-text="Loading..."> <i class="glyphicon glyphicon-ok-sign"></i> Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>  
+
+    <!-- remove brand -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="removeMemberModel">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title"><i class="glyphicon glyphicon-remove"></i> Reject Application</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Do you really want to reject?</p>
+                </div>
+                <div class="modal-footer removeBrandFooter">
+                    <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="glyphicon glyphicon-remove-sign"></i> Close</button>
+                    <button type="button" class="btn btn-primary" id="removeBrandBtn" data-loading-text="Loading..."> <i class="glyphicon glyphicon-ok-sign"></i> Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  <?php } ?>
+<!-- This is the main change now -->  
 	
 	<?php  if(isset($_SESSION['userId']) && $_SESSION['userId']==1) { ?>
 	<div class="col-md-8">
@@ -379,4 +420,5 @@ else
     });
 </script>
 
+<script src="custom/js/forms.js"></script>
 <?php require_once 'includes/footer.php'; ?>

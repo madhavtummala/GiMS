@@ -5,7 +5,7 @@ var_dump($_SESSION);
 echo '</pre>';*/
 $_SESSION['formtype'] = "3.1";
 ?>
-<form class="form-horizontal" id="submitCommunityCentreForm" action="php_action/submitForm.php" method="POST">
+<form class="form-horizontal" id="submitCommunityCentreForm" action="submitForm.php" method="POST">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         <h4 class="modal-title"><i class="fa fa-plus" ></i> Add Item</h4>
