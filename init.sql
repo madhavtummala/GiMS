@@ -25,9 +25,9 @@ create table officebearer
   contactnumber numeric(10,0) not null,
   emailid varchar(50) not null,
   password varchar(256) not null,
-  constraint pk_officebearer primary key (post),
+  constraint pk_officebearer primary key (emailid),
   constraint uk_officebearer_contactnumber unique (contactnumber),
-  constraint uk_officebearer_emailid unique (emailid)
+  constraint uk_officebearer_post unique (post)
 );
 
 create table student
@@ -56,6 +56,28 @@ create table hosteladmin (
   constraint fk_hosteladmin_hostelname foreign key (hostelname) references hostel(hostelname)
 );
 
+create table assignee (
+  email varchar(50) NOT NULL,
+  formtype varchar(20) NOT NULL,
+  constraint fk_assignee_email foreign key (email) references officebearer(emailid),
+  constraint pk_assignee primary key(formtype)
+);
+
+create table currentapplications (
+  formid int not null auto_increment,
+  userid varchar(50) NOT NULL,
+  formdata text NOT NULL,
+  assignee varchar(20),
+  status int NOT NULL,
+  submitdate date NOT NULL,
+  assignee_email varchar(50) not null,
+  formtype varchar(20) NOT NULL,
+  constraint pk_currentapplications primary key(formid),
+  constraint fk_currentapplications_userid foreign key (userid) references student(rollno),
+  constraint fk_currentapplications_formtype foreign key (formtype) references assignee(formtype),
+  constraint fk_currentapplications_assignee_email foreign key (assignee_email) references officebearer(emailid)
+);
+
 insert into hostel values
 ("MHR", "MHR"),
 ("SHR", "SHR"),
@@ -72,7 +94,10 @@ insert into student values("16cs01042", "Saksham Arneja", "sa26@iitbbs.ac.in", "
 insert into student values("16cs01017", "Aditya Pal", "ap37@iitbbs.ac.in", "$2y$10$gL5gSrZ2AVkRTdH/lKm3z.BWTP1vOQ274GzvRBQBF4tAfi3uwqZqa", "THN2");
 
 insert into officebearer values("Gsec Science and Technology", "Geeth Nischal", "8500936193", "ggn10@iitbbs.ac.in", "$2y$10$fuZBYCV18qgzgbF5vSZ71OgkMY3WdrPzMrY7020kVLaixrwH7bfW2");
-insert into officebearer values("Vice President", "Punith", "9999999999", "vp.sg@iitbbs.ac.in", "$2y$12$YGOxjbqzp2H2sX0PD25vHeq1EnJrS6/HPcIg/QG66gyXRM2cwtrYm");
+insert into officebearer values("Vice President", "Punith", "9999999999", "vp.sg@iitbbs.ac.in", "$2y$10$fuZBYCV18qgzgbF5vSZ71OgkMY3WdrPzMrY7020kVLaixrwH7bfW2");
+
+insert into assignee values ('ggn10@iitbbs.ac.in', '3_2');
+insert into assignee values ('vp.sg@iitbbs.ac.in', '3_1');
 
 create database THN2;
 use THN2;
@@ -496,38 +521,4 @@ begin
 update issued set fine = case when datediff(curdate(),dateofissue)<=7 then fine+10 else fine end;
 end //
 
-DELIMITER ;
-
-create database Forms;
-use Forms;
-
-CREATE TABLE `currentapplications` (
-  `formid` int(11) NOT NULL,
-  `userid` varchar(50) NOT NULL,
-  `formdata` text NOT NULL,
-  `assignee` varchar(50) NOT NULL,
-  `status` int NOT NULL,
-  `submitdate` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-INSERT INTO `currentapplications` (`formid`, `userid`, `formdata`, `assignee`, `status`, `submitdate`) VALUES
-(1, '16cs01017', '{\"name\":\"b\",\"invoiceno\":\"fuili\",\"cost\":\"20\"}', '1', 0, '2019-11-21'),
-(2, '16cs01017', '{\"name\":\"p\",\"invoiceno\":\"poj\",\"cost\":\"20\"}', '1', 0, '2019-11-21'),
-(3, '16cs01017', '{\"name\":\"p\",\"invoiceno\":\"98\",\"cost\":\"8\"}', '1', 0, '2019-11-21');
-
-ALTER TABLE `currentapplications`
-  ADD PRIMARY KEY (`formid`);
-
-ALTER TABLE `currentapplications`
-  MODIFY `formid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
-CREATE TABLE `assignee` (
-  `email` varchar(50) NOT NULL,
-  `formtype` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-INSERT INTO `assignee` (`email`, `formtype`) VALUES
-('ggn10@iitbbs.ac.in', '3.1'),
-('vp.sg@iitbbs.ac.in', '3.1');
- 
 DELIMITER ;

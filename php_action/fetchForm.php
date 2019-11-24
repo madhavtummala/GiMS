@@ -1,10 +1,6 @@
 <?php 	
 
 require_once 'core.php';
-define('__ROOT__', dirname(dirname(__FILE__)));
-require_once(__ROOT__.'/includes/fpdf.php');
-
-//echo __ROOT__.'/includes/fpdf.php';
 
 if($_SESSION['userId'] == -2)
 {
@@ -12,28 +8,26 @@ if($_SESSION['userId'] == -2)
 	$assignee = $_SESSION['aname'];
 	$sql = "SELECT userid, submitdate, formdata, formid FROM currentapplications WHERE assignee='$assignee' AND status=0 order by formid";
 	$result = $forms->query($sql);
-	$res = 0;
 	if($result->num_rows > 0) {
 
+	$activeBrands = "";
+
 	while($row = $result->fetch_array()) {
-		$sql = "SELECT name from student WHERE rollno = '$row[0]'";
-		$result2 = $connect->query($sql);
-		$row2 = $result2->fetch_array();
-		$row[0] = $row2[0];
-		$new_assignee = str_replace(' ', '', $assignee);
-		$formdata = json_decode($row[2], true);
-		$link = "php_action/".$res.$new_assignee.".pdf";
-		$link = "<a href=$link target='_blank'>Click here</a>";
+		$brandId = $row[3];
 
-		$initial="";
-		foreach ($formdata as $data)
-		{
-			$initial = $initial.$data.',';
-		}
-		$initial = $initial.','.$res.$new_assignee.'.pdf';
+		$button = '<!-- Single button -->
+		<div class="btn-group">
+		  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			Action <span class="caret"></span>
+		  </button>
+		  <ul class="dropdown-menu">
+			<li><a type="button" data-toggle="modal" data-target="#acceptMemberModel" onclick="acceptBrands('.$brandId.')"> <i class="glyphicon glyphicon-ok"></i> Accept</a></li>
+			<li><a type="button" data-toggle="modal" data-target="#removeMemberModel" onclick="removeBrands('.$brandId.')"> <i class="glyphicon glyphicon-remove"></i> Reject</a></li>     
+		  </ul>
+		</div>';
 
-		$command = "python ".$base."/pdf.py \"".$initial."\"";
-		exec("$command", $output); 
+		$link = "forms/".$brandId.".pdf";
+		$link = "<a href=$link>Click here</a>";
 
 		$output['data'][] = array(
 			$row[0],
@@ -56,22 +50,33 @@ else
 	$sql = "SELECT assignee, submitdate, status, formdata, formid FROM currentapplications WHERE userid='$userid' ORDER BY formid";
 	$result = $forms->query($sql);
 	$output = array('data' => array());
-	$res = 0;
 
 	if($result->num_rows > 0) {
 
 	 while($row = $result->fetch_array()) {
+		$brandId = $row[4];
 
-		$formdata = json_decode($row[3], true);
-		$link = "php_action/".$res.$userid.".pdf";
-		$link = "<a href=$link target='_blank'>Click here</a>";
+		if($row[2] == 0)
+			$activeBrands = "<label class='label label-default'>New</label>";
+		else if($row[2] == 1)
+			$activeBrands = "<label class='label label-success'>Accepted</label>";
+		else if($row[2] == 2)
+			$activeBrands = "<label class='label label-danger'>Rejected</label>";
 
-		$initial="";
-		foreach ($formdata as $data)
-		{
-			$initial = $initial.$data.',';
-		}
-		$initial = $initial.','.$res.$userid.'.pdf';
+
+		$button = '<!-- Single button -->
+		<div class="btn-group">
+		  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			Action <span class="caret"></span>
+		  </button>
+		  <ul class="dropdown-menu">
+			<li><a type="button" data-toggle="modal" data-target="#resubmitMemberModel" onclick="resubmitBrands('.$brandId.')"> <i class="glyphicon glyphicon-ok"></i> Resubmit</a></li>
+			<li><a type="button" data-toggle="modal" data-target="#deleteMemberModel" onclick="deleteBrands('.$brandId.')"> <i class="glyphicon glyphicon-remove"></i> Remove</a></li>
+		  </ul>
+		</div>';
+
+		$link = "forms/".$brandId.".pdf";
+		$link = "<a href=$link>Click here</a>";
 
 		$command = "python ".$base."/pdf.py \"".$initial."\"";
 		exec("$command", $output);

@@ -1,10 +1,8 @@
-#!/usr/bin/python
+#!/usr/local/bin/python3 
+
 import os
 import pdfrw
 import sys
-
-INVOICE_TEMPLATE_PATH = 'C://xampp//htdocs//Gymkhana//Email.pdf'
-INVOICE_OUTPUT_PATH = 'invoice.pdf'
 
 
 ANNOT_KEY = '/Annots'
@@ -42,11 +40,17 @@ if __name__ == '__main__':
 	x = len(a)
 	prefix = 'untitled'
 	seq = 1
-	for val in range(0, x-1):
+	for val in range(0, x-3):
 		key = prefix + str(seq)
 		data_dict[key] = a[val]
 		seq = seq + 1
 
-	if x > 0:
-		INVOICE_OUTPUT_PATH = a[x-1];
+	if x > 2:
+		FORM_ID = a[x-3]
+		FORM_TYPE = a[x-2]
+		BASE = a[x-1]
+
+	INVOICE_TEMPLATE_PATH = '{}/templates/{}.pdf'.format(BASE,FORM_TYPE)
+	INVOICE_OUTPUT_PATH = '{}/forms/{}.pdf'.format(BASE,FORM_ID)
+
 	write_fillable_pdf(INVOICE_TEMPLATE_PATH, INVOICE_OUTPUT_PATH, data_dict)
