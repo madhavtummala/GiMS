@@ -95,10 +95,60 @@ html, body {
         </div>
     </div>
     <?php } ?>
-
-
 <!--Modal ends-->
 
+<!---Modal starts-->
+
+ <?php  if(isset($_SESSION['userId']) && $_SESSION['userId']==-2) { ?>
+    <div class="modal fade" id="returnBrandModel2" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <form class="form-horizontal" id="returnBrandForm" >
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title"><i class="fa fa-plus"></i> Add Event</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <div id="return-brand-messages"></div>
+
+                        <div id="return-brand-result">
+
+                            <div class="form-group">
+                                <label for="returnNo" class="col-sm-3 control-label">Enter Event Name </label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="returnNo" placeholder="Event Name" name="returnNo1" autocomplete="off">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="returnFine" class="col-sm-3 control-label">Start date </label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="returnFine" placeholder="Enter a date in YYYY-MM-DD format" name="returnFine1" autocomplete="off">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="returnFine2" class="col-sm-3 control-label">End date </label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="returnFine2" placeholder="Enter a date in YYYY-MM-DD format" name="returnFine21" autocomplete="off">
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="modal-footer returnBrandFooter">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary" id="returnBrandBtn2" data-loading-text="Loading..." autocomplete="off">Delete event</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+    <?php } ?>
+<!--Modal ends-->
 
     <script>
 
@@ -111,7 +161,7 @@ html, body {
     defaultDate: '2019-11-07',
     header: {
       left: 'prev,next today',
-      center: 'addEventButton',
+      center: 'addEventButton deleteEventButton',
       right: 'dayGridMonth,timeGridWeek,timeGridDay'
     },
 	<?php if ($_SESSION['userId'] == -2) {
@@ -150,6 +200,39 @@ html, body {
 	});
           
         }
+      },
+	  deleteEventButton: {
+        text: 'Delete event',
+        click: function() {
+		  $('#returnBrandModel2').modal('show');
+		  $('#returnBrandBtn2').click(function () {
+			  var textFieldVal = $('input[name=\"returnNo1\"]').val();
+			  var textFieldVal2 = $('input[name=\"returnFine1\"]').val();
+			  var textFieldVal3 = $('input[name=\"returnFine21\"]').val();
+			  $.ajax({
+				url: 'php_action/deleteCalendar.php',
+				type: 'post',
+				data: {a:textFieldVal,b:textFieldVal2,c:textFieldVal3},
+				dataType: 'json',
+				success:function(response) {
+					console.log(response);
+					var a = response.output;
+					for(var i = 0; i < a.length; i++)
+					{
+						var ename = a[i][0];
+						var sdate = new Date(a[i][1] + 'T00:00:00');
+						var edate = new Date(a[i][2] + 'T00:00:00');
+						calendar.addEvent({
+						title: ename,
+						start: sdate,
+						end: edate
+						});
+					}
+				}
+        });
+	});
+          
+        }
       }
     },
 	events: events,
@@ -157,10 +240,15 @@ html, body {
   }
   else
   {
-	  echo "
+	$roll_no = $_SESSION['userId'];
+	$sql = "SELECT name from student WHERE rollno = '$roll_no'";
+	//echo $sql;
+    $result = $connect->query($sql);
+	$studname = $result->fetch_array();
+	echo "
 	customButtons: {
       addEventButton: {
-        text: 'Hi, student'
+        text: 'Hi, ".$studname[0]."'
 	  }
 	},
 	events: events,

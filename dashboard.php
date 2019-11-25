@@ -202,7 +202,7 @@ else
                   <p> Hi, <?php echo $studname[0]?>!</p>
               <?php } ?>
 			  <?php  if(isset($_SESSION['userId']) && $_SESSION['userId'] == -2) { ?>
-                  <p> Hi, <?php echo $ofname[0]?>!</p>
+                  <p> Hi, <?php echo $ofname[0]?>!<br><?php echo $ofname[1]?></p>
               <?php } ?>
 			</h1>
 		  </div>
@@ -210,11 +210,11 @@ else
 		  <div class="cardContainer">
 		    <p>
 			<?php if(isset($_SESSION['userId']) && $_SESSION['userId']>2) { ?>
-				<a href="submitForms.php">Submit Form</a> &nbsp&nbsp&nbsp <a href="checkForms.php">Check Status</a>
+				<a href="submitForms.php">Submit Form</a> &nbsp&nbsp&nbsp <a href="checkForms.php">Check Status</a>&nbsp&nbsp&nbsp <a href="calendar.php">View Calendar</a>
 			<?php } else if(isset($_SESSION['userId']) && $_SESSION['userId'] == 1) { ?>
 				<a href="manageAssignee.php">Change form assignee</a>
 			<?php } else if(isset($_SESSION['userId']) && $_SESSION['userId'] == -2) { 
-				echo $ofname[1];
+				?><a href="calendar.php">Modify Gymkhana calendar</a><?php
 			} ?>
 			</p>
 		  </div>

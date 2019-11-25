@@ -78,6 +78,14 @@ create table currentapplications (
   constraint fk_currentapplications_assignee_email foreign key (assignee_email) references officebearer(emailid)
 );
 
+CREATE TABLE calevents (
+  name varchar(100) NOT NULL,
+  start date NOT NULL,
+  end date NOT NULL,
+  creator varchar(50) NOT NULL
+);
+
+
 insert into hostel values
 ("MHR", "MHR"),
 ("SHR", "SHR"),
