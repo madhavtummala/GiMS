@@ -21,7 +21,7 @@ $_SESSION['formtype'] = "3_2";
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control" id="addName" placeholder="First name" name="u1" autocomplete="off" 
 									<?php 
-									if (isset($_SESSION['inputValues']))
+									if (isset($_SESSION['inputValues']['name']))
 									{ 
 										echo 'value = '.$_SESSION['inputValues']['name'];
 									}?>
