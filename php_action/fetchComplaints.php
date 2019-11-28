@@ -2,7 +2,7 @@
 
 require_once 'core.php';
 
-if($_SESSION['userId']!=2) {
+if($_SESSION['userId']>2) {
     header('location: dashboard.php');
 }
 
