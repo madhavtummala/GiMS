@@ -196,7 +196,15 @@
                   
                 </i> Manage Hostel Admins
               </a>
-            </li>            
+            </li> 
+
+			<li id="topNavUser">
+              <a href="officeBearer.php"> 
+                <i class="glyphicon glyphicon-wrench">
+                  
+                </i> Manage OfficeBearers
+              </a>
+            </li> 			
 
             <?php } ?>
 
