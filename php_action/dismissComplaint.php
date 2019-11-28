@@ -2,9 +2,9 @@
 
 require_once 'core.php';
 
-if($_SESSION['userId']!=2) {
-    header('location: dashboard.php');
-}
+// if($_SESSION['userId']!=2) {
+//     header('location: dashboard.php');
+// }
 
 $valid['success'] = array('success' => false, 'messages' => array());
 
@@ -12,7 +12,7 @@ $request = $_POST['request'];
 
 if($request) { 
 
- $sql = "DELETE FROM complaints WHERE complaintno = '$request'";
+ $sql = "UPDATE complaints set status = 2 WHERE complaintno = '$request'";
 
  if($connect->query($sql) === true) {
  	$valid['success'] = true;

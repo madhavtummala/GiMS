@@ -29,7 +29,7 @@ if($_SESSION['userId']>2) {
                             <th style="width:10%;">Title</th>
                             <th style="width:10%;">Roll No</th>
                             <th style="width:35%;">Reason</th>
-                            <th style="width:20%;">Purchase Links</th>                            
+                            <th style="width:20%;">Target</th>
                             <th style="width:10%;">Date & Time</th>
                             <th style="width:15%;">Actions</th>
                         </tr>
@@ -41,25 +41,24 @@ if($_SESSION['userId']>2) {
         </div>
     </div>
 
-    <!-- edit brand -->
-    <div class="modal fade" id="editBrandModel" tabindex="-1" role="dialog">
+    <!-- accept brand -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="acceptMemberModel">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title"><i class="glyphicon glyphicon-ok"></i> Mark as done</h4>
+                    <h4 class="modal-title"><i class="glyphicon glyphicon-ok"></i> Accept Application</h4>
                 </div>
                 <div class="modal-body">
-                    <p>Do you really want to mark as done ?</p>
+                    <p>Do you really want to accept?</p>
                 </div>
-                <div class="modal-footer editBrandFooter">
-                    <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="glyphicon glyphicon-ok"></i> Close</button>
-                    <button type="button" class="btn btn-primary" id="editBrandBtn" data-loading-text="Loading..."> <i class="glyphicon glyphicon-ok-sign"></i> Save changes</button>
+                <div class="modal-footer acceptBrandFooter">
+                    <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="glyphicon glyphicon-accept-sign"></i> Close</button>
+                    <button type="button" class="btn btn-primary" id="acceptBrandBtn" data-loading-text="Loading..."> <i class="glyphicon glyphicon-ok-sign"></i> Save changes</button>
                 </div>
             </div>
         </div>
-    </div>
-
+    </div>  
 
     <!-- remove brand -->
     <div class="modal fade" tabindex="-1" role="dialog" id="removeMemberModel">
@@ -67,10 +66,10 @@ if($_SESSION['userId']>2) {
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title"><i class="glyphicon glyphicon-trash"></i> Dismiss Complaint</h4>
+                    <h4 class="modal-title"><i class="glyphicon glyphicon-remove"></i> Reject Application</h4>
                 </div>
                 <div class="modal-body">
-                    <p>Do you really want to remove ?</p>
+                    <p>Do you really want to reject?</p>
                 </div>
                 <div class="modal-footer removeBrandFooter">
                     <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="glyphicon glyphicon-remove-sign"></i> Close</button>

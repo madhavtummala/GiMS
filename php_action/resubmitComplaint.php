@@ -2,7 +2,7 @@
 
 require_once 'core.php';
 
-// if($_SESSION['userId'] > 2) {
+// if($_SESSION['userId'] <= 2) {
 //     header('location: dashboard.php');
 // }
 
@@ -12,7 +12,7 @@ $request = $_POST['request'];
 
 if($request) { 
 
- $sql = "UPDATE complaints set status = 0 WHERE complaintno = '$request'";
+ $sql = "UPDATE complaints set status = 1 WHERE complaintno = '$request'";
 
  if($connect->query($sql) === true) {
  	$valid['success'] = true;

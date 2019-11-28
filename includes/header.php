@@ -154,7 +154,7 @@
           <a href="complaints.php"> 
             <i class="glyphicon glyphicon-pencil">
               
-            </i> Register a Complaint
+            </i> Complaints
           </a>
         </li>
 
