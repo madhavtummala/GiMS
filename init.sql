@@ -25,6 +25,7 @@ create table officebearer
   contactnumber numeric(10,0) not null,
   emailid varchar(50) not null,
   password varchar(256) not null,
+  permission int not null,
   constraint pk_officebearer primary key (emailid),
   constraint uk_officebearer_contactnumber unique (contactnumber),
   constraint uk_officebearer_post unique (post)
@@ -37,6 +38,7 @@ create table student
   emailid varchar(50) not null,
   password varchar(256) not null,
   hostelname varchar(50) not null,
+  permission int not null,
   constraint pk_student primary key (rollno),
   constraint fk_student_hostelname foreign key (hostelname) references hostel(hostelname),
   constraint uk_student_emailid unique (emailid)
@@ -45,6 +47,7 @@ create table student
 create table centraladmin (
   loginid varchar(50) NOT NULL,
   password varchar(256) NOT NULL,
+  permission int not null,
   constraint pk_centraladmin primary key (loginid)
 );
   
@@ -52,6 +55,7 @@ create table hosteladmin (
   loginid varchar(50) NOT NULL,
   password varchar(256) NOT NULL,
   hostelname varchar(50) NOT NULL,
+  permission int not null,
   constraint pk_centraladmin primary key (loginid),
   constraint fk_hosteladmin_hostelname foreign key (hostelname) references hostel(hostelname)
 );
@@ -92,17 +96,17 @@ insert into hostel values
 ("THN1", "THN1"),
 ("THN2", "THN2");
 
-insert into centraladmin values('admin1', '$2y$10$lajkwiXNugj0eKHZdGLeiun8bsQ/JyejepwbDnIJOZWJxB3.sGFYm');
+insert into centraladmin values('admin1', '$2y$10$lajkwiXNugj0eKHZdGLeiun8bsQ/JyejepwbDnIJOZWJxB3.sGFYm', '5');
 
-insert into hosteladmin values('thn1', '$2y$10$0cLXibHZh6mdhNc9a5cs1.vW6rH/7T3SuF2HZAad9qLZ32EsrnINi', "THN1");
-insert into hosteladmin values('thn2', '$2y$10$0cLXibHZh6mdhNc9a5cs1.vW6rH/7T3SuF2HZAad9qLZ32EsrnINi', "THN2");
+insert into hosteladmin values('thn1', '$2y$10$0cLXibHZh6mdhNc9a5cs1.vW6rH/7T3SuF2HZAad9qLZ32EsrnINi', "THN1", '3');
+insert into hosteladmin values('thn2', '$2y$10$WfYHMxDYETHPvlI5cMgP0e6Fo7gehQMqhScf2MdonQZpgnsT1979i', "THN2", '3');
 
-insert into student values("16cs01041", "Tummala Madhav", "tm15@iitbbs.ac.in", "$2y$10$fuZBYCV18qgzgbF5vSZ71OgkMY3WdrPzMrY7020kVLaixrwH7bfW2", "THN2");
-insert into student values("16cs01042", "Saksham Arneja", "sa26@iitbbs.ac.in", "$2y$10$NgRzVrrE2JccpkE1Cz9NJuYeVukKtHrBpKFufkKW4VrOUuVoF76jO", "THN2");
-insert into student values("16cs01017", "Aditya Pal", "ap37@iitbbs.ac.in", "$2y$10$gL5gSrZ2AVkRTdH/lKm3z.BWTP1vOQ274GzvRBQBF4tAfi3uwqZqa", "THN2");
+insert into student values("16cs01041", "Tummala Madhav", "tm15@iitbbs.ac.in", "$2y$10$fuZBYCV18qgzgbF5vSZ71OgkMY3WdrPzMrY7020kVLaixrwH7bfW2", "THN2", '1');
+insert into student values("16cs01042", "Saksham Arneja", "sa26@iitbbs.ac.in", "$2y$10$NgRzVrrE2JccpkE1Cz9NJuYeVukKtHrBpKFufkKW4VrOUuVoF76jO", "THN2", '1');
+insert into student values("16cs01017", "Aditya Pal", "ap37@iitbbs.ac.in", "$2y$10$gL5gSrZ2AVkRTdH/lKm3z.BWTP1vOQ274GzvRBQBF4tAfi3uwqZqa", "THN2", '1');
 
-insert into officebearer values("Gsec Science and Technology", "Geeth Nischal", "8500936193", "ggn10@iitbbs.ac.in", "$2y$10$fuZBYCV18qgzgbF5vSZ71OgkMY3WdrPzMrY7020kVLaixrwH7bfW2");
-insert into officebearer values("Vice President", "Punith", "9999999999", "vp.sg@iitbbs.ac.in", "$2y$10$fuZBYCV18qgzgbF5vSZ71OgkMY3WdrPzMrY7020kVLaixrwH7bfW2");
+insert into officebearer values("Gsec Science and Technology", "Geeth Nischal", "8500936193", "ggn10@iitbbs.ac.in", "$2y$10$fuZBYCV18qgzgbF5vSZ71OgkMY3WdrPzMrY7020kVLaixrwH7bfW2", '4');
+insert into officebearer values("Vice President", "Punith", "9999999999", "vp.sg@iitbbs.ac.in", "$2y$10$fuZBYCV18qgzgbF5vSZ71OgkMY3WdrPzMrY7020kVLaixrwH7bfW2", '4');
 
 insert into assignee values ('ggn10@iitbbs.ac.in', '3_2');
 insert into assignee values ('vp.sg@iitbbs.ac.in', '3_1');
