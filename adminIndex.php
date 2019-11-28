@@ -36,6 +36,7 @@ if($_POST) {
 			if(password_verify($password,$value['password'])) {
 				$_SESSION['userId'] = 1;
 				$_SESSION['loginId'] = $value['loginid'];
+				$_SESSION['access'] = $value['permission'];
 				header('location: dashboard.php');	
 			} else{
 				$errors[] = "Incorrect loginid/password combination";

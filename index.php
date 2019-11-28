@@ -47,6 +47,8 @@ if($_POST) {
 				// set session
 				$_SESSION['hostel'] = $value['hostelname'];
 				$_SESSION['userId'] = $user_id;
+				$_SESSION['access'] = $value['permission'];
+				
 				$result->close();
 				header('location: dashboard.php');	
 			} else{

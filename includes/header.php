@@ -124,6 +124,18 @@
 
         <?php } ?>
 
+        <?php if($_SESSION['userId'] <= 2) { ?>
+
+        <li id="navreport">
+          <a href="actComplaint.php">
+            <i class="glyphicon glyphicon-inbox">
+              
+            </i>  Complaints
+          </a>
+        </li>
+
+        <?php } ?>        
+
         <?php  if($_SESSION['userId']>2) { ?>
 
         <li id="navRequest">
@@ -135,6 +147,18 @@
         </li>
 
         <?php } ?>
+
+        <?php  if($_SESSION['userId']>2) { ?>
+
+        <li id="navRequest">
+          <a href="complaints.php"> 
+            <i class="glyphicon glyphicon-pencil">
+              
+            </i> Register a Complaint
+          </a>
+        </li>
+
+        <?php } ?>        
 
         <li class="dropdown" id="navSetting">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> 

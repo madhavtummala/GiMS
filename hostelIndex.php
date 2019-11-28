@@ -43,6 +43,7 @@ if($_POST) {
 				$_SESSION['userId'] = 2;
 				$_SESSION['hostel'] = $value['hostelname'];
 				$_SESSION['loginId'] = $value['loginid'];
+				$_SESSION['access'] = $value['permission'];
 				header('location: dashboard.php');	
 			} else{
 				
