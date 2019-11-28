@@ -82,6 +82,19 @@ create table currentapplications (
   constraint fk_currentapplications_assignee_email foreign key (assignee_email) references officebearer(emailid)
 );
 
+create table complaints
+(
+  complaintno int not null auto_increment,
+  title varchar(50) not null,
+  status int not null,
+  rollno varchar(12) not null,
+  body varchar(1000) not null,
+  target varchar(100),
+  ts timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  constraint pk_complaints primary key (complaintno),
+  constraint fk_rollno_complaints foreign key (rollno) references student(rollno)
+);
+
 CREATE TABLE calevents (
   name varchar(100) NOT NULL,
   start date NOT NULL,
