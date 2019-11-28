@@ -106,10 +106,16 @@ insert into student values("16cs01042", "Saksham Arneja", "sa26@iitbbs.ac.in", "
 insert into student values("16cs01017", "Aditya Pal", "ap37@iitbbs.ac.in", "$2y$10$gL5gSrZ2AVkRTdH/lKm3z.BWTP1vOQ274GzvRBQBF4tAfi3uwqZqa", "THN2", '1');
 
 insert into officebearer values("Gsec Science and Technology", "Geeth Nischal", "8500936193", "ggn10@iitbbs.ac.in", "$2y$10$fuZBYCV18qgzgbF5vSZ71OgkMY3WdrPzMrY7020kVLaixrwH7bfW2", '4');
-insert into officebearer values("Vice President", "Punith", "9999999999", "vp.sg@iitbbs.ac.in", "$2y$10$fuZBYCV18qgzgbF5vSZ71OgkMY3WdrPzMrY7020kVLaixrwH7bfW2", '4');
+insert into officebearer values("Vice President", "Punith", "9999999999", "vp.sg@iitbbs.ac.in", "$2y$10$fuZBYCV18qgzgbF5vSZ71OgkMY3WdrPzMrY7020kVLaixrwH7bfW2", '4'),
+('GSec Cultural', 'Shobhit Sahoo', '9748789878', 'ssh87@iitbbs.ac.in', '$2y$10$fuZBYCV18qgzgbF5vSZ71OgkMY3WdrPzMrY7020kVLaixrwH7bfW2'),
+('GSec Sports', 'Akarsh Balachandran', '8748789878', 'ak7@iitbbs.ac.in', '$2y$10$fuZBYCV18qgzgbF5vSZ71OgkMY3WdrPzMrY7020kVLaixrwH7bfW2');
 
 insert into assignee values ('ggn10@iitbbs.ac.in', '3_2');
-insert into assignee values ('vp.sg@iitbbs.ac.in', '3_1');
+insert into assignee values ('vp.sg@iitbbs.ac.in', '3_1'),
+('ggn10@iitbbs.ac.in', '4_1'),
+('ssh87@iitbbs.ac.in', '4_0'),
+('vp.sg@iitbbs.ac.in', '3_1'),
+('vp.sg@iitbbs.ac.in', '4_3');
 
 create database THN2;
 use THN2;
