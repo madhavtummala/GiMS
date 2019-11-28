@@ -1,7 +1,7 @@
 <?php 	
 require_once 'core.php';
 if($_SESSION['userId'] == -2)
-{
+{ 
 	$output = array();
 	$assignee = $_SESSION['aname'];
 	$sql = "SELECT userid, submitdate, formdata, formid FROM currentapplications WHERE assignee='$assignee' AND status=0 order by formid";

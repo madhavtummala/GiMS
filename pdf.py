@@ -50,6 +50,9 @@ if __name__ == '__main__':
 		FORM_TYPE = a[x-2]
 		BASE = a[x-1]
 
+	if FORM_TYPE[0] == '4':
+		FORM_TYPE = 4
+	
 	INVOICE_TEMPLATE_PATH = '{}/templates/{}.pdf'.format(BASE,FORM_TYPE)
 	INVOICE_OUTPUT_PATH = '{}/forms/{}.pdf'.format(BASE,FORM_ID)
 
