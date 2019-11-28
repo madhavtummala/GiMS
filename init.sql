@@ -25,7 +25,7 @@ create table officebearer
   contactnumber numeric(10,0) not null,
   emailid varchar(50) not null,
   password varchar(256) not null,
-  permission int not null,
+  permission varchar(2) not null,
   constraint pk_officebearer primary key (emailid),
   constraint uk_officebearer_contactnumber unique (contactnumber),
   constraint uk_officebearer_post unique (post)

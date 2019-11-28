@@ -13,7 +13,6 @@ $(document).ready(function() {
 
 	$("#newRequestForm").unbind('submit').bind('submit', function() {
 		var form = $(this);
-
 		$('.text-danger').remove();
 		$('.form-group').removeClass('has-error').removeClass('has-success');		
 		
