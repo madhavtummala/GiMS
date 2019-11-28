@@ -12,6 +12,7 @@ if($_POST) {
 	$uname = $_POST['username'];
 	$upass = $_POST['userpassword'];
 	$uemail = $_POST['useremail'];
+	$uperm = $_POST['userperm'];
 	$roll = $_POST['roll'];
 
 	if($uname){
@@ -47,6 +48,19 @@ if($_POST) {
 		$sql = "UPDATE hosteladmin SET hostelname = ? WHERE loginid='$roll'";
         $stmt = $connect->prepare($sql);
         $stmt->bind_param("s", $uemail);
+
+        if($stmt->execute()) {
+            $valid['success'] = true;
+            $valid['messages'] = "Successfully Updated";
+        } else {
+            $valid['success'] = false;
+            $valid['messages'] = "Error while updating hostel admin info";
+        }		
+	}
+	if($uperm){
+		$sql = "UPDATE hosteladmin SET permission = ? WHERE loginid='$roll'";
+        $stmt = $connect->prepare($sql);
+        $stmt->bind_param("s", $uperm);
 
         if($stmt->execute()) {
             $valid['success'] = true;

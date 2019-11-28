@@ -117,8 +117,9 @@ function editUser(userid = null) {
 			var username = $('#edituserName').val();
 			var userpassword = $('#editPassword').val();
 			var useremail = $('#editEmail').val();
+			var userperm = $('#u11').val();
 
-			if(username || userpassword || useremail) {
+			if(username || userpassword || useremail || userperm) {
 				
 				$('#editUserBtn').button('loading');
 
@@ -127,7 +128,7 @@ function editUser(userid = null) {
 				$.ajax({
 					url : 'php_action/editHostelAdmin.php',
 					type: 'post',
-					data: {username: username, roll: userid, userpassword: userpassword, useremail: useremail},
+					data: {username: username, roll: userid, userpassword: userpassword, useremail: useremail, userperm: userperm},
 					dataType: 'json',
 					success:function(response) {
 
