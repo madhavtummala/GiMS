@@ -210,7 +210,7 @@ else
 		  <div class="cardContainer">
 		    <p>
 			<?php if(isset($_SESSION['userId']) && $_SESSION['userId']>2) { ?>
-				<a href="submitForms.php">Submit Form</a> &nbsp&nbsp&nbsp <a href="checkForms.php">Check Status</a>&nbsp&nbsp&nbsp <a href="calendar.php">View Calendar</a>
+				<a href="submitForms.php">Submit Form</a> &nbsp&nbsp&nbsp <a href="checkForms.php">Check Status</a> &nbsp&nbsp&nbsp <a href="calendar.php">View Calendar</a></br><a href="complaint.php">Register a complaint</a>
 			<?php } else if(isset($_SESSION['userId']) && $_SESSION['userId'] == 1) { ?>
 				<a href="manageAssignee.php">Change form assignee</a>
 			<?php } else if(isset($_SESSION['userId']) && $_SESSION['userId'] == -2) { 
