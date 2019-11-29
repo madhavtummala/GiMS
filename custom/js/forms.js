@@ -246,10 +246,8 @@ function forwardBrands(brandId = null) {
 		$('#forwardBrandForm').unbind('submit').bind('submit', function() {
 
 			$('.text-danger').remove();
-			$('.form-group').removeClass('has-error').removeClass('has-success');			
-
+			$('.form-group').removeClass('has-error').removeClass('has-success');
 			var assignee = $('#forwardRoll').val();
-
 			if(assignee == "") {
 				$('#forwardRoll').after('<p class="text-danger">Field is required</p>');
 				$('#forwardRoll').closest('#form-group').addClass('has-error');
