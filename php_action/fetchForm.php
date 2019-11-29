@@ -4,7 +4,7 @@ if($_SESSION['userId'] == -2)
 { 
 	$output = array();
 	$assignee = $_SESSION['aname'];
-	$sql = "SELECT userid, submitdate, formdata, formid FROM currentapplications WHERE assignee='$assignee' AND status=0 OR 3 order by formid";
+	$sql = "SELECT userid, submitdate, formdata, formid FROM currentapplications WHERE assignee='$assignee' AND (status=0 OR status=3) order by formid";
 	$result = $forms->query($sql);
 	if($result->num_rows > 0) {
 	 $activeBrands = "";

@@ -20,6 +20,7 @@ if($_POST){
 	 	$valid['success'] = true;
 		$valid['messages'] = "Successfully Rejected";
 		$sql = "UPDATE currentapplications set assignee_email = '$assignee' WHERE formid = '$brandId'";
+		$forms->query($sql);
 		$sql = "UPDATE currentapplications set status = 3 WHERE formid = '$brandId'";
 		
 		if($forms->query($sql) === TRUE)
