@@ -17,7 +17,8 @@ if($_SESSION['userId'] == -2)
 		  </button>
 		  <ul class="dropdown-menu">
 			<li><a type="button" data-toggle="modal" data-target="#acceptMemberModel" onclick="acceptBrands('.$brandId.')"> <i class="glyphicon glyphicon-ok"></i> Accept</a></li>
-			<li><a type="button" data-toggle="modal" data-target="#removeMemberModel" onclick="removeBrands('.$brandId.')"> <i class="glyphicon glyphicon-remove"></i> Reject</a></li>     
+			<li><a type="button" data-toggle="modal" data-target="#removeMemberModel" onclick="removeBrands('.$brandId.')"> <i class="glyphicon glyphicon-remove"></i> Reject</a></li>   
+  			<li><a type="button" data-toggle="modal" data-target="#forwardMemberModel" onclick="forwardBrands('.$brandId.')"> <i class="glyphicon glyphicon-share-alt"></i> Forward</a></li> 
 		  </ul>
 		</div>';
 		$link = "forms/".$brandId.".pdf";
@@ -48,6 +49,9 @@ else
 			$activeBrands = "<label class='label label-success'>Accepted</label>";
 		else if($row[2] == 2)
 			$activeBrands = "<label class='label label-danger'>Rejected</label>";
+		else if($row[2] == 3)
+			$activeBrands = "<label class='label label-default'>Forwarded</label>";
+
 		$button = '<!-- Single button -->
 		<div class="btn-group">
 		  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

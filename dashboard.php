@@ -236,6 +236,7 @@ else
 
                 <div class="remove-messages"></div>
                 <div class="accept-messages"></div>
+                <div class="forward-messages"></div>
 
                 <table class="table" id="manageBrandTable">
                     <thead>
@@ -289,6 +290,38 @@ else
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="forwardMemberModel" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <form class="form-horizontal" id="forwardBrandForm">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title"><i class="fa fa-edit"></i> Forward Form</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="forward-brand-result">
+                            <div class="form-group">
+                                <label for="forwardRoll" class="col-sm-3 control-label">New Assignee </label>
+                                <label class="col-sm-1 control-label">: </label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="forwardRoll" placeholder="New assignee email" name="forwardRoll" autocomplete="off">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer forwardBrandFooter">
+                        <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="glyphicon glyphicon-remove-sign"></i> Close</button>
+
+                        <button type="submit" class="btn btn-success" id="forwardBrandBtn" data-loading-text="Loading..." autocomplete="off"> <i class="glyphicon glyphicon-ok-sign"></i> Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>   
 
   <?php } ?>
 <!-- This is the main change now -->  

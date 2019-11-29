@@ -239,3 +239,85 @@ function deleteBrands(brandId = null) {
 		alert('error!! Refresh the page again');
 	}
 }
+
+function forwardBrands(brandId = null) {
+	if(brandId) {
+
+		$('#forwardBrandForm').unbind('submit').bind('submit', function() {
+
+			$('.text-danger').remove();
+			$('.form-group').removeClass('has-error').removeClass('has-success');			
+
+			var assignee = $('#forwardRoll').val();
+
+			if(assignee == "") {
+				$('#forwardRoll').after('<p class="text-danger">Field is required</p>');
+				$('#forwardRoll').closest('#form-group').addClass('has-error');
+			} else {
+				$('#forwardRoll').find('#text-danger').remove();
+				$('#forwardRoll').closest('#form-group').addClass('has-success');
+			}
+
+			if(assignee){
+
+				$('#forwardBrandBtn').button('loading');
+
+				$.ajax({
+					url: 'php_action/forwardForm.php',
+					type: 'post',
+					data: {brandId : brandId, assignee : assignee},
+					dataType: 'json',
+					success:function(response) {
+
+						console.log(response);
+
+						$('#forwardBrandBtn').button('reset');
+
+						if(response.success == true) {
+
+							manageBrandTable.ajax.reload(null, false);
+
+							$('#forwardBrandForm')[0].reset();
+							$('.text-danger').remove();
+							$('.form-group').removeClass('has-error').removeClass('has-success');
+
+							$('#forwardBrandModel').modal('hide');
+
+							$('.forward-messages').html('<div class="alert alert-success">'+
+								'<button type="button" class="close" data-dismiss="alert">&times;</button>'+
+								'<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> '+ response.messages +
+								'</div>');
+
+							$('.alert-success').delay(500).show(10, function() {
+								$(this).delay(3000).hide(10, function() {
+									$(this).remove();
+								});
+							});
+						} else {
+
+							$('#forwardBrandForm')[0].reset();
+							$('.text-danger').remove();
+							$('.form-group').removeClass('has-error').removeClass('has-success');
+
+							$('#forwardBrandModel').modal('hide');
+
+							$('.forward-messages').html('<div class="alert alert-warning">'+
+							'<button type="button" class="close" data-dismiss="alert">&times;</button>'+
+							'<strong><i class="glyphicon glyphicon-warning-sign"></i></strong> '+ response.messages +
+							'</div>');
+
+							$('.alert-warning').delay(500).show(10, function() {
+								$(this).delay(3000).hide(10, function() {
+									$(this).remove();
+								});
+							});
+						}
+					}
+				});
+			}
+		});
+
+	} else {
+		alert('error!! Refresh the page again');
+	}
+}

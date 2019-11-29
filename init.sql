@@ -22,7 +22,7 @@ create table officebearer
 (
   post varchar(50) not null,
   name varchar(50) not null,
-  contactnumber varchar not null,
+  contactnumber varchar(11) not null,
   emailid varchar(50) not null,
   password varchar(256) not null,
   permission varchar(2) not null,

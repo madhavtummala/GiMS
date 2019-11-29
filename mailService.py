@@ -9,13 +9,6 @@ from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email import encoders
 
-mail_content = '''Hello,
-This is a test mail.
-In this mail we are sending some attachments.
-The mail is sent using Python SMTP library.
-Thank You
-'''
-
 sender_address = 'tummalamadhav1999@gmail.com'
 sender_pass = 'Madhav6193'
 
@@ -37,6 +30,10 @@ gym = mysql.connector.connect(
 gymcursor = gym.cursor();
 
 while True:
+
+  session = smtplib.SMTP('smtp.gmail.com', 587) #use gmail with port
+  session.starttls() #enable security
+  session.login(sender_address, sender_pass) #login with mail_id and password
 
   # For sending application successful mail
   gymcursor.execute("select * from currentapplications where status = 1");
@@ -69,91 +66,64 @@ while True:
         payload.add_header('Content-Decomposition', 'attachment', filename=file_name)
         message.attach(payload)
 
-        session = smtplib.SMTP('smtp.gmail.com', 587) #use gmail with port
-        session.starttls() #enable security
-        session.login(sender_address, sender_pass) #login with mail_id and password
         text = message.as_string()
         session.sendmail(sender_address, receiver_address, text)
-        session.quit()
         # print('Mail Sent')  
 
   gymcursor.execute("select dbaddress from hostel");
 
-  # for db in gymcursor:
-  #   hostel = mysql.connector.connect(
-  #     host="localhost",
-  #     port="8889",
-  #     user="root",
-  #     passwd="root",
-  #     database=db[0]
-  #   );
-  #   hostelcursor=hostel.cursor();
+  for db in gymcursor:
+    hostel = mysql.connector.connect(
+      host="localhost",
+      port="8889",
+      user="root",
+      passwd="root",
+      database=db[0]
+    );
+    hostelcursor=hostel.cursor();
 
-    # # For sending issued mail
-    # hostelcursor.execute("select * from issued,equipment where issued.eid=equipment.eid");
-    # for issue in hostelcursor:
-    #   if issue[0] not in issue_add:
-    #     issue_add.add(issue[0]);
-    #     gymcursor2 = gym.cursor();
-    #     gymcursor2.execute("select * from student where rollno=%s",(issue[2], ) );
-    #     for std in gymcursor2:
-    #       to = std[2];
-    #       gmail_user = 'sg.iitbbs@gmail.com';
-    #       gmail_pwd = 'Password';
-    #       smtpserver = smtplib.SMTP("smtp.gmail.com",587);
-    #       smtpserver.ehlo();
-    #       smtpserver.starttls();
-    #       smtpserver.ehlo;
-    #       smtpserver.login(gmail_user, gmail_pwd);
-    #       header = 'To:' + to + '\n' + 'From: ' + gmail_user + '\n' + 'Subject:Gymkhana Equipment Issued \n';
-    #       msg = header + 'Dear ' + std[1] + ',\n\nThis is to inform you that ' + issue[7] + ' has been issued by you today.\n\nRegards,\nStudents\' Gymkhana,\nIndian Institute of Technology Bhubaneswar\n\n';
-    #       smtpserver.sendmail(gmail_user, to, msg);
-    #       smtpserver.close();
+    # For sending issued mail
+    hostelcursor.execute("select * from issued,equipment where issued.eid=equipment.eid");
+    for issue in hostelcursor:
+      if issue[0] not in issue_add:
+        issue_add.add(issue[0]);
+        gymcursor2 = gym.cursor();
+        gymcursor2.execute("select * from student where rollno=%s",(issue[2], ) );
+        for std in gymcursor2:
+          to = std[2];
+          header = 'To:' + to + '\n' + 'From: ' + sender_address + '\n' + 'Subject:Gymkhana Equipment Issued \n';
+          msg = header + 'Dear ' + std[1] + ',\n\nThis is to inform you that ' + issue[7] + ' has been issued by you today.\n\nRegards,\nStudents\' Gymkhana,\nIndian Institute of Technology Bhubaneswar\n\n';
+          session.sendmail(sender_address, to, msg);
 
-    # # For sending return due mail
-    # hostelcursor.execute("select * from issued,equipment where issued.eid=equipment.eid and dateofissue<=%s", ((date.today() - timedelta(days=6)).strftime("%Y-%m-%d"), ));
-    # for issue in hostelcursor:
-    #   if issue[0] not in issue_due:
-    #     issue_due.add(issue[0]);
-    #     gymcursor2 = gym.cursor();
-    #     gymcursor2.execute("select * from student where rollno=%s",(issue[2], ) );
-    #     for std in gymcursor2:
-    #       to = std[2];
-    #       gmail_user = 'sg.iitbbs@gmail.com';
-    #       gmail_pwd = 'Password';
-    #       smtpserver = smtplib.SMTP("smtp.gmail.com",587);
-    #       smtpserver.ehlo();
-    #       smtpserver.starttls();
-    #       smtpserver.ehlo;
-    #       smtpserver.login(gmail_user, gmail_pwd);
-    #       header = 'To:' + to + '\n' + 'From: ' + gmail_user + '\n' + 'Subject:Gymkhana Equipment Return Reminder \n';
-    #       msg = header + 'Dear ' + std[1] + ',\n\nThis is to remind you that ' + issue[7] + ' is now due to be returned.\nPer day, Rs.10/- Fine will be charged from now, till the date of return.\n\nRegards,\nStudents\' Gymkhana,\nIndian Institute of Technology Bhubaneswar\n\n';
-    #       smtpserver.sendmail(gmail_user, to, msg);
-    #       smtpserver.close();      
+    # For sending return due mail
+    hostelcursor.execute("select * from issued,equipment where issued.eid=equipment.eid and dateofissue<=%s", ((date.today() - timedelta(days=6)).strftime("%Y-%m-%d"), ));
+    for issue in hostelcursor:
+      if issue[0] not in issue_due:
+        issue_due.add(issue[0]);
+        gymcursor2 = gym.cursor();
+        gymcursor2.execute("select * from student where rollno=%s",(issue[2], ) );
+        for std in gymcursor2:
+          to = std[2];
+          header = 'To:' + to + '\n' + 'From: ' + sender_address + '\n' + 'Subject:Gymkhana Equipment Return Reminder \n';
+          msg = header + 'Dear ' + std[1] + ',\n\nThis is to remind you that ' + issue[7] + ' is now due to be returned.\nPer day, Rs.10/- Fine will be charged from now, till the date of return.\n\nRegards,\nStudents\' Gymkhana,\nIndian Institute of Technology Bhubaneswar\n\n';
+          session.sendmail(sender_address, to, msg);     
 
-    # # For sending return successful mail
-    # hostelcursor.execute("select * from issuehistory,equipment where issuehistory.eid=equipment.eid");
-    # for issue in hostelcursor:
-    #   if issue[0] not in issue_ret:
-    #     issue_ret.add(issue[0]);
-    #     gymcursor2 = gym.cursor();
-    #     gymcursor2.execute("select * from student where rollno=%s",(issue[2], ) );
-    #     for std in gymcursor2:
-    #       to = std[2];
-    #       gmail_user = 'sg.iitbbs@gmail.com';
-    #       gmail_pwd = 'Password';
-    #       smtpserver = smtplib.SMTP("smtp.gmail.com",587);
-    #       smtpserver.ehlo();
-    #       smtpserver.starttls();
-    #       smtpserver.ehlo;
-    #       smtpserver.login(gmail_user, gmail_pwd);
-    #       header = 'To:' + to + '\n' + 'From: ' + gmail_user + '\n' + 'Subject:Gymkhana Equipment Returned Successfully \n';
-    #       msg = header + 'Dear ' + std[1] + ',\n\nThis is to infrom you that ' + issue[8] + ' is returned with fine of '+ str(issue[5]) + '.\n\nRegards,\nStudents\' Gymkhana,\nIndian Institute of Technology Bhubaneswar\n\n';
-    #       smtpserver.sendmail(gmail_user, to, msg);
-    #       smtpserver.close(); 
+    # For sending return successful mail
+    hostelcursor.execute("select * from issuehistory,equipment where issuehistory.eid=equipment.eid");
+    for issue in hostelcursor:
+      if issue[0] not in issue_ret:
+        issue_ret.add(issue[0]);
+        gymcursor2 = gym.cursor();
+        gymcursor2.execute("select * from student where rollno=%s",(issue[2], ) );
+        for std in gymcursor2:
+          to = std[2];
+          header = 'To:' + to + '\n' + 'From: ' + sender_address + '\n' + 'Subject:Gymkhana Equipment Returned Successfully \n';
+          msg = header + 'Dear ' + std[1] + ',\n\nThis is to infrom you that ' + issue[8] + ' is returned with fine of '+ str(issue[5]) + '.\n\nRegards,\nStudents\' Gymkhana,\nIndian Institute of Technology Bhubaneswar\n\n';
+          session.sendmail(sender_address, to, msg);
 
   print (issue_add);
   print (issue_due);
   print (issue_ret);
   print (applications);
-  time.sleep(10);
+  session.close();
+  time.sleep(60);
