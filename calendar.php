@@ -164,6 +164,7 @@ html, body {
       center: 'addEventButton deleteEventButton',
       right: 'dayGridMonth,timeGridWeek,timeGridDay'
     },
+
 	<?php if ($_SESSION['userId'] == -2 && $_SESSION['access'] >=4 ) {
 	echo "
 	customButtons: {
@@ -245,6 +246,10 @@ html, body {
 	//echo $sql;
     $result = $connect->query($sql);
 	$studname = $result->fetch_array();
+	if($result->num_rows == 0)
+	{
+		$studname = array(0 => $_SESSION['aname']);
+	}
 	echo "
 	customButtons: {
       addEventButton: {

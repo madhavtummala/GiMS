@@ -81,7 +81,15 @@ if($_SESSION['userId']!=1) {
 				    <div class="col-sm-8">
 				      <input type="text" class="form-control" id="uhostel" placeholder="Hostel of Hostel Admin" name="uhostel" autocomplete="off">
 				    </div>
-	        </div> 	                         
+	        </div> 	
+
+			<div class="form-group">
+	        	<label for="u1" class="col-sm-3 control-label">Permission: </label>
+	        	
+				    <div class="col-sm-8">
+				      <input type="text" class="form-control" id="u1" placeholder="Permission level" value="3" name="u1" autocomplete="off">
+				    </div>
+	        </div> 	  
 	        	         	        
 	      </div> 
 	      
@@ -131,7 +139,15 @@ if($_SESSION['userId']!=1) {
 					    <div class="col-sm-8">
 					      <input type="password" class="form-control" id="editEmail" placeholder="New Hostel" name="editEmail" autocomplete="off">
 					    </div>
-		        </div> 		        
+		        </div>
+
+				<div class="form-group">
+	        	<label for="u11" class="col-sm-3 control-label">New Permission: </label>
+	        	
+				    <div class="col-sm-8">
+				      <input type="text" class="form-control" id="u11" placeholder="Permission level" value="3" name="u11" autocomplete="off">
+				    </div>
+	        </div> 	  
 
 		        <div class="modal-footer editUserFooter">
 			        <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="glyphicon glyphicon-remove-sign"></i> Close</button>
