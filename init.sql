@@ -63,7 +63,6 @@ create table hosteladmin (
 create table assignee (
   email varchar(50) NOT NULL,
   formtype varchar(20) NOT NULL,
-  constraint fk_assignee_email foreign key (email) references officebearer(emailid),
   constraint pk_assignee primary key(formtype)
 );
 
@@ -78,8 +77,7 @@ create table currentapplications (
   formtype varchar(20) NOT NULL,
   constraint pk_currentapplications primary key(formid),
   constraint fk_currentapplications_userid foreign key (userid) references student(rollno),
-  constraint fk_currentapplications_formtype foreign key (formtype) references assignee(formtype),
-  constraint fk_currentapplications_assignee_email foreign key (assignee_email) references officebearer(emailid)
+  constraint fk_currentapplications_formtype foreign key (formtype) references assignee(formtype)
 );
 
 create table complaints
